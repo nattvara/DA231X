@@ -1,0 +1,17 @@
+{
+"Author1": {"Last name": "Kristoffersson", "First name": "Ludwig", "Local User Id": "u100001", "E-mail": "ludwigkr@kth.se", "organisation": {"L1": "School of Electrical Engineering and Computer Science" }},
+"Cycle": "2", "Course code": "DA231X", "Credits": "30.0",
+"Degree1": {"Educational program": "Master's Programme, Computer Science, 120 credits","programcode": "TCSCM" ,"Degree": "Masters degree" ,"subjectArea": "Technology" },
+"Title": {"Main title": "Evaluating retrieval and summarisation performance of AI-Assistants built with Large Language Models and RAG-techniques (Retrieval Augmented Generation) in the domain of a LMS (Learning Management System)", "Subtitle": "A subtitle in the language of the thesis", "Language": "eng" }, "Alternative title": {"Main title": "Detta är den svenska översättningen av titeln", "Subtitle": "Detta är den svenska översättningen av undertiteln", "Language": "swe" },
+"Supervisor1": {"Last name": "Welle", "First name": "Michael", "Local User Id": "u100003", "E-mail": "mwelle@kth.se", "organisation": {"L1": "School of Electrical Engineering and Computer Science" ,"L2": "COLLABORATIVE AUTONOMOUS SYSTEMS DIVISION OF ROBOTICS, PERCEPTION AND LEARNING" }},
+"Supervisor2": {"Last name": "Enoksson", "First name": "Fredrik", "Local User Id": "u100003", "E-mail": "fen@kth.se", "organisation": {"L1": "" ,"L2": "UNIT OF DIGITAL LEARNING" }},
+"Examiner1": {"Last name": "Jensfelt", "First name": "Danica", "Local User Id": "u1d13i2c", "E-mail": "danik@kth.se", "organisation": {"L1": "School of Electrical Engineering and Computer Science" ,"L2": "COLLABORATIVE AUTONOMOUS SYSTEMS DIVISION OF ROBOTICS, PERCEPTION AND LEARNING" }},
+"Cooperation": {"Partner_name": "KTH IT"},
+"National Subject Categories": "10201, 10206",
+"Other information": {"Year": "2024", "Number of pages": "1,23" },
+"Copyrightleft": "copyright",
+"Series": {"Title of series": "TRITA-EECS-EX" , "No. in series": "2023:0000" },
+"Opponents": {"Name": "A. B. Normal \& A. X. E. Normalè"},
+"Presentation": {"Date": "2022-03-15 13:00" ,"Language": "eng" ,"Room": "via Zoom https://kth-se.zoom.us/j/ddddddddddd" ,"Address": "Isafjordsgatan 22 (Kistagången 16)" ,"City": "Stockholm" },
+"Number of lang instances": "2",
+}
