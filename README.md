@@ -2,10 +2,36 @@
 
 For the compiled report see [main.pdf](main.pdf).
 
-## Build the abbreviations page
+## Build the latex project
 
-To create the abbrevations page run this command.
+Clone the repo
 
 ```bash
-makeglossaries "main"
+git clone git@github.com:nattvara/DA231X.git && cd DA231X
+```
+
+Link the content
+
+```bash
+ln -s [PATH TO CONTENT IN GOOGLE DRIVE] content
+```
+
+build the report
+
+```bash
+make
+```
+
+## Commands
+
+Only download the new contnet
+
+```bash
+make download
+```
+
+Only compile the latex
+
+```bash
+make compile
 ```
