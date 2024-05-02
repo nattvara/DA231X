@@ -1,38 +1,34 @@
 %%
-%% myIEEEtran.bst is based upon IEEEtran.bst, but add DOI, ISSN, and ISBN support
-%% 
-%% Created on 2013.05.18 by GQMJr
-%% 
 %% IEEEtran.bst
 %% BibTeX Bibliography Style file for IEEE Journals and Conferences (unsorted)
-%% Version 1.13 (2008/09/30)
-%% 
-%% Copyright (c) 2003-2008 Michael Shell
-%% 
+%% Version 1.14 (2015/08/26)
+%%
+%% Copyright (c) 2003-2015 Michael Shell
+%%
 %% Original starting code base and algorithms obtained from the output of
 %% Patrick W. Daly's makebst package as well as from prior versions of
 %% IEEE BibTeX styles:
-%% 
+%%
 %% 1. Howard Trickey and Oren Patashnik's ieeetr.bst  (1985/1988)
 %% 2. Silvano Balemi and Richard H. Roy's IEEEbib.bst (1993)
-%% 
+%%
 %% Support sites:
 %% http://www.michaelshell.org/tex/ieeetran/
-%% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+%% http://www.ctan.org/pkg/ieeetran
 %% and/or
 %% http://www.ieee.org/
-%% 
+%%
 %% For use with BibTeX version 0.99a or later
 %%
 %% This is a numerical citation style.
-%% 
+%%
 %%*************************************************************************
 %% Legal Notice:
 %% This code is offered as-is without any warranty either expressed or
 %% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% FITNESS FOR A PARTICULAR PURPOSE!
 %% User assumes all risk.
-%% In no event shall IEEE or any contributor to this code be liable for
+%% In no event shall the IEEE or any contributor to this code be liable for
 %% any damages or losses, including, but not limited to, incidental,
 %% consequential, or any other damages, resulting from the use or misuse
 %% of any information contained here.
@@ -48,54 +44,7 @@
 %% Retain all contribution notices and credits.
 %% ** Modified files should be clearly indicated as such, including  **
 %% ** renaming them and changing author support contact information. **
-%%
-%% File list of work: IEEEabrv.bib, IEEEfull.bib, IEEEexample.bib,
-%%                    IEEEtran.bst, IEEEtranS.bst, IEEEtranSA.bst,
-%%                    IEEEtranN.bst, IEEEtranSN.bst, IEEEtran_bst_HOWTO.pdf
 %%*************************************************************************
-%
-%
-% Changelog:
-%
-% 1.00 (2002/08/13) Initial release
-%
-% 1.10 (2002/09/27)
-%  1. Corrected minor bug for improperly formed warning message when a
-%     book was not given a title. Thanks to Ming Kin Lai for reporting this.
-%  2. Added support for CTLname_format_string and CTLname_latex_cmd fields
-%     in the BST control entry type.
-%
-% 1.11 (2003/04/02)
-%  1. Fixed bug with URLs containing underscores when using url.sty. Thanks
-%     to Ming Kin Lai for reporting this.
-%
-% 1.12 (2007/01/11)
-%  1. Fixed bug with unwanted comma before "et al." when an entry contained
-%     more than two author names. Thanks to Pallav Gupta for reporting this.
-%  2. Fixed bug with anomalous closing quote in tech reports that have a
-%     type, but without a number or address. Thanks to Mehrdad Mirreza for
-%     reporting this.
-%  3. Use braces in \providecommand in begin.bib to better support
-%     latex2html. TeX style length assignments OK with recent versions
-%     of latex2html - 1.71 (2002/2/1) or later is strongly recommended.
-%     Use of the language field still causes trouble with latex2html.
-%     Thanks to Federico Beffa for reporting this.
-%  4. Added IEEEtran.bst ID and version comment string to .bbl output.
-%  5. Provide a \BIBdecl hook that allows the user to execute commands
-%     just prior to the first entry.
-%  6. Use default urlstyle (is using url.sty) of "same" rather than rm to
-%     better work with a wider variety of bibliography styles.
-%  7. Changed month abbreviations from Sept., July and June to Sep., Jul.,
-%     and Jun., respectively, as IEEE now does. Thanks to Moritz Borgmann
-%     for reporting this.
-%  8. Control entry types should not be considered when calculating longest
-%     label width.
-%  9. Added alias www for electronic/online.
-% 10. Added CTLname_url_prefix control entry type.
-%
-% 1.13 (2008/09/30)
-%  1. Fixed bug with edition number to ordinal conversion. Thanks to
-%     Michael Roland for reporting this and correcting the algorithm.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,7 +55,7 @@
 % here can be overridden by the user via IEEEtranBSTCTL entry type.
 
 % NOTE: The recommended LaTeX command to invoke a control entry type is:
-% 
+%
 %\makeatletter
 %\def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
 %\def\@bstctlcite[#1]#2{\@bsphack
@@ -133,9 +82,15 @@ FUNCTION {default.is.use.number.for.article} { #1 }
 FUNCTION {default.is.use.paper} { #1 }
 
 
+% #0 turns off the display of urls
+% #1 enables
+FUNCTION {default.is.use.url} { #1 }
+
+
 % #0 turns off the forced use of "et al."
 % #1 enables
 FUNCTION {default.is.forced.et.al} { #0 }
+
 
 % The maximum number of names that can be present beyond which an "et al."
 % usage is forced. Be sure that num.names.shown.with.forced.et.al (below)
@@ -144,6 +99,7 @@ FUNCTION {default.is.forced.et.al} { #0 }
 % a very large number of authors as well as instances in which "et al." is
 % used profusely.
 FUNCTION {default.max.num.names.before.forced.et.al} { #10 }
+
 
 % The number of names that will be shown with a forced "et al.".
 % Must be less than or equal to max.num.names.before.forced.et.al
@@ -154,19 +110,20 @@ FUNCTION {default.num.names.shown.with.forced.et.al} { #1 }
 % #1 enables
 FUNCTION {default.is.use.alt.interword.spacing} { #1 }
 
+
 % If alternate interword spacing for entries with URLs is enabled, this is
 % the interword spacing stretch factor that will be used. For example, the
 % default "4" here means that the interword spacing in entries with URLs can
 % stretch to four times normal. Does not have to be an integer. Note that
 % the value specified here can be overridden by the user in their LaTeX
-% code via a command such as: 
+% code via a command such as:
 % "\providecommand\BIBentryALTinterwordstretchfactor{1.5}" in addition to
 % that via the IEEEtranBSTCTL entry type.
 FUNCTION {default.ALTinterwordstretchfactor} { "4" }
 
 
 % #0 turns off the "dashification" of repeated (i.e., identical to those
-% of the previous entry) names. IEEE normally does this.
+% of the previous entry) names. The IEEE normally does this.
 % #1 enables
 FUNCTION {default.is.dash.repeated.names} { #1 }
 
@@ -197,14 +154,14 @@ FUNCTION {is.print.banners.to.terminal} { #1 }
 %% FILE VERSION AND BANNER %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-FUNCTION{bst.file.version} { "1.13" }
-FUNCTION{bst.file.date} { "2008/09/30" }
+FUNCTION{bst.file.version} { "1.14" }
+FUNCTION{bst.file.date} { "2015/08/26" }
 FUNCTION{bst.file.website} { "http://www.michaelshell.org/tex/ieeetran/bibtex/" }
 
 FUNCTION {banner.message}
 { is.print.banners.to.terminal
-    {  "-- myIEEEtran.bst based upon IEEEtran.bst version" " " * bst.file.version *               %%GQMJr
-       " based upon (" * bst.file.date * ") " * "by Michael Shell." *    %%GQMJr
+     { "-- IEEEtran.bst version" " " * bst.file.version *
+       " (" * bst.file.date * ") " * "by Michael Shell." *
        top$
        "-- " bst.file.website *
        top$
@@ -268,7 +225,7 @@ FUNCTION {large.space} { "\hskip 1em plus 0.5em minus 0.4em\relax " }
 % The LaTeX code for dashes that are used to represent repeated names.
 % Note: Some older IEEE journals used something like
 % "\rule{0.275in}{0.5pt}\," which is fairly thick and runs right along
-% the baseline. However, IEEE now uses a thinner, above baseline,
+% the baseline. However, the IEEE now uses a thinner, above baseline,
 % six dash long sequence.
 FUNCTION {repeated.name.dashes} { "------" }
 
@@ -305,14 +262,11 @@ ENTRY
     chapter
     day
     dayfiled
-    doi					%% GQMJr
     edition
     editor
     howpublished
     institution
     intype
-    isbn				%% GQMJr
-    issn				%% GQMJr
     journal
     key
     language
@@ -336,6 +290,7 @@ ENTRY
     yearfiled
     CTLuse_article_number
     CTLuse_paper
+    CTLuse_url
     CTLuse_forced_etal
     CTLmax_names_forced_etal
     CTLnames_show_etal
@@ -357,13 +312,13 @@ ENTRY
 %%%%%%%%%%%%%%%%%%%%%%%
 
 INTEGERS { prev.status.punct this.status.punct punct.std
-           punct.no punct.comma punct.period 
+           punct.no punct.comma punct.period
            prev.status.space this.status.space space.std
            space.no space.normal space.large
            prev.status.quote this.status.quote quote.std
            quote.no quote.close
            prev.status.nline this.status.nline nline.std
-           nline.no nline.newblock 
+           nline.no nline.newblock
            status.cap cap.std
            cap.no cap.yes}
 
@@ -371,6 +326,7 @@ INTEGERS { longest.label.width multiresult nameptr namesleft number.label numnam
 
 INTEGERS { is.use.number.for.article
            is.use.paper
+           is.use.url
            is.forced.et.al
            max.num.names.before.forced.et.al
            num.names.shown.with.forced.et.al
@@ -402,6 +358,7 @@ STRINGS { bibinfo
 FUNCTION {initialize.controls}
 { default.is.use.number.for.article 'is.use.number.for.article :=
   default.is.use.paper 'is.use.paper :=
+  default.is.use.url 'is.use.url :=
   default.is.forced.et.al 'is.forced.et.al :=
   default.max.num.names.before.forced.et.al 'max.num.names.before.forced.et.al :=
   default.num.names.shown.with.forced.et.al 'num.names.shown.with.forced.et.al :=
@@ -420,11 +377,11 @@ FUNCTION {initialize.controls}
 % or use the newline/newblock feature, but it has been implemented for
 % possible future use.) The output states of IEEEtran.bst consist of
 % multiple independent attributes and, as such, can be thought of as being
-% vectors, rather than the simple scalar values ("before.all", 
+% vectors, rather than the simple scalar values ("before.all",
 % "mid.sentence", etc.) used in most other .bst files.
-% 
+%
 % The more flexible and complex design used here was motivated in part by
-% IEEE's rather unusual bibliography style. For example, IEEE ends the
+% the IEEE's rather unusual bibliography style. For example, the IEEE ends the
 % previous field item with a period and large space prior to the publisher
 % address; the @electronic entry types use periods as inter-item punctuation
 % rather than the commas used by the other entry types; and URLs are never
@@ -440,21 +397,21 @@ FUNCTION {initialize.controls}
 %               "PREVIOUS_ITEM
 %
 % which, in this example, is to eventually appear in the bibliography as:
-% 
+%
 %               "PREVIOUS_ITEM," CURRENT_ITEM
 %
 % It is the job of the output routine to take the previous item off of the
 % stack (while leaving the current item at the top of the stack), apply its
 % trailing punctuation (including closing quote marks) and spacing, and then
 % to write the result to BibTeX's output buffer:
-% 
-%               "PREVIOUS_ITEM," 
-% 
+%
+%               "PREVIOUS_ITEM,"
+%
 % Punctuation (and spacing) between items is often determined by both of the
 % items rather than just the first one. The presence of quotation marks
 % further complicates the situation because, in standard English, trailing
 % punctuation marks are supposed to be contained within the quotes.
-% 
+%
 % IEEEtran.bst maintains two output state (aka "status") vectors which
 % correspond to the previous and current (aka "this") items. Each vector
 % consists of several independent attributes which track punctuation,
@@ -462,7 +419,7 @@ FUNCTION {initialize.controls}
 % separate scalar because the format routines, not the output routine,
 % handle capitalization and, therefore, there is no need to maintain the
 % capitalization attribute for both the "previous" and "this" items.
-% 
+%
 % When a format routine adds a new item, it copies the current output status
 % vector to the previous output status vector and (usually) resets the
 % current (this) output status vector to a "standard status" vector. Using a
@@ -472,7 +429,7 @@ FUNCTION {initialize.controls}
 % example, the standard status vector for the @book entry type may use
 % commas for item separators, while the @electronic type may use periods,
 % yet both entry handlers exploit many of the exact same format routines.
-% 
+%
 % Because format routines have write access to the output status vector of
 % the previous item, they can override the punctuation choices of the
 % previous format routine! Therefore, it becomes trivial to implement rules
@@ -484,13 +441,13 @@ FUNCTION {initialize.controls}
 % The IEEEtran.bst output state system can easily be expanded if needed.
 % For instance, it is easy to add a "space.tie" attribute value if the
 % bibliography rules mandate that two items have to be joined with an
-% unbreakable space. 
+% unbreakable space.
 
 FUNCTION {initialize.status.constants}
 { #0 'punct.no :=
   #1 'punct.comma :=
   #2 'punct.period :=
-  #0 'space.no := 
+  #0 'space.no :=
   #1 'space.normal :=
   #2 'space.large :=
   #0 'quote.no :=
@@ -605,7 +562,7 @@ multiresult
 
 % converts a single character string on the stack to an integer
 FUNCTION {char.to.integer}
-{ duplicate$ 
+{ duplicate$
   is.num
     { chr.to.int$ "0" chr.to.int$ - }
     {"noninteger character " quote$ * swap$ * quote$ *
@@ -641,13 +598,13 @@ numnames
 % routines have to consider the previous output status (which corresponds to
 % the item that is being output). Full independent control of punctuation,
 % closing quote marks, spacing, and newblock is provided.
-% 
+%
 % "output.nonnull" does not check for the presence of a previous empty
 % item.
-% 
+%
 % "output" does check for the presence of a previous empty item and will
 % remove an empty item rather than outputing it.
-% 
+%
 % "output.warn" is like "output", but will issue a warning if it detects
 % an empty item.
 
@@ -660,7 +617,7 @@ FUNCTION {output.nonnull}
   prev.status.punct punct.period =
      { add.period$ }
      { skip$ }
-   if$ 
+   if$
   prev.status.quote quote.close =
      { "''" * }
      { skip$ }
@@ -819,7 +776,7 @@ FUNCTION {empty.entry.warn}
 % currently not used as the bogus bibinfo functions defined here output the
 % entry values directly without the \bibinfo wrapper. The bibinfo functions
 % themselves (and the calls to them) are retained for possible future use.
-% 
+%
 % bibinfo.check avoids acting on missing fields while bibinfo.warn will
 % issue a warning message if a missing field is detected. Prior to calling
 % the bibinfo functions, the user should push the field value and then its
@@ -848,8 +805,8 @@ FUNCTION {bibinfo.warn}
 }
 
 
-% IEEE separates large numbers with more than 4 digits into groups of
-% three. IEEE uses a small space to separate these number groups. 
+% The IEEE separates large numbers with more than 4 digits into groups of
+% three. The IEEE uses a small space to separate these number groups.
 % Typical applications include patent and page numbers.
 
 % number of consecutive digits required to trigger the group separation.
@@ -875,7 +832,7 @@ FUNCTION {large.number.separate}
   { t empty$ not }
   { t #-1 #1 substring$ is.num
       { numnames #1 + 'numnames := }
-      { #0 'numnames := 
+      { #0 'numnames :=
         large.number.trigger 'nameptr :=
       }
     if$
@@ -1132,17 +1089,25 @@ FUNCTION {end.bib}
 { newline$ "\end{thebibliography}" write$ newline$ }
 
 FUNCTION {if.url.alt.interword.spacing}
-{ is.use.alt.interword.spacing 
-     {url empty$ 'skip$ {"\BIBentryALTinterwordspacing" write$ newline$} if$}
-     { skip$ }
-   if$
+{ is.use.alt.interword.spacing
+    { is.use.url
+        { url empty$ 'skip$ {"\BIBentryALTinterwordspacing" write$ newline$} if$ }
+        { skip$ }
+      if$
+    }
+    { skip$ }
+  if$
 }
 
 FUNCTION {if.url.std.interword.spacing}
-{ is.use.alt.interword.spacing 
-     {url empty$ 'skip$ {"\BIBentrySTDinterwordspacing" write$ newline$} if$}
-     { skip$ }
-   if$
+{ is.use.alt.interword.spacing
+    { is.use.url
+        { url empty$ 'skip$ {"\BIBentrySTDinterwordspacing" write$ newline$} if$ }
+        { skip$ }
+      if$
+    }
+    { skip$ }
+  if$
 }
 
 
@@ -1352,7 +1317,7 @@ FUNCTION {format.date}
 FUNCTION {format.date.electronic}
 { month "month" bibinfo.check duplicate$ empty$
   year  "year" bibinfo.check duplicate$ empty$
-    { swap$ 
+    { swap$
         { pop$ }
         { "there's a month but no year in " cite$ * warning$
         pop$ ")" * "(" swap$ *
@@ -1364,7 +1329,7 @@ FUNCTION {format.date.electronic}
         }
       if$
     }
-    { swap$ 
+    { swap$
         { swap$ pop$ ")" * "(" swap$ * }
         { "(" swap$ * ", " * swap$ * ")" * }
       if$
@@ -1381,9 +1346,9 @@ FUNCTION {format.date.electronic}
 
 %% edition/title
 
-% Note: IEEE considers the edition to be closely associated with
-% the title of a book. So, in IEEEtran.bst the edition is normally handled 
-% within the formatting of the title. The format.edition function is 
+% Note: The IEEE considers the edition to be closely associated with
+% the title of a book. So, in IEEEtran.bst the edition is normally handled
+% within the formatting of the title. The format.edition function is
 % retained here for possible future use.
 FUNCTION {format.edition}
 { edition duplicate$ empty$ 'skip$
@@ -1402,7 +1367,7 @@ FUNCTION {format.edition}
 }
 
 % This is used to format the booktitle of a conference proceedings.
-% Here we use the "intype" field to provide the user a way to 
+% Here we use the "intype" field to provide the user a way to
 % override the word "in" (e.g., with things like "presented at")
 % Use of intype stops the emphasis of the booktitle to indicate that
 % we no longer mean the written conference proceedings, but the
@@ -1472,12 +1437,12 @@ FUNCTION {format.article.title.electronic}
     { this.to.prev.status
       this.status.std
       cap.status.std
-      "t" change.case$ 
+      "t" change.case$
     }
   if$
   "title" bibinfo.check
-  duplicate$ empty$ 
-    { skip$ } 
+  duplicate$ empty$
+    { skip$ }
     { select.language }
   if$
 }
@@ -1596,7 +1561,7 @@ FUNCTION {format.volume}
   duplicate$ empty$ 'skip$
     { this.to.prev.status
       this.status.std
-      bbl.volume 
+      bbl.volume
       status.cap
         { capitalize }
         { skip$ }
@@ -1627,17 +1592,17 @@ FUNCTION {format.number}
 }
 
 FUNCTION {format.number.if.use.for.article}
-{ is.use.number.for.article 
+{ is.use.number.for.article
      { format.number }
      { "" }
    if$
 }
 
-% IEEE does not seem to tie the series so closely with the volume
+% The IEEE does not seem to tie the series so closely with the volume
 % and number as is done in other bibliography styles. Instead the
 % series is treated somewhat like an extension of the title.
 FUNCTION {format.series}
-{ series empty$ 
+{ series empty$
    { "" }
    { this.to.prev.status
      this.status.std
@@ -1698,7 +1663,7 @@ FUNCTION {format.paper}
         }
       if$
      }
-     { "" } 
+     { "" }
    if$
 }
 
@@ -1734,12 +1699,12 @@ FUNCTION {format.tech.report.number}
   this.status.std
   cap.status.std
   type duplicate$ empty$
-    { pop$ 
+    { pop$
       bbl.techrep
     }
     { skip$ }
   if$
-  "type" bibinfo.check 
+  "type" bibinfo.check
   swap$ duplicate$ empty$
     { pop$ }
     { tie.or.space.prefix * * }
@@ -1786,10 +1751,10 @@ FUNCTION {format.patent.date}
       if$
       dayfiled duplicate$ empty$
         { "dayfiled" bibinfo.check pop$ "" * }
-        { "dayfiled" bibinfo.check 
-          monthfiled empty$ 
+        { "dayfiled" bibinfo.check
+          monthfiled empty$
              { "dayfiled without a monthfiled in " cite$ * warning$
-               * 
+               *
              }
              { " " swap$ * * }
            if$
@@ -1797,7 +1762,7 @@ FUNCTION {format.patent.date}
       if$
       yearfiled empty$
         { "no year or yearfiled in " cite$ * warning$ }
-        { yearfiled "yearfiled" bibinfo.check 
+        { yearfiled "yearfiled" bibinfo.check
           swap$
           duplicate$ empty$
              { pop$ }
@@ -1812,16 +1777,16 @@ FUNCTION {format.patent.date}
       if$
       day duplicate$ empty$
         { "day" bibinfo.check pop$ "" * }
-        { "day" bibinfo.check 
-          month empty$ 
+        { "day" bibinfo.check
+          month empty$
              { "day without a month in " cite$ * warning$
-               * 
+               *
              }
              { " " swap$ * * }
            if$
         }
       if$
-      year "year" bibinfo.check 
+      year "year" bibinfo.check
       swap$
       duplicate$ empty$
         { pop$ }
@@ -1848,7 +1813,7 @@ FUNCTION {format.patent.nationality.type.number}
   type empty$
     { bbl.patent "type" bibinfo.check }
     { type "type" bibinfo.check }
-  if$  
+  if$
   *
   number duplicate$ empty$
     { "number" bibinfo.warn pop$ }
@@ -1856,7 +1821,7 @@ FUNCTION {format.patent.nationality.type.number}
       large.number.separate
       swap$ " " * swap$ *
     }
-  if$ 
+  if$
   cap.status.std
 }
 
@@ -1868,7 +1833,7 @@ FUNCTION {format.organization.institution.standard.type.number}
 { this.to.prev.status
   this.status.std
   organization duplicate$ empty$
-    { pop$ 
+    { pop$
       institution duplicate$ empty$
         { "institution" bibinfo.warn }
         { "institution" bibinfo.warn " " * }
@@ -1879,7 +1844,7 @@ FUNCTION {format.organization.institution.standard.type.number}
   type empty$
     { bbl.standard "type" bibinfo.check }
     { type "type" bibinfo.check }
-  if$  
+  if$
   *
   number duplicate$ empty$
     { "number" bibinfo.check pop$ }
@@ -1887,7 +1852,7 @@ FUNCTION {format.organization.institution.standard.type.number}
       large.number.separate
       swap$ " " * swap$ *
     }
-  if$ 
+  if$
   cap.status.std
 }
 
@@ -1915,7 +1880,7 @@ FUNCTION {format.master.thesis.type}
     {
       bbl.mthesis
     }
-    { 
+    {
       type "type" bibinfo.check
     }
   if$
@@ -1929,7 +1894,7 @@ FUNCTION {format.phd.thesis.type}
     {
       bbl.phdthesis
     }
-    { 
+    {
       type "type" bibinfo.check
     }
   if$
@@ -1941,98 +1906,27 @@ cap.status.std
 %% URL
 
 FUNCTION {format.url}
-{ url empty$
-    { "" }
-    { this.to.prev.status
-      this.status.std
-      cap.yes 'status.cap :=
-      name.url.prefix " " *
-      "\url{" * url * "}" *
-      punct.no 'this.status.punct :=
-      punct.period 'prev.status.punct :=
-      space.normal 'this.status.space :=
-      space.normal 'prev.status.space :=
-      quote.no 'this.status.quote :=
+{ is.use.url
+    { url empty$
+      { "" }
+      { this.to.prev.status
+        this.status.std
+        cap.yes 'status.cap :=
+        name.url.prefix " " *
+        "\url{" * url * "}" *
+        punct.no 'this.status.punct :=
+        punct.period 'prev.status.punct :=
+        space.normal 'this.status.space :=
+        space.normal 'prev.status.space :=
+        quote.no 'this.status.quote :=
+      }
+    if$
     }
-  if$
-}
-%FUNCTION {format.url}
-%{ url empty$
-%    { "" }
-%    { this.to.prev.status
-%      this.status.std
-%      cap.yes 'status.cap :=
-%      name.url.prefix " " *
-%      "\url{" * url * "}" *
-%      punct.no 'this.status.punct :=
-%      punct.period 'prev.status.punct :=
-%      space.normal 'this.status.space :=
-%      space.normal 'prev.status.space :=
-%      quote.no 'this.status.quote :=
-%      urldate empty$
-%       { "there is url but no urldate in " cite$ * warning$ }
-%       { " [Accessed: " * urldate * "]" * }
-%       if$
-%    }
-%  if$
-%}
-
-%% ISBN
-%% added by GQMJr
-
-FUNCTION {format.isbn}
-{ isbn empty$
     { "" }
-    { this.to.prev.status
-      this.status.std
-      cap.yes 'status.cap :=
-      "ISBN " isbn *
-      punct.no 'this.status.punct :=
-      punct.period 'prev.status.punct :=
-      space.normal 'this.status.space :=
-      space.normal 'prev.status.space :=
-      quote.no 'this.status.quote :=
-    }
   if$
 }
 
-%% ISSN
-%% added by GQMJr
 
-FUNCTION {format.issn}
-{ issn empty$
-    { "" }
-    { this.to.prev.status
-      this.status.std
-      cap.yes 'status.cap :=
-      "ISSN " issn *
-      punct.no 'this.status.punct :=
-      punct.period 'prev.status.punct :=
-      space.normal 'this.status.space :=
-      space.normal 'prev.status.space :=
-      quote.no 'this.status.quote :=
-    }
-  if$
-}
-
-%% DOI
-%% added by GQMJr
-
-FUNCTION {format.doi}
-{ doi empty$
-    { "" }
-    { this.to.prev.status
-      this.status.std
-      cap.yes 'status.cap :=
-      "doi: " doi *
-      punct.no 'this.status.punct :=
-      punct.period 'prev.status.punct :=
-      space.normal 'this.status.space :=
-      space.normal 'prev.status.space :=
-      quote.no 'this.status.quote :=
-    }
-  if$
-}
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -2040,7 +1934,7 @@ FUNCTION {format.doi}
 %%%%%%%%%%%%%%%%%%%%
 
 
-% Note: In many journals, IEEE (or the authors) tend not to show the number
+% Note: In many journals, the IEEE (or the authors) tend not to show the number
 % for articles, so the display of the number is controlled here by the
 % switch "is.use.number.for.article"
 FUNCTION {article}
@@ -2055,7 +1949,6 @@ FUNCTION {article}
   format.number.if.use.for.article output
   format.pages output
   format.date "year" output.warn
-  format.doi output
   format.note output
   format.url output
   fin.entry
@@ -2080,7 +1973,6 @@ FUNCTION {book}
   format.address.publisher.date output
   format.volume output
   format.number output
-  format.isbn output		%% GQMJr
   format.note output
   format.url output
   fin.entry
@@ -2098,7 +1990,6 @@ FUNCTION {booklet}
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
   format.date output
-  format.isbn output		%% GQMJr
   format.note output
   format.url output
   fin.entry
@@ -2116,7 +2007,6 @@ FUNCTION {electronic}
   format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
-  format.isbn output		%% GQMJr
   format.note output
   format.url output
   fin.entry
@@ -2140,7 +2030,6 @@ FUNCTION {inbook}
   format.number output
   format.chapter output
   format.pages output
-  format.isbn output		%% GQMJr
   format.note output
   format.url output
   fin.entry
@@ -2162,7 +2051,6 @@ FUNCTION {incollection}
   format.number output
   format.chapter output
   format.pages output
-  format.isbn output		%% GQMJr
   format.note output
   format.url output
   fin.entry
@@ -2188,9 +2076,6 @@ FUNCTION {inproceedings}
     }
   if$
   format.paper output
-  format.doi output		%% GQMJr
-  format.isbn output		%% GQMJr
-  format.issn output		%% GQMJr
   format.pages output
   format.note output
   format.url output
@@ -2205,7 +2090,7 @@ FUNCTION {manual}
   format.authors output
   name.or.dash
   format.book.title.edition "title" output.warn
-  format.howpublished "howpublished" bibinfo.check output 
+  format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
   format.date output
@@ -2239,7 +2124,7 @@ FUNCTION {misc}
   format.authors output
   name.or.dash
   format.article.title output
-  format.howpublished "howpublished" bibinfo.check output 
+  format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
   format.pages output
@@ -2278,7 +2163,6 @@ FUNCTION {periodical}
   format.volume output
   format.number output
   format.organization "organization" bibinfo.check output
-  format.issn output		%% GQMJr
   format.date "year" output.warn
   format.note output
   format.url output
@@ -2296,7 +2180,6 @@ FUNCTION {phdthesis}
   format.phd.thesis.type output.nonnull
   format.school "school" bibinfo.warn output
   format.address "address" bibinfo.check output
-  format.isbn output		%% GQMJr
   format.date "year" output.warn
   format.note output
   format.url output
@@ -2320,7 +2203,6 @@ FUNCTION {proceedings}
       format.address.publisher.date output
     }
   if$
-  format.doi output		%% GQMJr
   format.note output
   format.url output
   fin.entry
@@ -2334,7 +2216,7 @@ FUNCTION {standard}
   format.authors output
   name.or.dash
   format.book.title "title" output.warn
-  format.howpublished "howpublished" bibinfo.check output 
+  format.howpublished "howpublished" bibinfo.check output
   format.organization.institution.standard.type.number output
   format.revision output
   format.date output
@@ -2351,7 +2233,7 @@ FUNCTION {techreport}
   format.authors "author" output.warn
   name.or.dash
   format.article.title "title" output.warn
-  format.howpublished "howpublished" bibinfo.check output 
+  format.howpublished "howpublished" bibinfo.check output
   format.institution "institution" bibinfo.warn output
   format.address "address" bibinfo.check output
   format.tech.report.number output.nonnull
@@ -2400,6 +2282,14 @@ FUNCTION {IEEEtranBSTCTL}
     { CTLuse_paper
       yes.no.to.int
       'is.use.paper :=
+    }
+  if$
+  CTLuse_url
+  empty$
+    { skip$ }
+    { CTLuse_url
+      yes.no.to.int
+      'is.use.url :=
     }
   if$
   CTLuse_forced_etal
@@ -2476,7 +2366,7 @@ FUNCTION {IEEEtranBSTCTL}
 
 
   num.names.shown.with.forced.et.al max.num.names.before.forced.et.al >
-    { "CTLnames_show_etal cannot be greater than CTLmax_names_forced_etal in " cite$ * warning$ 
+    { "CTLnames_show_etal cannot be greater than CTLmax_names_forced_etal in " cite$ * warning$
       max.num.names.before.forced.et.al 'num.names.shown.with.forced.et.al :=
     }
     { skip$ }
