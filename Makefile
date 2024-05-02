@@ -11,4 +11,4 @@ compile:
 	./compile_latex.sh
 
 clean:
-	@git clean -fdX
+	./clean.sh
