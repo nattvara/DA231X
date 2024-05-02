@@ -13,7 +13,7 @@ git clone git@github.com:nattvara/DA231X.git && cd DA231X
 Link the content
 
 ```bash
-ln -s [PATH TO CONTENT IN GOOGLE DRIVE] content
+ln -s [PATH TO CONTENT IN GOOGLE DRIVE] google_docs_content
 ```
 
 build the report

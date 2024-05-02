@@ -1,6 +1,6 @@
 .PHONY: all download compile clean
 
-DOCS_PATH=./content
+DOCS_PATH=./google_docs_content
 
 all: download compile
 
