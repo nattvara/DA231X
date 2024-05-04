@@ -24,22 +24,161 @@ This chapter provides the necessary background for understanding the research co
 \section{Neural Networks}
 
 
+Neural network models are a type of models within the broader field of machine learning whose design have been inspired by human brains. These models allow computers to recognise patterns and solve complex problems. The backpropagation algorithm was popularised by Rumelhart, Hinton, and Williams \cite{rumelhart_learning_1986}. This algorithm efficiently computes the gradient of the loss function with respect to the weights of the network by propagating the error back from the output layer to the input layer. This method is critical to understand all machine learning pipelines because it enables the network to adjust its weights in a way that minimises the error, thereby improving the model's predictions over time.
 
 
-%        "Learning representations by back-propagating errors" by Rumelhart, Hinton, and Williams (1986): This is a pivotal paper that introduced the backpropagation algorithm, crucial for training neural networks.
-%         "Gradient-based learning applied to document recognition" by Yann LeCun et al. (1998): This paper by LeCun introduces Convolutional Neural Networks (CNNs), significantly impacting image processing tasks.
+Building on backpropagation, Yann LeCun et al. \cite{lecun_gradient-based_1998} introduced Convolutional Neural Networks (CNNs) in 1998. These are a specialised kind of neural network for processing data, such as images, which can be converted to a matrix. CNNs utilise layers with convolving filters that apply the learned weights across subsections of the input data. This reduces the amount of parameters in the network and improves its efficiency.
 
 
-\subsection{Large Language Models}
+These are two steps in the evolution of neural network models, particularly the developments in CNNs and other deep learning technologies, are central for setting the stage for even more complex architectures aimed at processing not just visual data, but sequential data such as text. This will eventually lead to Large Language Models (\gls{LLM}), which leverage deep learning techniques to understand and \textit{generate} human language. LLMs are built upon the principles of neural networks. Understanding the models we commonly refer to as LLMs involves understanding models such as Transformer models, BERT, and other encoder-decoder networks.
 
 
-Mention transformers. Mention OpenAI and Mistral. How they can be used.
+\subsection{Recurrent Neural Networks (RNNs)}
+
+
+A Recurrent Neural Network (\gls{RNN}) is a type of neural network that is good for modelling sequential data. They are significantly different from other neural networks in their ability to maintain memory of previous inputs using an internal state. This state which is maintained inside the network while it’s running, will influence the network’s output. RNNs proved to be fundamental in tasks where context was crucial, such as language modelling and generation of text.
+
+
+In an RNN, each neuron, its most basic building block, processes a part of the sequence, receiving both the current input \(x_t\) and the output from the previous step \(h_{t-1}\), this is known as the "hidden state". The core of an RNN operation involves updating this hidden state using:
+\[
+h_t = \text{tanh}(W_{hh} h_{t-1} + W_{xh} x_t + b)
+\]
+where \(W_{hh}\) and \(W_{xh}\) are the weights for the hidden state and input, respectively, and \(b\) is a bias. The updated state \(h_t\) is used in the next step to generate the output \(y_t\) via:
+\[
+y_t = W_{hy} h_t + b_y
+\]
+
+
+
+
+However, RNNs often struggle with maintaining a longer context due to problems like vanishing and exploding gradients, as written by Hochreiter and Schmidhuber \cite{hochreiter_long_1997}. This was a problem other RNN models tried to mitigate as it significantly reduce their usefulness in various tasks. The vanishing gradient problem makes it difficult for the RNN to learn connections between events that occur at longer distances in the input sequence because the gradient of the loss function decays exponentially with the length of the input sequence.
+
+
+This led to the development of more sophisticated variants like Long Short-Term Memory (LSTM) networks and Gated Recurrent Units (GRUs) were developed. LSTMs \cite{hochreiter_long_1997}, use input, output, and "forget gates" to manage information flow, which allows them to maintain stable gradients. GRUs, which was proposed by Cho et al. \cite{cho_learning_2014}, simplifies this by merging the gates and states, reducing complexity while preserving performance across various tasks.
+
+
+\subsection{Sequence-to-Sequence Models}
+
+
+Sequence-to-sequence (seq2seq) models are designed to process sequences of data, such as text or speech, and generate corresponding output sequences. Sutskever et al. \cite{sutskever_sequence_2014} were the first to introduce these models which typically consist of two main components: an encoder and a decoder. The encoder will process the input and convert it into a dense vector. This vector encodes the entire input sequence which is then passed to the decoder, which generates the output. This architecture proved very useful in certain tasks such as translating text between languages. Bahdanau, Cho, and Bengio built upon this concept with attention mechanisms \cite{bahdanau_neural_2016} which would allow the decoder to focus on a specific piece of the input for small parts of the output, which improved the models ability to focus on longer sequences.
+
+
+\subsection{Transformer Models}
+
+
+The Transformer model, introduced by Vaswani et al. \cite{vaswani_attention_2023}, was a new approach for sequence-to-sequence networks, with a self-attention mechanism which was different from the recurrent design of RNNs. The new transformer architecture introduced by Vaswani et al. allowed the network to weigh the importance of different tokens in the input data irrespective of their sequential position. Where a token is a sequence of characters that can be treated as a single logical entity in the input and output sequence.
+
+
+The key innovation of the Transformer is its ability to handle dependencies between single tokens or sequences of tokens at long distances from each other. This makes the transformer architecture especially good at understanding context in text data.
+
+
+The introduction of the transformer model was foundational in the field, and today most models use this architecture, see section~\ref{sec:openai_models} and ~\ref{sec:mistral_models}.
+
+
+\subsection{BERT and Advances in Encoder-Decoder Models}
+\label{sec:bert_and_encoder_decoder}
+
+
+Bidirectional Encoder Representations from Transformers also known as \textit{BERT} was introduced by Devlin et al. \cite{devlin_bert_2019} in 2018 and was a major improvement within natural language processing. The BERT model optimised token representations bidirectionally which means that it was refining the understanding of each token by looking at the tokens before and after each token. BERT was built on the transformer model’s encoder which allowed for pre-training on large text corpora, followed by fine-tuning for various tasks such as sentiment analysis and question answering.
+
+
+Encoder-decoder models are important in machine learning for tasks that involve converting one sequence into another, such as machine translation or speech-to-text. In this type of model the encoder processes the input sequence and compresses information into what’s known as a context vector, this is a condensed representation of the input data. The decoder takes this context vector and generates an output sequence token by token. Each of these two components may be built using recurrent networks, convolutional networks, or more commonly nowadays, transformer architectures.
+
+
+In contrast to traditional encoder-decoder models, encoder-only models, such as BERT, focus on generating an output based on an input without the need for a decoder. These models are typically used for tasks that require deep understanding of language context like sentence classification.
+
+
+Decoder-only models, like the Generative Pre-trained Transformer (see section~\ref{sec:openai_models}), focus on generating sequences from a given context or starting point. These models are very good in situations where the model needs to exhibit "creative" properties, such as when generating text completions.
+
+
+Parallel to BERT, other encoder-decoder models like the Transformer \cite{vaswani_attention_2023} and sequence-to-sequence networks with attention mechanisms \cite{bahdanau_neural_2016} have shown great results when translating sequences in tasks like machine translation, exemplified by Google's Neural Machine Translation system \cite{wu_googles_2016}, and speech recognition, as seen in Apple's Siri voice assistant \cite{hinton_deep_2012}.
+
+
+\subsection{Generative AI}
+
+
+Generative AI is a term used to describe a subset of artificial intelligence technologies that are designed to create new content. This can be images such as with DALL-E \cite{ramesh_zero-shot_2021}, text with models like GPT-3 \cite{brown_language_2020} or movies \cite{openai_video_2024}. These models are capable of generating realistic and arguably novel outputs by understanding and simulating the underlying structure of the training data. One of the most popular frameworks in Generative AI includes Generative Adversarial Networks (GANs), introduced by Goodfellow et al. \cite{goodfellow_generative_2014}, which consist of two neural networks, the generator and the discriminator. These two networks will compete against each other. The generator creates items that are as realistic as possible, and the discriminator evaluates them. This process runs until the discriminator can no longer accurately separate generated items from the training data.
+
+
+\subsection{State-of-the-Art Large Language Models}
+
+
+\gls{LLM} represent a significant breakthrough in \gls{NLP}. They are capable of understanding and generating text similar to that written by humans. In recent years, several cutting-edge LLMs have been developed by prominent companies and research institutions that have gained wide-spread use. This section gives an overview of some notable examples of these advanced LLMs.
+
+
+\label{sec:openai_models}
+\subsubsection{OpenAI's GPT Series}
+
+
+OpenAI's \gls{GPT} series of language models have over the past few years featured some of the most widely used language models. GPT-1 was first released in 2017 followed by GPT-2, GPT-3, and GPT-4 (with various variants of these models). GPT-3, in particular, with its 175 billion parameters, has demonstrated strong capabilities in tasks such as text completion, question answering, and even code generation \cite{brown_language_2020}. These models are some of the most widely used models, primarily due to their popularisation by the product from the same company, ChatGPT \footnote{\href{https://chat.openai.com}{chat.openai.com}}.
+
+
+\subsubsection{Mistral}
+\label{sec:mistral_models}
+
+
+Mistral is a french firm that has released a few models that has gained widespread adoption in the open source community. As of writing, \textit{Mistral-7B-Instruct-v0.2} had 2,297,845 million downloads on huggingface last month \footnote{\href{https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2}{The huggingface page for Mistral-7B-Instruct-v0.2}}, and Mixtral-8x7B-Instruct-v0.1 had 628,927 \footnote{\href{https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1}{The huggingface page for Mixtral-8x7B-Instruct-v0.1}}.
+
+
+\textit{Mistral 7B v0.1} \cite{jiang_mistral_2023} was their first major model to get widespread notoriety. The model is a 7-billion-parameter language model which was small enough to run on consumer-grade GPUs. The model utilised \gls{GQA}\cite{ainslie_gqa_2023} and \gls{SWA} \cite{roy_efficient_2020} techniques to achieve impressive results across various benchmarks, including reasoning, mathematics, and code generation tasks. \textit{Mistral 7B v0.1 instruct} is a related fine-tuned model.
+
+
+The "instruct" version of generative AI models, such as the Mistral 7B, has been fine-tuned to follow prompted instructions. In contrast, the base model simply generates output based on the provided prompt. This process was first published by the team at OpenAI \cite{ouyang_training_2022}, however it’s also employed by mistral and other model vendors. This approach is commonly used for models deployed in AI assistants or chat applications.
+
+
+The \textit{Mixtral of Experts} model \cite{jiang_mixtral_2024}, is a variant of the Mistral model that introduces a \gls{SMoE} architecture, as described by Jiang et al. \textit{Mixtral-8x7B-Instruct-v0.1} employs 8 feedforward blocks (experts) in each layer, with a router network selecting two experts for processing and combining their outputs at each timestep. The model has access to 47 billion parameters, but effectively only utilise 13 billion parameters during inference, which makes the model easier to deploy on GPUs with less amounts of memory.
+
+
+\subsubsection{Google's Language Models}
+
+
+Google has two major families of model, the first being the Gemini family, as introduced in a series of papers by Google's team \cite{gemini_team_gemini_2024-1}, consists of models like Gemini Ultra, Pro, and Nano, each of these models are designed for specific applications and more importantly size of GPU. Where the larger models require enterprise-grade GPUs that are expensive to operate. Gemini 1.5 extended on these models with an even larger context window by effectively processing and recalling information across millions of tokens in a multi-modal context (tokens include both text, audio and image tokens) \cite{gemini_team_gemini_2024}. This is the first model to demonstrate resilience to the problem first described by Nelson et al. where the model would be biassed towards instructions or data in the beginning and end of larger prompts \cite{liu_lost_2023}.
+
+
+Goggles Gemma family of models \cite{gemma_team_gemma_2024} represents Google's effort to provide state-of-the-art, lightweight models to the open source community. These models, available in sizes of 2 billion and 7 billion parameters. The models demonstrate worse performance against their Gemini class of models across all tasks such language understanding and reasoning. However, the Gemma models’ size make them easier to deploy on smaller consumer-grade GPUs.
+
+
+\subsubsection{The LLama family of models}
+
+
+In February 2023, Meta AI released LLaMA \cite{touvron_llama_2023-1} in four distinct sizes: 7, 13, 33, and 65 billion parameters. The model utilised features such as SwiGLU activation functions, rotary positional embeddings, and root-mean-squared layer-normalisation to achieve comparable results to OpenAIs GPT-3 model. Despite being initially released under a noncommercial licence, the weights of LLaMA were leaked, prompting widespread unauthorised use. This accelerated its adoption across various applications.
+
+
+Later in July of 2023, Meta released LLaMA-2 \cite{touvron_llama_2023-2} which was built upon the foundational models of its predecessor with enhanced data sets of 2 trillion tokens, fine-tuning capabilities, and improved dialogue system performance through specialised LLaMA-2 Chat models, these are similar to the instruct models mentioned in section ~\ref{sec:mistral_models}. LLaMA-2 had a 40\% larger training corpus and extended the context length to 4,000 tokens. The release included model sizes from 7 to 70 billion parameters. These models were released under a similar licence to the first LLaMA models.
+
+
+Recently, in April 2024, Meta AI released LLaMA-3, this time with two models, one 8 billion parameter model and one 70 billion parameter model. These were open source and available online \footnote{\href{https://github.com/meta-llama/llama3}{The GitHub repository for LLaMA-3}} from day one under a commercial licence. The model was pre-trained on approximately 15 trillion tokens. Meta announced an, as of writing, future release of a 400 billion parameter model.
+
+
+\subsubsection{Notable other vendors}
+
+
+Besides the major players such as OpenAI, Google, and Meta, there exists a vast array of players, of varying size, that also develops language models. These include, but are not limited to, Anthropic, IBM and DeepMind (which is also a part of Google).
 
 
 \section{Prompt engineering}
+\label{sec:prompt_engineering}
 
 
-Explain it.
+Prompt engineering is the name given to the technique that evolved from the use of language models. This is the task of optimising the performance of a \gls{LLM} such as GPT-4, LLaMA, and others. This involves crafting the input text, or \textit{"prompt"} to these models in a way that guides them to produce desired outputs \cite{kathiriya_power_2023, chen_unleashing_2023}.
+
+
+Prompt engineering is defined as the practice of designing input prompts that maximise the efficacy and accuracy of LLM outputs. It is a key factor in the success of deploying LLM-based applications. The process of prompt engineering involves several key techniques. A prompt should, according to Chen et al. include clear instructions and enough contextual details to guide the model towards providing the expected answer in the expected format. There are numerous advanced techniques such as "role-prompting", zero-shot, one-shot, and few-shot prompting that can improve the performance of LLM.
+
+
+For instance, Kathiriya et al. \cite{kathiriya_power_2023} demonstrates that role-prompting produces responses with heightened professional relevance. Similarly, Chen et al. highlight how few-shot prompting can refine the model's ability to perform complex analytical tasks by providing some targeted examples. Both of these studies show how prompt engineering techniques can improve performance.
+
+
+Figure \ref{fig:role_prompt}, taken from the paper published by Chen et al. \cite{chen_unleashing_2023} illustrates an example of role-prompting. In this example the LLM is instructed to assume the role of an expert in artificial intelligence, which aligns its responses with specific professional knowledge.
+
+
+\input{content/figures/01-background-role-prompt}
+
+
+Another technique known as few-shot prompting, is shown in figure \ref{fig:fewshot_prompt}, taken from the paper written by Kathiriya et al. \cite{kathiriya_power_2023}. With this technique the model is provided with multiple examples to better understand the task. If only one example is given, this is referred to as "one-shot” prompting. Similarly, if no example is given, then the prompt is referred to as a "zero-shot" prompt.
+
+
+\input{content/figures/02-few-shot-prompt}
 
 
 \section{Crawling}

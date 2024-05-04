@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \newlength{\boxwidth}
+    \setlength{\boxwidth}{0.4\textwidth}
+
+    \node[draw, rectangle, rounded corners=2pt, inner sep=5pt, text width=\boxwidth, align=center] (a) {
+        \smaller{You are an expert in artificial intelligence specialising in large language models...}
+    };
+    \node[draw, rectangle, rounded corners=2pt, inner sep=5pt, text width=\boxwidth, align=center, right=of a, xshift=0.5cm] (b) {
+        \smaller{Here are five basic methods to quickly get started with large language models: \\\\ 1. Experiment with web-based interfaces \\\\ ...}
+    };
+
+    \draw[-latex, line width=1mm] (a) -- (b);
+
+    \node[align=center, below=0.1cm of a] (c) {\footnotesize A role prompt};
+    \node[align=center, below=0.1cm of b] (d) {\footnotesize Model output};
+\end{tikzpicture}
+\caption{Role prompting example.}
+\label{fig:role_prompt}
+\end{figure}

@@ -1,0 +1,38 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % Set the width of the boxes
+        \newlength{\boxwidth}
+        \setlength{\boxwidth}{0.4\textwidth}
+
+        \node[draw, rectangle, rounded corners=2pt, inner sep=5pt, text width=\boxwidth, align=left] (input) {
+            \small{
+                \\
+                Example 1: ``Bug Report: Application crashes on startup. Category: Critical. Priority: High.''\\\\
+                \vspace{2mm}
+                Example 2: ``Bug Report: Minor typo in the user interface. Category: Trivial. Priority: Low.''\\\\
+                \vspace{2mm}
+                Task: ``Classify and prioritize the following bug report. Bug Report: User unable to login with valid credentials.''
+                \\
+                \vspace{2mm}
+            }
+        };
+
+        \node[draw, rectangle, rounded corners=2pt, inner sep=5pt, text width=\boxwidth, align=left, right=of input, xshift=2cm] (output) {
+            \small{
+                \\
+                Category: Major. Priority: High
+                \\
+                \vspace{2mm}
+            }
+        };
+
+        \draw[-latex, line width=1mm] (input) -- (output);
+
+        \node[align=center, below=0.1cm of input] (label1) {\footnotesize Input};
+        \node[align=center, below=0.1cm of output] (label2) {\footnotesize Output};
+
+    \end{tikzpicture}
+    \caption{Role prompting example.}
+    \label{fig:fewshot_prompt}
+\end{figure}
