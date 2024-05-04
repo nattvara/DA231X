@@ -181,7 +181,19 @@ Another technique known as few-shot prompting, is shown in figure \ref{fig:fewsh
 \input{content/figures/02-few-shot-prompt}
 
 
-\section{Crawling}
+\section{Web crawling}
+
+
+Web crawling is a technique to systematically browse the World Wide Web to index the content of websites for search engines and other applications using automated programs known as web crawlers \cite{pant_crawling_2003, liu_web_2009}. This is a process that’s crucial for the operation of search engines.
+
+
+A web crawler starts with a list of URLs to visit. As the crawler visits these URLs, it identifies all the hyperlinks on the page and adds them to a database of known URLs to visit. After visiting a URL the crawler employs a method of selecting the next url to visit, which may be one of the hyperlinks it just found on the current page, or any url it might have found before. This method may vary depending on the implementation of the crawler. This process continues until a defined stop condition.
+
+
+While the primary application of web crawling is in web search engines, it can also be used within various other domains. Web crawlers can be used for everything from monitoring changes in web pages to gather data from specific intranets or corporate knowledge bases.
+
+
+Implementing an efficient web crawler involves addressing multiple technical challenges. These are primarily constructing an efficient crawler that can visit and process urls at scale. Additionally, the crawler must be able to index the content found on those websites, which may include various media types such as plaintext, images or document formats such as PDF.
 
 
 \section{Information Retrieval}
