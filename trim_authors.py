@@ -1,7 +1,9 @@
 """
-This script will trim the author entry of references with an absurd amount of authors.
+This script will trim the author entry of references with an absurd amount of authors and remove the file section from all entries.
 
-The latex template doesn't handle that well and produce a silly amount of authors in the bibliography.
+The latex template doesn't handle that well and produces a silly amount of authors in the bibliography.
+
+The script also cleans up unnecessary file sections.
 
 Usage:
 
@@ -26,11 +28,12 @@ def trim_authors(bib_content):
                     team_term = next((author for author in authors_list if "team" in author.lower()), None)
                     if team_term:
                         authors_list = [author for author in authors_list if "team" not in author.lower()]
-                        reduced_authors = ' and '.join([team_term] + authors_list[:9])  # Adjust to include team_term in the 10
+                        reduced_authors = ' and '.join([team_term] + authors_list[:9])
                     else:
                         reduced_authors = ' and '.join(authors_list[:10])
                     modified_authors = re.sub(r'{(.+?)}', '{' + reduced_authors + '}', author_line_match.group(0))
                     entry = entry.replace(author_line_match.group(0), modified_authors)
+        entry = re.sub(r'\s*file\s*=\s*{[^}]*}', '', entry, flags=re.IGNORECASE)
         processed_entries.append(entry)
 
     return '@' + '@'.join(processed_entries)
@@ -44,4 +47,4 @@ trimmed_content = trim_authors(content)
 with open(bib_file_path, 'w', encoding='utf-8') as file:
     file.write(trimmed_content)
 
-print("Bib file has been updated with trimmed author lists.")
+print("Bib file has been updated with trimmed author lists and removed file sections.")
