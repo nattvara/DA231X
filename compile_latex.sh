@@ -1,5 +1,6 @@
 #!/bin/bash
 
+python trim_authors.py
 pdflatex -interaction=nonstopmode main.tex
 makeglossaries "main"
 bibtex main
