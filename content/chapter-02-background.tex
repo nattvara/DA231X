@@ -196,10 +196,70 @@ While the primary application of web crawling is in web search engines, it can a
 Implementing an efficient web crawler involves addressing multiple technical challenges. These are primarily constructing an efficient crawler that can visit and process urls at scale. Additionally, the crawler must be able to index the content found on those websites, which may include various media types such as plaintext, images or document formats such as PDF.
 
 
+
+
+
+
 \section{Information Retrieval}
 
 
-Some stuff here
+\gls{IR} refers to the process of returning relevant information from a corpus of documents. The field primarily focuses on the retrieval of text data and is a core part of many applications such as search engines or AI agents.
+
+
+The objective of information retrieval is to find material within an unstructured database \cite{christopher_d_introduction_2008}. This usually involves resolving the relevant documents in response to a user query. Information retrieval systems are usually measured against precision and recall metrics. These show how relevant the documents returned were, and how many of the relevant documents were returned.
+
+
+\begin{equation}
+        \text{Precision} = \frac{\text{Number of Relevant Documents Retrieved}}{\text{Total Number of Documents Retrieved}}
+\end{equation}
+
+
+\begin{equation}
+        \text{Recall} = \frac{\text{Number of Relevant Documents Retrieved}}{\text{Total Number of Relevant Documents in the Corpus}}
+\end{equation}
+
+
+The core of \gls{IR} is indexing and search algorithms. To index a corpus means processing all the documents in the corpus into a data structure that can later be used for retrieving docs. Search algorithms utilise this index to find documents that match the user's query \cite{christopher_d_introduction_2008}.
+
+
+The second problem of IR is to rank the returned documents. This is problem with many possible solutions.
+
+
+\subsection{Term frequency inverse document frequency}
+
+
+\gls{TF-IDF} is a measurement used to evaluate how important a word is to a document in a collection or corpus. This means it is a relative metric that is unique to the corpus being indexed. TF-IDF is calculated by multiplying two values
+
+
+\begin{enumerate}
+        \item How many times a term appears in a document
+        \item The inverse document frequency of the term across a set of documents
+\end{enumerate}
+
+
+Term frequency is calculated using the following formula
+
+
+\begin{equation}
+        \text{TF}(t, d) = \frac{\text{Number of times term } t \text{ appears in document } d}{\text{Total number of terms in document } d}
+\end{equation}
+
+The inverse document frequency is calculated using this formula
+
+
+\begin{equation}
+        \text{IDF}(t, D) = \log \left(\frac{\text{Total number of documents in the corpus } D}{\text{Number of documents containing term } t}\right)
+\end{equation}
+
+The complete formula for TF-IDF is the following
+
+
+\begin{equation}
+        \text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \text{IDF}(t, D)
+\end{equation}
+
+
+This formula means the relevance for a token increases with the number of times that term appears in the document, but is offset by the frequency of the term in the entire corpus. This is a good way of adjusting for the fact that some words are generally more common than others, such as "a", "the", etc. \cite{christopher_d_introduction_2008}.
 
 
 \subsection{Embedding functions}
@@ -208,7 +268,8 @@ Some stuff here
 Explain it. How it relates to LLMs.
 
 
-\subsection{TFIDF}
+
+
 
 
 \section{RAG}
