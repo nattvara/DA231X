@@ -27,19 +27,19 @@ This chapter provides the necessary background for understanding the research co
 Neural network models are a type of models within the broader field of machine learning whose design have been inspired by human brains. These models allow computers to recognise patterns and solve complex problems. The backpropagation algorithm was popularised by Rumelhart, Hinton, and Williams \cite{rumelhart_learning_1986}. This algorithm efficiently computes the gradient of the loss function with respect to the weights of the network by propagating the error back from the output layer to the input layer. This method is critical to understand all machine learning pipelines because it enables the network to adjust its weights in a way that minimises the error, thereby improving the model's predictions over time.
 
 
-Building on backpropagation, Yann LeCun et al. \cite{lecun_gradient-based_1998} introduced Convolutional Neural Networks (CNNs) in 1998. These are a specialised kind of neural network for processing data, such as images, which can be converted to a matrix. CNNs utilise layers with convolving filters that apply the learned weights across subsections of the input data. This reduces the amount of parameters in the network and improves its efficiency.
+Building on backpropagation, Yann LeCun et al. \cite{lecun_gradient-based_1998} introduced the \gls{CNN} architecture in 1998. These are a specialised kind of neural network for processing data, such as images, which can be converted to a matrix. \gls{CNN}s utilise layers with convolving filters that apply the learned weights across subsections of the input data. This reduces the amount of parameters in the network and improves its efficiency.
 
 
-These are two steps in the evolution of neural network models, particularly the developments in CNNs and other deep learning technologies, are central for setting the stage for even more complex architectures aimed at processing not just visual data, but sequential data such as text. This will eventually lead to Large Language Models (\gls{LLM}), which leverage deep learning techniques to understand and \textit{generate} human language. LLMs are built upon the principles of neural networks. Understanding the models we commonly refer to as LLMs involves understanding models such as Transformer models, BERT, and other encoder-decoder networks.
+These are two steps in the evolution of neural network models, particularly the developments in \gls{CNN}s and other deep learning technologies, are central for setting the stage for even more complex architectures aimed at processing not just visual data, but sequential data such as text. This will eventually lead to Large Language Models (\gls{LLM}), which leverage deep learning techniques to understand and \textit{generate} human language. \gls{LLM}s are built upon the principles of neural networks. Understanding the models we commonly refer to as \gls{LLM}s involves understanding models such as Transformer models, \gls{BERT}, and other encoder-decoder networks.
 
 
 \subsection{Recurrent Neural Networks (RNNs)}
 
 
-A Recurrent Neural Network (\gls{RNN}) is a type of neural network that is good for modelling sequential data. They are significantly different from other neural networks in their ability to maintain memory of previous inputs using an internal state. This state which is maintained inside the network while it’s running, will influence the network’s output. RNNs proved to be fundamental in tasks where context was crucial, such as language modelling and generation of text.
+A Recurrent Neural Network (\gls{RNN}) is a type of neural network that is good for modelling sequential data. They are significantly different from other neural networks in their ability to maintain memory of previous inputs using an internal state. This state which is maintained inside the network while it’s running, will influence the network’s output. \gls{RNN}s proved to be fundamental in tasks where context was crucial, such as language modelling and generation of text.
 
 
-In an RNN, each neuron, its most basic building block, processes a part of the sequence, receiving both the current input \(x_t\) and the output from the previous step \(h_{t-1}\), this is known as the "hidden state". The core of an RNN operation involves updating this hidden state using:
+In an \gls{RNN}, each neuron, its most basic building block, processes a part of the sequence, receiving both the current input \(x_t\) and the output from the previous step \(h_{t-1}\), this is known as the "hidden state". The core of an \gls{RNN} operation involves updating this hidden state using:
 \[
 h_t = \text{tanh}(W_{hh} h_{t-1} + W_{xh} x_t + b)
 \]
@@ -51,10 +51,10 @@ y_t = W_{hy} h_t + b_y
 
 
 
-However, RNNs often struggle with maintaining a longer context due to problems like vanishing and exploding gradients, as written by Hochreiter and Schmidhuber \cite{hochreiter_long_1997}. This was a problem other RNN models tried to mitigate as it significantly reduce their usefulness in various tasks. The vanishing gradient problem makes it difficult for the RNN to learn connections between events that occur at longer distances in the input sequence because the gradient of the loss function decays exponentially with the length of the input sequence.
+However, \gls{RNN}s often struggle with maintaining a longer context due to problems like vanishing and exploding gradients, as written by Hochreiter and Schmidhuber \cite{hochreiter_long_1997}. This was a problem other \gls{RNN} models tried to mitigate as it significantly reduce their usefulness in various tasks. The vanishing gradient problem makes it difficult for the \gls{RNN} to learn connections between events that occur at longer distances in the input sequence because the gradient of the loss function decays exponentially with the length of the input sequence.
 
 
-This led to the development of more sophisticated variants like Long Short-Term Memory (LSTM) networks and Gated Recurrent Units (GRUs) were developed. LSTMs \cite{hochreiter_long_1997}, use input, output, and "forget gates" to manage information flow, which allows them to maintain stable gradients. GRUs, which was proposed by Cho et al. \cite{cho_learning_2014}, simplifies this by merging the gates and states, reducing complexity while preserving performance across various tasks.
+This led to the development of more sophisticated variants like \gls{LSTM} networks and \gls{GRU}s were developed. \gls{LSTM}s \cite{hochreiter_long_1997}, use input, output, and "forget gates" to manage information flow, which allows them to maintain stable gradients. \gls{GRU}s, which was proposed by Cho et al. \cite{cho_learning_2014}, simplifies this by merging the gates and states, reducing complexity while preserving performance across various tasks.
 
 
 \subsection{Sequence-to-Sequence Models}
@@ -66,7 +66,7 @@ This led to the development of more sophisticated variants like Long Short-Term 
 \subsection{Transformer Models}
 
 
-The Transformer model, introduced by Vaswani et al. \cite{vaswani_attention_2023}, was a new approach for \gls{seq2seq} networks, with a self-attention mechanism which was different from the recurrent design of RNNs. The new transformer architecture introduced by Vaswani et al. allowed the network to weigh the importance of different tokens in the input data irrespective of their sequential position. Where a token is a sequence of characters that can be treated as a single logical entity in the input and output sequence.
+The Transformer model, introduced by Vaswani et al. \cite{vaswani_attention_2023}, was a new approach for \gls{seq2seq} networks, with a self-attention mechanism which was different from the recurrent design of \gls{RNN}s. The new transformer architecture introduced by Vaswani et al. allowed the network to weigh the importance of different tokens in the input data irrespective of their sequential position. Where a token is a sequence of characters that can be treated as a single logical entity in the input and output sequence.
 
 
 The key innovation of the Transformer is its ability to handle dependencies between single tokens or sequences of tokens at long distances from each other. This makes the transformer architecture especially good at understanding context in text data.
@@ -79,31 +79,31 @@ The introduction of the transformer model was foundational in the field, and tod
 \label{sec:bert_and_encoder_decoder}
 
 
-Bidirectional Encoder Representations from Transformers also known as \textit{BERT} was introduced by Devlin et al. \cite{devlin_bert_2019} in 2018 and was a major improvement within natural language processing. The BERT model optimised token representations bidirectionally which means that it was refining the understanding of each token by looking at the tokens before and after each token. BERT was built on the transformer model’s encoder which allowed for pre-training on large text corpora, followed by fine-tuning for various tasks such as sentiment analysis and question answering.
+\gls{BERT} was introduced by Devlin et al. \cite{devlin_bert_2019} in 2018 and was a major improvement within natural language processing. The \gls{BERT} model optimised token representations bidirectionally which means that it was refining the understanding of each token by looking at the tokens before and after each token. \gls{BERT} was built on the transformer model’s encoder which allowed for pre-training on large text corpora, followed by fine-tuning for various tasks such as sentiment analysis and question answering.
 
 
 Encoder-decoder models are important in machine learning for tasks that involve converting one sequence into another, such as machine translation or speech-to-text. In this type of model the encoder processes the input sequence and compresses information into what’s known as a context vector, this is a condensed representation of the input data. The decoder takes this context vector and generates an output sequence token by token. Each of these two components may be built using recurrent networks, convolutional networks, or more commonly nowadays, transformer architectures.
 
 
-In contrast to traditional encoder-decoder models, encoder-only models, such as BERT, focus on generating an output based on an input without the need for a decoder. These models are typically used for tasks that require deep understanding of language context like sentence classification.
+In contrast to traditional encoder-decoder models, encoder-only models, such as \gls{BERT}, focus on generating an output based on an input without the need for a decoder. These models are typically used for tasks that require deep understanding of language context like sentence classification.
 
 
-Decoder-only models, like the Generative Pre-trained Transformer (see section~\ref{sec:openai_models}), focus on generating sequences from a given context or starting point. These models are very good in situations where the model needs to exhibit "creative" properties, such as when generating text completions.
+Decoder-only models, like the \gls{GPT} (see section~\ref{sec:openai_models}), focus on generating sequences from a given context or starting point. These models are very good in situations where the model needs to exhibit "creative" properties, such as when generating text completions.
 
 
-Parallel to BERT, other encoder-decoder models like the Transformer \cite{vaswani_attention_2023} and \gls{seq2seq} networks with attention mechanisms \cite{bahdanau_neural_2016} have shown great results when translating sequences in tasks like machine translation, exemplified by Google's Neural Machine Translation system \cite{wu_googles_2016}, and speech recognition, as seen in Apple's Siri voice assistant \cite{hinton_deep_2012}.
+Parallel to \gls{BERT}, other encoder-decoder models like the Transformer \cite{vaswani_attention_2023} and \gls{seq2seq} networks with attention mechanisms \cite{bahdanau_neural_2016} have shown great results when translating sequences in tasks like machine translation, exemplified by Google's Neural Machine Translation system \cite{wu_googles_2016}, and speech recognition, as seen in Apple's Siri voice assistant \cite{hinton_deep_2012}.
 
 
 \subsection{Generative AI}
 
 
-Generative AI is a term used to describe a subset of artificial intelligence technologies that are designed to create new content. This can be images such as with DALL-E \cite{ramesh_zero-shot_2021}, text with models like GPT-3 \cite{brown_language_2020} or movies \cite{openai_video_2024}. These models are capable of generating realistic and arguably novel outputs by understanding and simulating the underlying structure of the training data. One of the most popular frameworks in Generative AI includes Generative Adversarial Networks (GANs), introduced by Goodfellow et al. \cite{goodfellow_generative_2014}, which consist of two neural networks, the generator and the discriminator. These two networks will compete against each other. The generator creates items that are as realistic as possible, and the discriminator evaluates them. This process runs until the discriminator can no longer accurately separate generated items from the training data.
+Generative AI is a term used to describe a subset of artificial intelligence technologies that are designed to create new content. This can be images such as with DALL-E \cite{ramesh_zero-shot_2021}, text with models like GPT-3 \cite{brown_language_2020} or movies \cite{openai_video_2024}. These models are capable of generating realistic and arguably novel outputs by understanding and simulating the underlying structure of the training data. One of the most popular frameworks in Generative AI includes \gls{GAN}s, introduced by Goodfellow et al. \cite{goodfellow_generative_2014}, which consist of two neural networks, the generator and the discriminator. These two networks will compete against each other. The generator creates items that are as realistic as possible, and the discriminator evaluates them. This process runs until the discriminator can no longer accurately separate generated items from the training data.
 
 
 \subsection{State-of-the-Art Large Language Models}
 
 
-\gls{LLM} represent a significant breakthrough in \gls{NLP}. They are capable of understanding and generating text similar to that written by humans. In recent years, several cutting-edge LLMs have been developed by prominent companies and research institutions that have gained wide-spread use. This section gives an overview of some notable examples of these advanced LLMs.
+\gls{LLM} represent a significant breakthrough in \gls{NLP}. They are capable of understanding and generating text similar to that written by humans. In recent years, several cutting-edge \gls{LLM}s have been developed by prominent companies and research institutions that have gained wide-spread use. This section gives an overview of some notable examples of these advanced \gls{LLM}s.
 
 
 \label{sec:openai_models}
@@ -163,13 +163,13 @@ Besides the major players such as OpenAI, Google, and Meta, there exists a vast 
 Prompt engineering is the name given to the technique that evolved from the use of language models. This is the task of optimising the performance of a \gls{LLM} such as GPT-4, LLaMA, and others. This involves crafting the input text, or \textit{"prompt"} to these models in a way that guides them to produce desired outputs \cite{kathiriya_power_2023, chen_unleashing_2023}.
 
 
-Prompt engineering is defined as the practice of designing input prompts that maximise the efficacy and accuracy of LLM outputs. It is a key factor in the success of deploying LLM-based applications. The process of prompt engineering involves several key techniques. A prompt should, according to Chen et al. include clear instructions and enough contextual details to guide the model towards providing the expected answer in the expected format. There are numerous advanced techniques such as "role-prompting", zero-shot, one-shot, and few-shot prompting that can improve the performance of LLM.
+Prompt engineering is defined as the practice of designing input prompts that maximise the efficacy and accuracy of \gls{LLM} outputs. It is a key factor in the success of deploying \gls{LLM}-based applications. The process of prompt engineering involves several key techniques. A prompt should, according to Chen et al. include clear instructions and enough contextual details to guide the model towards providing the expected answer in the expected format. There are numerous advanced techniques such as "role-prompting", zero-shot, one-shot, and few-shot prompting that can improve the performance of \gls{LLM}.
 
 
 For instance, Kathiriya et al. \cite{kathiriya_power_2023} demonstrates that role-prompting produces responses with heightened professional relevance. Similarly, Chen et al. highlight how few-shot prompting can refine the model's ability to perform complex analytical tasks by providing some targeted examples. Both of these studies show how prompt engineering techniques can improve performance.
 
 
-Figure \ref{fig:role_prompt}, taken from the paper published by Chen et al. \cite{chen_unleashing_2023} illustrates an example of role-prompting. In this example the LLM is instructed to assume the role of an expert in artificial intelligence, which aligns its responses with specific professional knowledge.
+Figure \ref{fig:role_prompt}, taken from the paper published by Chen et al. \cite{chen_unleashing_2023} illustrates an example of role-prompting. In this example the \gls{LLM} is instructed to assume the role of an expert in artificial intelligence, which aligns its responses with specific professional knowledge.
 
 
 \input{content/figures/01-background-role-prompt}
