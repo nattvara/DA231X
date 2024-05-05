@@ -262,14 +262,45 @@ The complete formula for TF-IDF is the following
 This formula means the relevance for a token increases with the number of times that term appears in the document, but is offset by the frequency of the term in the entire corpus. This is a good way of adjusting for the fact that some words are generally more common than others, such as "a", "the", etc. \cite{christopher_d_introduction_2008}.
 
 
-\subsection{Embedding functions}
+\subsection{Embedding Functions}
 
 
-Explain it. How it relates to LLMs.
+Vector embeddings are a way of representing text or other media content, such as images, as a numerical vector that encapsulates their features. Figure ~\ref{fig:example_embeddings_cat_dog} illustrates how a token, in this case \textit{cat} and \textit{dog}, is encoded into a vector.
 
 
+\input{content/figures/03-embedding-function}
 
 
+For text content such a feature could be something abstract about a word that’s even true in several languages. In text processing, one typically leverages the neural network of a language model to understand the contexts and co-occurrences of tokens. These networks have usually been trained on very large corpora of text and are thereby very good at placing semantically similar tokens close to each other in a vector space. For example, \textit{football} and \textit{soccer} may appear in similar contexts, leading the network to locate them near each other in a "meaning space", as can be seen in figure ~\ref{fig:background_word_plot}. Measured with something like levenshtein distance, the words are very far from each other, even though we know they are synonymous in many contexts. Processing text with a neural network and representing it with a vector can allow computers to perform complex tasks like text prediction with an understanding akin to human cognitive judgments \cite{mikolov_efficient_2013}.
+
+
+\input{content/figures/04-background-word-plot}
+
+
+There are numerous types of models and techniques that have been developed to efficiently compute vector embeddings. One such is \gls{CBOW} and Skip-gram models, introduced by Mikolov et al. \cite{mikolov_efficient_2013}. These were early yet foundational methods for generating word embeddings. These models leverage large corpora to predict tokens from their context (CBOW), or with the context from the tokens (Skip-gram). Both of these techniques leverage the trained models ability to learn semantic and syntactic nuances of the tokens in the training corpus \cite{mikolov_efficient_2013, mikolov_distributed_2013}.
+
+
+Advancements in vector embedding technologies enhance \gls{NLP} tasks such as text classification and sentiment analysis. Embedding models that can process language or images with nuance and precision are crucial for accurate real-world applications \cite{pennington_glove_2014}.
+
+
+There are new Embedding functions released often, built-upon different language models and employing various different techniques. The evaluation of these embedding functions often remains constrained to a narrow set of tasks. Muennighoff et al. tried to address this issue by introducing \gls{MTEB}, which spans 8 embedding tasks covering a total of 58 datasets and 112 languages. The leaderboard is currently actively maintained on hunggingface \footnote{\href{https://huggingface.co/spaces/mteb/leaderboard}{Massive Text Embedding Benchmark (MTEB) Leaderboard on Huggingface}}.
+
+
+Two models that rank highly on the leaderboard is Salesforce's open source \textit{SFR-Embedding-Mistral} model which exemplifies advancements in embedding technology for text retrieval tasks \cite{meng_sfr-embedding-mistral_2024}. Similarly, OpenAI has developed several closed source embedding models that also rank highly on the MTEB leaderboard \cite{openai_new_2024, openai_new_2024-1}.
+
+
+Embeddings are often used to compare documents against each other, or against a given user query. This is often done by computing similarity scores between words, phrases, or documents, which are represented as vectors in the embedding space. These scores quantify the closeness, or "similarity" between different texts.
+
+
+The similarity between two vector representations is typically measured using the cosine similarity metric. This calculates the cosine of the angle between two vectors. This metric ranges from -1 (the exact opposite document) to 1 (the exact same document), with 0 indicating orthogonality (no similarity). The cosine similarity \( \text{sim}(u, v) \) between two vectors \( u \) and \( v \) is defined as:
+
+
+\begin{equation}
+\text{sim}(u, v) = \frac{u \cdot v}{\|u\| \|v\|}
+\end{equation}
+
+
+where \( u \cdot v \) is the dot product of the vectors \( u \) and \( v \), and \( \|u\| \) and \( \|v\| \) are the Euclidean norms of both vectors.
 
 
 \section{RAG}
