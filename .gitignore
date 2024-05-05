@@ -308,3 +308,5 @@ TSWLatexianTemp*
 *.tlg
 
 google_docs_content
+
+venv
