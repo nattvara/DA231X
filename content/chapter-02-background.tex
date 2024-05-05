@@ -60,13 +60,13 @@ This led to the development of more sophisticated variants like Long Short-Term 
 \subsection{Sequence-to-Sequence Models}
 
 
-Sequence-to-sequence (seq2seq) models are designed to process sequences of data, such as text or speech, and generate corresponding output sequences. Sutskever et al. \cite{sutskever_sequence_2014} were the first to introduce these models which typically consist of two main components: an encoder and a decoder. The encoder will process the input and convert it into a dense vector. This vector encodes the entire input sequence which is then passed to the decoder, which generates the output. This architecture proved very useful in certain tasks such as translating text between languages. Bahdanau, Cho, and Bengio built upon this concept with attention mechanisms \cite{bahdanau_neural_2016} which would allow the decoder to focus on a specific piece of the input for small parts of the output, which improved the models ability to focus on longer sequences.
+\gls{seq2seq} models are designed to process sequences of data, such as text or speech, and generate corresponding output sequences. Sutskever et al. \cite{sutskever_sequence_2014} were the first to introduce these models which typically consist of two main components: an encoder and a decoder. The encoder will process the input and convert it into a dense vector. This vector encodes the entire input sequence which is then passed to the decoder, which generates the output. This architecture proved very useful in certain tasks such as translating text between languages. Bahdanau, Cho, and Bengio built upon this concept with attention mechanisms \cite{bahdanau_neural_2016} which would allow the decoder to focus on a specific piece of the input for small parts of the output, which improved the models ability to focus on longer sequences.
 
 
 \subsection{Transformer Models}
 
 
-The Transformer model, introduced by Vaswani et al. \cite{vaswani_attention_2023}, was a new approach for sequence-to-sequence networks, with a self-attention mechanism which was different from the recurrent design of RNNs. The new transformer architecture introduced by Vaswani et al. allowed the network to weigh the importance of different tokens in the input data irrespective of their sequential position. Where a token is a sequence of characters that can be treated as a single logical entity in the input and output sequence.
+The Transformer model, introduced by Vaswani et al. \cite{vaswani_attention_2023}, was a new approach for \gls{seq2seq} networks, with a self-attention mechanism which was different from the recurrent design of RNNs. The new transformer architecture introduced by Vaswani et al. allowed the network to weigh the importance of different tokens in the input data irrespective of their sequential position. Where a token is a sequence of characters that can be treated as a single logical entity in the input and output sequence.
 
 
 The key innovation of the Transformer is its ability to handle dependencies between single tokens or sequences of tokens at long distances from each other. This makes the transformer architecture especially good at understanding context in text data.
@@ -91,7 +91,7 @@ In contrast to traditional encoder-decoder models, encoder-only models, such as 
 Decoder-only models, like the Generative Pre-trained Transformer (see section~\ref{sec:openai_models}), focus on generating sequences from a given context or starting point. These models are very good in situations where the model needs to exhibit "creative" properties, such as when generating text completions.
 
 
-Parallel to BERT, other encoder-decoder models like the Transformer \cite{vaswani_attention_2023} and sequence-to-sequence networks with attention mechanisms \cite{bahdanau_neural_2016} have shown great results when translating sequences in tasks like machine translation, exemplified by Google's Neural Machine Translation system \cite{wu_googles_2016}, and speech recognition, as seen in Apple's Siri voice assistant \cite{hinton_deep_2012}.
+Parallel to BERT, other encoder-decoder models like the Transformer \cite{vaswani_attention_2023} and \gls{seq2seq} networks with attention mechanisms \cite{bahdanau_neural_2016} have shown great results when translating sequences in tasks like machine translation, exemplified by Google's Neural Machine Translation system \cite{wu_googles_2016}, and speech recognition, as seen in Apple's Siri voice assistant \cite{hinton_deep_2012}.
 
 
 \subsection{Generative AI}
@@ -263,6 +263,7 @@ This formula means the relevance for a token increases with the number of times 
 
 
 \subsection{Embedding Functions}
+\label{sec:embedding_functions}
 
 
 Vector embeddings are a way of representing text or other media content, such as images, as a numerical vector that encapsulates their features. Figure ~\ref{fig:example_embeddings_cat_dog} illustrates how a token, in this case \textit{cat} and \textit{dog}, is encoded into a vector.
@@ -306,7 +307,25 @@ where \( u \cdot v \) is the dot product of the vectors \( u \) and \( v \), and
 \section{RAG}
 
 
-Explain it.
+\gls{RAG} is the process of integrating retrieval mechanisms into the generative models. This approach effectively combines the strengths of both retrieval and generative language modelling to enhance a model's ability to accurately recall factual information by utilising an external knowledge base during the generation process \cite{lewis_retrieval-augmented_2021}.
+
+
+\gls{RAG} was developed to address the limitations of large pre-trained language models that could compress a large training corpus into its weights, but could struggle with accessing and precisely manipulating this information when required. The term "hallucination" would come to describe the event where models would "recall" incorrect information, as shown in figure ~\ref{fig:hallucination_example}.
+
+
+\input{content/figures/05-hallucination-example}
+
+
+The fact that language models tend to have a propensity to hallucinate, and the simple fact that it is very time consuming to train language models, mean these models would often lag behind in knowledge-intensive applications where correctness is crucial. The integration of a non-parametric memory, or an external knowledge base, allows these models to retrieve relevant information during the generation process and thereby producing more accurate responses \cite{lewis_retrieval-augmented_2021}.
+
+
+In a typical \gls{RAG} setup, the systems architecture is split into two main components: the retriever and the generator. The retriever is a language model trained to search and fetch relevant documents. Nowadays, this process often utilises dense vector representations of documents (see section ~\ref{sec:embedding_functions}) which enables efficient and effective search \cite{guu_realm_2020}.
+
+
+The returned documents are then fed into the generator, this is a \gls{seq2seq} model, which then synthesises the information into coherent text. The generator is often instructed to only use authoritative facts that are returned from the retriever and not rely on its internal knowledge for factual statements. This dual-component approach allows \gls{RAG} to dynamically access a large corpus of knowledge while maintaining its ability to generate fluent and contextually appropriate language \cite{lewis_retrieval-augmented_2021}. This method has shown significant improvement over a purely parametric-approach in various tasks such as question answering and fact verification \cite{brown_language_2020, sachan_end--end_2021}.
+
+
+When google announced Gemini 1.5 \cite{gemini_team_gemini_2024} they claimed it could effectively recall knowledge over prompts as large as a million tokens. It remains to be seen if the hallucination, training-time and context length problems can be overcomed and remove the need for a \gls{RAG} system when building knowledge-intensive applications on-top of a \gls{LLM}.
 
 
 \section{AI Agents}

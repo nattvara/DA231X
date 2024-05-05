@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \newlength{\boxwidth}
+    \setlength{\boxwidth}{0.4\textwidth}
+
+    \node[draw, rectangle, rounded corners=2pt, inner sep=5pt, text width=\boxwidth, align=center] (a) {
+        \smaller{What was the name of the spacecraft that took the first humans to Mars?}
+    };
+    \node[draw, rectangle, rounded corners=2pt, inner sep=5pt, text width=\boxwidth, align=center, right=of a, xshift=0.5cm] (b) {
+        \smaller{The first humans were taken to Mars by the spacecraft Ares I, which landed on the Martian surface in 2025.}
+    };
+
+    \draw[-latex, line width=1mm] (a) -- (b);
+
+    \node[align=center, below=0.1cm of a] (c) {\footnotesize Input};
+    \node[align=center, below=0.1cm of b] (d) {\footnotesize Model output};
+\end{tikzpicture}
+\caption{An example of how a model can hallucinate an answer to a question.}
+\label{fig:hallucination_example}
+\end{figure}
