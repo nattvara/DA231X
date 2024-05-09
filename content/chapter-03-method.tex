@@ -28,6 +28,9 @@
 % describes the framework selected to evaluate xxx.
 
 
+
+
+This chapter outlines the methodologies and procedures used for conducting the research described in this thesis. The focus is on presenting the chosen methods for data collection, analysis, and evaluation of the deployment and effectiveness of AI-assistants within Canvas course rooms at KTH.
 % \sweExpl{Vilka vetenskaplig eller ingenjörs-metodik ska du använda och varför har du valt den här metoden. Vilka andra metoder gjorde du övervägde du och varför du avvisar dem.
 % Vad är dina mål? (Vad ska du kunna göra som ett resultat av din lösning - vilken inte kan göras i god tid innan du började)
 % Vad du ska göra? Hur? Varför? Till exempel, om du har implementerat en artefakt vad gjorde du och varför? Hur kommer du utvärdera den.
@@ -48,7 +51,37 @@
 
 
 \section{Research Process}
-\label{sec:researchProcess}
+\label{sec:research_process}
+
+
+The research process within this thesis consisted of three main phases. This section will outline each phase and what the purpose was.
+
+
+\subsection{Prof of concept}
+
+
+The study will aim to achieve an assistant using open source and permissively licensed \gls{LLM}s and \gls{RAG} techniques, that is comparable to the current best in class models provided under less permissive licesnses and are only available through properitery APIs. Considering that this is a fairly complex task, the research started with a long phase of constructing various proof of concepts.
+
+
+There would be two main proof of concepts, one using proprietary models and \gls{RAG} techniques, and one strictly using software that is under open source licenses and can be self-hosted.
+
+
+\subsection{Implementation of study software}
+
+
+The second phase consists of constructing the software that will be used during the study. This software is the actual AI assistant and all it’s components, such as the course room crawler and indexer, the infrastructure to run \gls{LLM}s at scale and a \gls{GUI} to interact with the assistant. This software also needs to be able to exchange various different components that are the subject for the study, such as the \gls{LLM} being used in a chat. Furthermore, the software needs to be able to record user interactions and responses to questions.
+
+
+\subsection{Conduct the study at KTH}
+
+
+This phase consists of deploying and monitoring the assistant in the course rooms that have enrolled in the study. This might involve modifying the software such that it works in the new course room, or ensuring that there is enough capacity on the platform to sustain the new users.
+
+
+\subsection{Analyse results}
+
+
+TODO.
 
 
 % \sweExpl{Undersökningsrocess och utvecklingsprocess}
