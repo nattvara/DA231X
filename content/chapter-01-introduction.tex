@@ -45,7 +45,7 @@
 
 This degree project will investigate Large Language Models (\gls{LLM}) and Retrieval Augmented Generation (\gls{RAG}) systems in the form of deploying an AI-Assistant in canvas course rooms. The degree project will investigate how to evaluate these systems in very specialised domains and benchmark various models, approaches and techniques.
 
-The reason this research is important is that LLMs have gained widespread attention and we are likely to see large-scale adoption of these models into various applications. Understanding how to benchmark and evaluate these systems in specialised domains will be crucial to understand how to build these systems, which techniques to use, and which models work well.
+The reason this research is important is that \gls{LLM}s have gained widespread attention and we are likely to see large-scale adoption of these models into various applications. Understanding how to benchmark and evaluate these systems in specialised domains will be crucial to understand how to build these systems, which techniques to use, and which models work well.
 
 
 Many organisations need to, due to commercial and regulatory compliance, host all AI-models themselves. This aspect is also interesting to evaluate, i.e. how well open source and commercially licensed models compare against the closed source models, such as GPT-4 by OpenAI.
@@ -58,9 +58,6 @@ Many organisations need to, due to commercial and regulatory compliance, host al
 % other. This also introduces the names/terms/… that you are going to use
 % throughout your thesis (be consistent). This figure will also help you later
 % delimit what you are going to do and what others have done or will do.}
-
-
-\subsection{Where the research is taking place}
 
 
 The research will be carried out within the e-learning management object at KTH, who are responsible for the digital learning environment at KTH. The object consists of two teams at the KTH IT department and one team at the digital learning unit at the ITM-school. The university hosts thousands of courses with domain specific information, such as 
@@ -80,34 +77,23 @@ All the work done by KTH IT aims to improve the operations at the university. Am
 % projektet. }
 
 
-Large Language Models (LLMs) have gained widespread use since its popularisation by ChatGPT. Their abilities to summarise large bodies of text and follow user instructions have proven very useful in many contexts. However, considering their limited context window (and drawbacks of models with larger context window \cite{liu_lost_2023}) deploying useful applications with a chat based interface still rely upon integrating a RAG system, introduced by Lewis et al. \cite{lewis_retrieval-augmented_2021}. These can retrieve relevant information needed to answer a user's query from outside data sources and inject them into the conversation.
+\gls{LLM}s have gained widespread use since its popularisation by ChatGPT. Their abilities to summarise large bodies of text and follow user instructions have proven very useful in many contexts. However, considering their limited context window (and drawbacks of models with larger context window \cite{liu_lost_2023}) deploying useful applications with a chat based interface still rely upon integrating a RAG system, introduced by Lewis et al. \cite{lewis_retrieval-augmented_2021}. These can retrieve relevant information needed to answer a user's query from outside data sources and inject them into the conversation.
 
 
-Some unreleased models, such as the gemini family of models \cite{gemini_team_gemini_2023}, have been reported to show great recall performance and reasoning abilities over millions of tokens. This could significantly reduce the importance of RAG systems in applications which utilise LLMs and external datasets to create intelligent systems with domain specific knowledge. However, even though no exact figures are presented by the Gemini time, inference speed (the time taken to produce a response to a prompt) seems to be significantly slower than shorter contexts. This would again highlight the importance of efficient RAG systems. Still, other approaches than traditional GPUs have been shown recently \cite{abts_software-defined_2022} by the Groq team to greatly increase inference speed.
+Some announced but currently unreleased models, such as the gemini family of models \cite{gemini_team_gemini_2023}, have been reported to show great recall performance and reasoning abilities over millions of tokens. This could significantly reduce the importance of RAG systems in applications which utilise \gls{LLM}s and external datasets to create intelligent systems with domain specific knowledge. However, even though no exact figures are presented by the Gemini time, inference speed (the time taken to produce a response to a prompt) seems to be significantly slower than shorter contexts. This would again highlight the importance of efficient RAG systems. Still, other approaches than traditional GPUs have been shown recently \cite{abts_software-defined_2022} by the Groq team to greatly increase inference speed.
 
 
-% remember to update to this ref
-% @techreport{Gemini15Report2024,
-%   title = {Gemini 1.5: Unlocking Multimodal Understanding Across Millions of Tokens of Context},
-%   author = {The Gemini Team},
-%   year = {2024},
-%   institution = {Google},
-%   note = {Available: \url{https://research.google/pubs/pub50446/}},
-%   abstract = {In this report, we present the latest model of the Gemini family, Gemini 1.5 Pro, a highly compute-efficient multimodal mixture-of-experts model capable of recalling and reasoning over fine-grained information from millions of tokens of context, including multiple long documents and hours of video and audio.}
-% }
-
-
-Evaluating large language models is notoriously difficult. There are objective and automated metrics that can be used for tasks such as evaluating a model's summarisation capabilities, as shown by Basyal and Sanghvi \cite{basyal_text_2023}. However, for more complicated evaluations it gets trickier. In their seminal instructGPT paper Ouyang et al. at OpenAI try to evaluate \textit{“how well a model can follow instructions”} \cite{ouyang_training_2022} which is a very subjective question. They essentially relied upon human labelers to judge the overall quality of each response generated by the model.
+Evaluating large language models is notoriously difficult. There are objective and automated metrics that can be used for tasks such as evaluating a model's summarisation capabilities, as shown by Basyal and Sanghvi \cite{basyal_text_2023}. However, for more complicated evaluations it gets trickier. In their seminal instructGPT paper Ouyang et al. at OpenAI try to evaluate \textit{“how well a model can follow instructions”} \cite{ouyang_training_2022} which is a very subjective question. They essentially relied upon human labellers to judge the overall quality of each response generated by the model.
 
 
 In their Gemini-paper the Gemini team discuss the benchmarks used for their largest model. The team states that benchmarks are often designed to test shorter prompts whereas their longer prompts challenge tests used in traditional evaluation methods that rely heavily on manual evaluation. This highlights the relevance of good evaluation metrics. Regardless of context size or inference speed, evaluation of models tends to be very general. Which makes sense, when considering their general application.
 
 
-When releasing their Mixtral model \cite{jiang_mixtral_2024} the Mistral AI team used a range of benchmark tests, such as MMLU, PIQA, GSM8K etc. MMLU (\textit{Measuring Massive Multitask Language Understanding}) \cite{hendrycks_measuring_2021} benchmarks a LLMs proficiency in understanding and reasoning across various subjects such as humanities, STEM, and professional and everyday knowledge, by evaluating its performance on 57 tasks, to test its ability to generalise and apply knowledge. PIQA (\textit{Physical Interaction: Question Answering}) \cite{bisk_piqa_2019}, evaluates a language models understanding of physical commonsense by asking them to predict the outcome of physical interactions in various scenarios through multiple-choice questions. GSM8K (\textit{The Grade School Math}) \cite{cobbe_training_2021} tests the ability to solve elementary-level mathematics word problems.
+When releasing their Mixtral model \cite{jiang_mixtral_2024} the Mistral AI team used a range of benchmark tests, such as MMLU, PIQA, GSM8K etc. \gls{MMLU} \cite{hendrycks_measuring_2021} benchmarks a \gls{LLM}s proficiency in understanding and reasoning across various subjects such as humanities, STEM, and professional and everyday knowledge, by evaluating its performance on 57 tasks, to test its ability to generalise and apply knowledge. PIQA (\textit{Physical Interaction: Question Answering}) \cite{bisk_piqa_2019}, evaluates a language models understanding of physical commonsense by asking them to predict the outcome of physical interactions in various scenarios through multiple-choice questions. GSM8K (\textit{The Grade School Math}) \cite{cobbe_training_2021} tests the ability to solve elementary-level mathematics word problems.
 
 
-Evaluation of how well LLMs perform is an open research question. As shown above LLM developers often utilise multiple testsuites. These are oftentimes, as shown above, very general tests. When implementing LLMs in practical applications good performance often relies upon very good raw summarisation performance and reasoning abilities. Since the domain specific knowledge is provided to the model, raw built-in knowledge isn’t crucial. It is more important for the model to learn the task at hand using very few examples and within the given domain understand the question being asked by a user.
-Further, as argued by by Siriwardhana et al., the training data of LLMs include the knowledge of datasets such as Wikipedia \cite{siriwardhana_improving_2023} which means that evaluation methods in very specialised domains hold higher value than generalised domains. These brand new domains, that with certainty haven't been seen during training, tests the models zero-shot, and depending on the implementation, few-shot learning abilities.
+Evaluation of how well \gls{LLM}s perform is an open research question. As shown above \gls{LLM} developers often utilise multiple testsuites. These are oftentimes, as shown above, very general tests. When implementing \gls{LLM}s in practical applications good performance often relies upon very good raw summarisation performance and reasoning abilities. Since the domain specific knowledge is provided to the model, raw built-in knowledge isn’t crucial. It is more important for the model to learn the task at hand using very few examples and within the given domain understand the question being asked by a user.
+Further, as argued by by Siriwardhana et al., the training data of \gls{LLM}s include the knowledge of datasets such as Wikipedia \cite{siriwardhana_improving_2023} which means that evaluation methods in very specialised domains hold higher value than generalised domains. These brand new domains, that with certainty haven't been seen during training, tests the models zero-shot, and depending on the implementation, few-shot learning abilities.
 
 
 The research question for this project is \textit{Which language model and which retrieval techniques do students prefer using?} and \textit{Is it possible to deploy an AI-assistant using a completely open source toolchain?}.
@@ -145,10 +131,10 @@ The original problem stems from the need to understand whether AI-assistants can
 % Describe who benefits and how they benefit if you achieve your goals. Include anticipated ethical, sustainability, social issues, etc. related to your project. (Return to these in your reflections in Section~\ref{sec:reflections}.)}
 
 
-The purpose of this thesis is two-fold: firstly, to innovate within the educational technology space by integrating AI-assistants to potentially reduce workload and improve informational access within Canvas course rooms. Secondly, the thesis aims to contribute to academic knowledge by providing empirical data on the performance of these AI systems in a controlled educational setting. This dual purpose ensures the project not only addresses the immediate needs of KTH's digital learning environment but also enriches the scientific community’s understanding of applied AI in education.[a]
+The purpose of this thesis is two-fold: firstly, to innovate within the educational technology space by integrating AI-assistants to potentially reduce workload and improve informational access within Canvas course rooms. Secondly, the thesis aims to contribute to academic knowledge by providing empirical data on the performance of these AI systems in a controlled educational setting. The dual purpose of this thesis ensures it not only investigates the immediate needs of KTH's digital learning environment but also enriches the scientific community’s understanding of applied AI within a specialised domain, such as education.
 
 
-This research is intended to benefit educational institutions by potentially offering a tool that improves operational efficiency and students by providing an alternative, possibly more effective way of interacting with course content. In addition the research will bring benefit for researchers within AI and education. Ethically, the study focuses on the sustainable development of AI technologies by emphasising open-source solutions, aiming to democratise advanced technological developments and reduce reliance on proprietary models.
+This research is intended to benefit educational institutions by potentially offering a tool that improves operational efficiency and students by providing an alternative, possibly more effective way of interacting with course content. In addition the research will bring benefits for researchers within AI and education. Ethically, the study focuses on the sustainable development of AI technologies by emphasising open-source solutions, aiming to democratise advanced technological developments and reduce reliance on proprietary models.
 
 
 
@@ -172,19 +158,21 @@ This research is intended to benefit educational institutions by potentially off
 %\end{enumerate}
 
 
-The goals of this degree project are organised to comprehensively assess the deployment of AI-assistants within the educational framework of KTH's Canvas LMS, focusing on technological effectiveness and user receptiveness:[b]
-
-
 \begin{enumerate}
-        \item \textbf{Technological Efficacy:} To evaluate the accuracy, speed, and reliability of responses by AI-assistants utilising both proprietary and open-source models in handling domain-specific content.
-        \item \textbf{User Preference:} To ascertain the preferences of different user groups (students, faculty) regarding the usability, information quality, and overall experience of interacting with various AI-assistant models and retrieval techniques.
-        \item \textbf{Operational Feasibility:} To assess the feasibility of integrating a fully open-source AI-assistant within an academic setting, considering logistical, technical, and regulatory constraints.
+        \item \textbf{Technological Efficacy:} To evaluate the accuracy, speed, and reliability of responses by AI-assistants utilising both proprietary and open-source models in handling domain-specific content, such as the course rooms in canvas.
+
+
+        \item \textbf{User Preference:} To understand the preferences of students regarding the usability, information quality, and overall experience of interacting with an AI-assistant built upon different models and retrieval techniques.
+
+
+        \item \textbf{Operational Feasibility:} To assess the feasibility of integrating an AI-assistant built on fully open-source technologies within an academic setting, considering logistical, technical, and regulatory constraints.
+
+
         \item \textbf{Educational Impact:} To explore the potential of AI-assistants to reduce administrative burdens on educators and improve information accessibility for students.
-        \item \textbf{Comparative Analysis:} To perform a comparative study between open-source and proprietary models concerning their deployment costs, maintenance needs, and infrastructure requirements.
+
+
+        \item \textbf{Comparative Analysis:} To perform a comparative study between various \gls{LLM} models and \gls{RAG}-techniques.
 \end{enumerate}
-
-
-Each goal is designed to address a specific aspect of AI technology integration within educational practices, ensuring that the project outcomes are relevant and useful for both academic research and educational administration.
 
 
 
@@ -203,21 +191,38 @@ Each goal is designed to address a specific aspect of AI technology integration 
 % In this section you should present your philosophical assumption(s), research method(s), and research approach(es).}
 
 
-This project employs a hybrid research methodology combining empirical data collection with qualitative insights to evaluate the implementation of AI-assistants in an educational setting effectively:
+This project primarily employs an empirical study based on data collection and qualitative insights that will be used to evaluate the implementation of AI-assistants in the educational domain.
 
 
 \subsection{System Design and Implementation}
 \begin{description}
-        \item[Model Selection] Different models, including proprietary and open-source, with different training data/methods, will be evaluated to determine their performance in educational environments.
-        \item[RAG Integration] Various configurations of Retrieval Augmented Generation systems will be tested to identify the most effective method for enhancing the AI's responses with relevant information from KTH’s course-specific data.
+        \item[Model selection] Different models, including proprietary and open-source, with different sizes (number of active parameters), will be tested. The relevant models will be included in the study for testing.
+
+
+        \item[RAG technique selection] Various configurations of \gls{RAG} systems will be tested to identify the most effective method for enhancing the AI's responses with respect to the layout of the data in Canvas course rooms. The relevant techniques will be included in the study for testing.
+
+
+\item[Implement AI Assistant] Design and implement the system that will be used in the study.
+
+
+\item[Construct study questions] Craft the questions that will be asked to students and implement them in the AI assistant.
+
+
+\item[Find courses to test with] Find willing course administrators that want to participate in the study with their students.
+
+
 \end{description}
 
 
 \subsection{Evaluation Design}
 \begin{description}
-        \item[Study Participants] The study will involve students using the AI-assistant and providing feedback on their experiences. There are various types of students participating in the study.
-        \item[Experimental Setup] Controlled experiments will be conducted where participants use different configurations of the AI-assistant for typical student questions.
-        \item[Data Collection Methods] Data will be collected through integrated survey tools within the chat interface, capturing real-time feedback on the AI-assistant’s performance and student satisfaction.
+        \item[Study Participants] The study will involve students using the AI-assistant and providing feedback on their experiences.
+
+
+\item[Experimental Setup] Controlled experiments will be conducted where participants use different configurations of the AI-assistant for typical student questions.
+
+
+\item[Data Collection Methods] Data will be collected through integrated survey questions within the chat interface, capturing real-time feedback on the AI-assistant’s performance and student satisfaction.
 \end{description}
 
 
@@ -244,18 +249,11 @@ This project has several delimitations that define the scope and boundaries of t
 
 
 \begin{itemize}
-        \item \textbf{Model Scope:} The project will not involve the development of new models or the fine-tuning of existing models. This includes LLMs and embedding functions. The study will utilise pre-trained models offered by bigger vendors or the open source community.
-        \item \textbf{Data Limitations:} Only existing courses within KTH’s Canvas LMS will be utilised for the study. No new course content will be created, and no modifications will be made to existing course materials beyond what is necessary for the integration and testing of the AI-assistants.
+        \item \textbf{Model Scope:} The project will not involve the development of new models or the fine-tuning of existing models. This includes \gls{LLM} and embedding functions. The study will utilise pre-trained models offered by bigger vendors or the open source community.
+        \item \textbf{Data Limitations:} Only existing courses within KTH's Canvas \gls{LMS} will be utilised for the study. No new course content will be created, and no modifications will be made to existing course materials beyond what is necessary for the integration and testing of the AI-assistants.
         \item \textbf{Course Data Access:} The project will not use Canvas APIs for data integration. All interactions with the Canvas platform will be through existing interfaces, or data will be scraped and used from the Canvas web interface.
-        \item \textbf{Geographic and Cultural Constraints:} The study is limited to the KTH environment, which may not represent other educational settings in different cultural or geographic contexts. The findings might not be directly transferable to other institutions or countries without additional localization and adaptation.[c]
-\end{itemize}[d]
-
-
-These delimitations are set to clarify the focus of the research and define what is outside the scope of this thesis project. They help in managing expectations and provide a clear framework within which the study operates.
-
-
-
-
+        \item \textbf{Geographic and Cultural Constraints:} The study is limited to the KTH environment, which may not represent other educational settings in different cultural or geographic contexts or languages. The findings might not be directly transferable to other institutions or countries without additional localisation and adaptation.
+\end{itemize}
 
 
 \section{Structure of the thesis}
@@ -268,9 +266,3 @@ Chapter~\ref{ch:background} presents relevant background information about xxx. 
 
 
 \cleardoublepage
-
-
-[a]formulera om
-[b]formulera om?
-[c]expand upon this
-[d]maybe add more here?
