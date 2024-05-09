@@ -4,6 +4,7 @@ import numpy as np
 import os
 
 matplotlib.rcParams['font.family'] = 'Arial'
+matplotlib.rcParams['font.size'] = 14
 
 categories = {
     'Animals': ['Dog', 'Cat', 'Elephant', 'Lion', 'Tiger', 'Eurasian lynx'],
@@ -22,8 +23,8 @@ colors = {'Animals': '#ac0a10', 'Foods': '#bd6500', 'Sports': '#bba600'}
 
 for category_index, (category, items) in enumerate(categories.items()):
     x = np.full(len(items), category_index / (len(categories) - 1))
-    y = np.random.rand(len(items)) * 0.6 + 0.2
-    z = np.random.rand(len(items)) * 0.6 + 0.2
+    y = np.random.rand(len(items)) * 0.8 + 0.1
+    z = np.random.rand(len(items)) * 0.8 + 0.1
     ax.scatter(x, y, z, color=colors[category], s=100, label=category)
 
     for i, item in enumerate(items):
@@ -41,4 +42,4 @@ plt.tight_layout()
 
 file_path = os.path.realpath(f"{os.path.dirname(__file__)}/../content/figures/assets/04-background-word-plot.png")
 os.makedirs(os.path.dirname(file_path), exist_ok=True)
-plt.savefig(file_path)
+plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
