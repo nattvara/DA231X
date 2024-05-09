@@ -14,7 +14,7 @@
 % the degree project and give valid reasons for rejecting the work/research.}
 
 
-This chapter provides the necessary background for understanding the research conducted within this thesis. This chapter also showcase the related work for this thesis and how the research relates to it.
+This chapter provides the necessary background for understanding the research conducted within this thesis. This chapter also showcases the related work for this thesis and how the research relates to it.
 
 
 % \sweExpl{Vilken viktig litteratur och
@@ -179,6 +179,21 @@ Another technique known as few-shot prompting, is shown in figure \ref{fig:fewsh
 
 
 \input{content/figures/02-few-shot-prompt}
+
+
+\section{Evaluating LLM performance}
+
+
+When an \gls{LLM} vendor, such as Mistral, releases a new model its performance is evaluated using a series of well-established benchmarks. These benchmarks are essential for understanding the model’s capabilities in various cognitive tasks. This includes tasks such as mathematical reasoning, language understanding and program synthesis. This practice helps to quantify the models' performance and provides a method to compare its performance against previously released models \cite{cobbe_training_2021, austin_program_2021, chen_evaluating_2021}.
+
+
+When Mistral released its first major model they used table ~\ref{tab:mixtral_performance_table} to compare its results against the LLaMA family of models. There are numerous benchmarks included in the table, that test various abilities of the model. For example, the \textit{GSM8K} benchmark includes thousands of grade-school level maths problems that are designed to test mathematical reasoning \cite{cobbe_training_2021}. Benchmarks like \text{MBPP} assess a model's ability to understand and generate programming code from natural language descriptions \cite{austin_program_2021}. A test like \textit{MMLU} measures general world knowledge and problem solving ability \cite{hendrycks_measuring_2021}. Lastly, the \textit{PIQA} benchmark, challenges a model with physical common sense questions \cite{bisk_piqa_2019-1}
+
+
+\input{content/tables/01-mixtral-paper-table}
+
+
+All of these benchmarks are essential for developers and researchers to understand the limitations and capabilities of AI models. They ensure continuous improvements and innovations in the field. Each benchmark is sourced and created differently. Some models are tested against just a single benchmark such as OpenAI’s codex model (now deprecated) \cite{chen_evaluating_2021}. However, most general purpose language models such as those released by Mistral, OpenAI, Meta, Google and more use a common set of benchmarks such as those in table ~\ref{tab:mixtral_performance_table} \cite{jiang_mixtral_2024, meta_ai_introducing_2024, touvron_llama_2023-1, gemini_team_gemini_2024}.
 
 
 \section{Web crawling}
