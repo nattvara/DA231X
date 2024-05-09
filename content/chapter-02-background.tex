@@ -320,6 +320,7 @@ where \( u \cdot v \) is the dot product of the vectors \( u \) and \( v \), and
 
 
 \section{RAG}
+\label{sec:background_rag}
 
 
 \gls{RAG} is the process of integrating retrieval mechanisms into the generative models. This approach effectively combines the strengths of both retrieval and generative language modelling to enhance a model's ability to accurately recall factual information by utilising an external knowledge base during the generation process \cite{lewis_retrieval-augmented_2021}.
@@ -367,36 +368,57 @@ Interactions with AI agents through conversation is very affected by the agent's
 \gls{ECM} was introduced by Bhattacherjee \cite{bhattacherjee_understanding_2001} in 2001 and it extends the understanding of user satisfaction beyond initial acceptance which is outlined in \gls{TAM}. \gls{ECM} includes user expectations, perceived performance, and confirmation of expectations into the satisfaction assessment. This model is especially useful in assessing whether a technology meets or exceeds the users' expectations over time.
 
 
-\section{Related work area}
+\section{Related Work}
+\label{sec:related_work}
 
 
-% \sweExpl{Relaterade arbeten}
+\subsection{The Open Source Models by Mistral and Meta}
 
 
-...
+Mistral and Meta have both released a series of open-source models within their respective LLaMA and Mistral families. They’ve both made substantial contributions to the field of \gls{NLP}. The LLaMA models offered very capable models that could fit within different computing envelopes, with various levels of compute capacity \cite{touvron_llama_2023-1, touvron_llama_2023-2}. Similarly, Mistral's models, including \textit{Mistral-7B} and its Mixtral variants, have been made widely available and demonstrated robust capabilities. While the performance of these models is noteworthy, their most significant impact lies in their open-source licensing. This approach has democratised access to cutting-edge research and models, significantly accelerating the pace of innovation in the field compared to proprietary models from vendors such as OpenAI.
+
+
+\subsection{The Proprietary Models by OpenAI}
+
+
+The models released by OpenAI, which includes all the models from GPT-1 through GPT-4 have led the field across most benchmarks and text capabilities. Each new model has incorporated architectural improvements, larger datasets and new training methodologies. All of which have increased the models’ ability to understand complex text structures and generate coherent text. OpenAI’s contributions primarily lie in their scaled transformer architectures and fine-tuning techniques \cite{brown_language_2020}. OpenAI have also done major advancements in \gls{LLM} alignment research, for instance with their development of \textit{instructGPT} \cite{ouyang_training_2022}. InstructGPT was an effort to get models to follow human instructions. This was done through a combination of techniques such as \gls{RLHF} and supervised learning. These techniques have also shown to be able to increase truthfulness and reduce toxicity in the model’s output, which may have been inherent in the models’ training dataset.
+
+
+\subsection{Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks}
+\label{sec:related_works_rag}
+
+
+The introduction of \gls{RAG} by Lewis et al. has been crucial for the development of \gls{NLP} systems. The model they proposed has been shown to combine the generative power of a \gls{LLM} with the factual accuracy of verified knowledge bases. From a research perspective, \gls{RAG} is a method of addressing "hallucinations" in generative models \cite{lewis_retrieval-augmented_2021}. "Hallucinations" refers to instances where a \gls{LLM} asserts a fact that is provably untrue as though it were accurate, see figure ~\ref{fig:hallucination_example}. With the techniques proposed by Lewis et al. a system can be constructed around the model that ensures only verified facts are used to answer input prompts.
+
+
+\subsection{Gemini 1.5: Unlocking Multimodal Understanding Across Millions of Tokens of Context}
+
+
+There are two dominant theories for how AI systems will be constructed. The first theory advocates for a \gls{RAG}-based approach. As discussed in sections ~\ref{sec:background_rag} and ~\ref{sec:related_works_rag}, \gls{RAG} effectively integrates an external knowledge base into an AI system. However, there is the alternative theory of longer context windows. The context window refers to the maximum amount of tokens the model can consider at one time when generating responses. The context window typically consists of the input prompt, whatever extra content has been added to the model (could be multi-modal content such as images) and the models’ output. With a large enough context window, theoretically, an entire knowledge-base could be incorporated into a prompt. This would remove the need from intercepting the models generation process, which is the core component of \gls{RAG}, since the entire knowledge base is part of the prompt.
+
+
+Previously, Liu et al. has shown that models with larger prompts have a bias towards the beginning and the end of the prompt \cite{liu_lost_2023}. This effectively meant that a knowledge base with similar facts injected into the beginning or end of the prompt would have a higher likelihood of being included in the response, regardless of their correctness.
+
+
+When Google announced their Gemini 1.5 model they released results that suggest that it could process and integrate information across vast context windows using an extended transformer architecture \cite{gemini_team_gemini_2024}. The model could do this without a bias in precision or recall depending on where the data existed in the prompt. Even though this model isn’t widely available yet, Google’s results suggest that it is possible to construct a model that can fit a large knowledge base within the context window of a \gls{LLM}.
+
+
+Larger context windows generally require larger models which are more expensive to run. Larger prompts also take longer compute responses for. It remains an open research question whether the necessity of \gls{RAG}-systems will remain in the future.
+
+
+\subsection{Measuring Massive Multitask Language Understanding}
+The \gls{MMLU} benchmark was introduced by Hendrycks et al. in 2020 to provide a framework for evaluating \gls{LLM} across a broad range of tasks \cite{hendrycks_measuring_2021}. The test covers tasks in fields such as elementary mathematics, US history, computer science and law. It is designed to test a model's world knowledge and problem solving abilities. The benchmark is significant as it is the current most widely used general intelligence test on \gls{LLM}s.
+
+
+As highlighted by many, not the least Google in their Gemini 1.5 paper \cite{gemini_team_gemini_2024}, there is a pressing need for new benchmarking approaches. Traditional benchmarks do not sufficiently challenge new models, especially in the multimodal domain where text, images, video, and audio are combined \cite{gemini_team_gemini_2024}. Current evaluation methods rely heavily on human labelling and annotation, they are  increasingly seen as inadequate for more complex prompts and responses.
+
+
+In addition most benchmarks are biassed towards the training dataset of the models. The model's general intelligence is measured by data that is available to the model during training. This includes historical events, facts and problems. For instance, included in the training set are programming problems very similar to the programming problems included in benchmarks such as \textit{PIQA} \cite{bisk_piqa_2019-1}. To test the models true intelligence there is a need for benchmarks that measure the models abilities on data it hasn’t seen before.
 
 
 
 
-\subsection{Major related work 1}
-
-
-Carrier clouds have been suggested as a way to reduce the delay between the users and the cloud server that is providing them with content. However, there is a question of how to find the available resources in such a carrier cloud. One approach has been to disseminate resource information using an extension to OSPF-TE, see Roozbeh, Sefidcon, and Maguire \cite{roozbeh_resource_2013}.
-
-
-\subsection{Major related work n}
-
-
-\subsection{Minor related work 1}
-
-
-...
-
-
-\subsection{Minor related work n}
-
-
-\section{Summary}
+% \section{Summary}
 
 
 % \sweExpl{Det är trevligt om detta kapitel
