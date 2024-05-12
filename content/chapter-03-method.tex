@@ -209,6 +209,20 @@ The study sources its participants from courses from course administrators that 
 \label{sec:experimentalDesign}
 
 
+This section describes how the experiments conducted within the context of this study have been designed.
+
+
+\subsection{Experimental Setup}
+
+
+Participants in the study will be randomly assigned to groups, each of which will use a specific set of technologies and techniques. This random assignment will be managed by software written for this study, and it will apply to every chat session started with the assistant by the participating student. Each group will utilise a unique configuration based on one of these predefined parameters;
+
+
+\begin{itemize}
+        \item The language model used to run the chat. This is the \gls{LLM} that is used to generate chat replies within the chat. It’s also used for the internal logic of the assistant. This internal logic consists of tasks such as identifying whether the user asked the assistant a question that needs data from the knowledgebase.
+        \item The \gls{RAG} technique and technology used to access the indexed data. This could be \gls{TF-IDF} or an embedding function. It it’s the latter the group also have a defined embedding model assigned.
+        \item Post processing of the retrieved documents. This is a boolean flag that configures the assistant to post process documents before inserting them into the context window for the configured \gls{LLM} to generate an answer with.
+\end{itemize}
 
 
 \subsection{Test environment/test bed/model}
