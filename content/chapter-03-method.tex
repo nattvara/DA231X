@@ -240,7 +240,7 @@ Each of these triggers allows for inserting any given number of questions into t
 With these configurations, the experiment aims to measure the impact of the predefined parameters on users' responses to the questions posed during the chats at the configured triggers.
 
 
-\subsection{Test environment/test bed/model}
+\section{Test environment}
 
 
 % \engExpl{Describe everything that someone else would need to reproduce your test environment/test bed/model/… .}
@@ -251,12 +251,49 @@ With these configurations, the experiment aims to measure the impact of the pred
 \subsection{Software}
 
 
+To reproduce the results of this study the software that was written to crawl course rooms, index their content and host the chat with the assistant is available in its entirety on github, see \autoref{appendix:source_code}.
+
+
+\subsection{Configuration}
+
+
+There is quite a bit of configuration needed to get the software operational. The \textit{README} in the source code extensively covers how to run the software in most common environments, see \autoref{appendix:source_code}.
+
+
+\subsection[Data/Access to Canvas]{Data and access to canvas}
+
+
+To run the AI assistant with data from an actual course room the bot needs to have access to a canvas through a KTH registered user. Due to time constraints the option to use the official Canvas API was abandoned early in the planning of this study. The softwares’ crawler therefore needs the cookies of an authenticated user with access to the course rooms included in the study.
+
+
+\textbf{note: maybe explore publishing the course content of some course rooms? As like a downloadable from the github repo or something?}
+
+
 \subsection{Models}
+
+
+The software constructed for the study utilise the transformers python library \footnote{The GitHub page for the transformers library \href{https://github.com/huggingface/transformers}{/github.com/huggingface/transformers}} maintained by HuggingFace. The library manages the download and loading of the open source \gls{LLM}s and embedding models used in the thesis. This also means that if the models are no longer available on the huggingface registry, or the registry is nonoperational, the models have to be obtained by other means. The open source models that are supported by the software are the following models
+
+
+\begin{itemize}
+        \item The Mistral-7B-Instruct, provided by MistralAI, \footnote{\href{https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2}{huggingface.co/mistralai/Mistral-7B-Instruct-v0.2}}
+        \item The Gemma-7B, provided by Google, \footnote{\href{https://huggingface.co/google/gemma-7b}{huggingface.co/google/gemma-7b}}
+        \item The Falcon-7B, provided by TII UAE, \footnote{\href{https://huggingface.co/tiiuae/falcon-7b}{huggingface.co/tiiuae/falcon-7b}}
+        \item The SFR-Embedding-Mistral, provided by Salesforce, \footnote{\href{https://huggingface.co/Salesforce/SFR-Embedding-Mistral}{huggingface.co/Salesforce/SFR-Embedding-Mistral}}
+        \item The Meta-Llama-3-8B-Instruct, provided by Meta, \footnote{\href{https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct}{huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct}}
+\end{itemize}
+
+
+In addition to the open source models the software also supports experiments using some proprietary models by OpenAI. The two models that are supported are the \textit{GPT-4} model and the \textit{text-embedding-3-large} embedding model \footnote{\href{https://platform.openai.com/docs/guides/embeddings}{platform.openai.com/docs/guides/embeddings/}}. Both of these are accessible using the python API \footnote{\href{https://github.com/openai/openai-python}{github.com/openai/openai-python}} which require an OpenAI subscription and API key.
 
 
 \subsection{Hardware}
 
 
+The study software should be able to execute on most common hardware and most parts of the application are not particularly compute intensive. The notable exception to this is the worker processes in the \text{LLM Service} part of the software that, depending on the model, run quite intensive compute loads. That is unless the agent runs either of the proprietary cloud hosted models provided by OpenAI.
+
+
+If the agent is running one of the \gls{LLM}s it can run, such as the \textit{Mistral 7B instruct} model, the agent needs access to a quite capable GPU. For the supported models this needs to be a GPU with at least 24 GB of video memory. Example of such graphics cards are \textit{NVIDIA GeForce RTX 3090}\footnote{\href{https://www.nvidia.com/sv-se/geforce/graphics-cards/30-series/rtx-3090-3090ti/}{nvidia.com/sv-se/geforce/graphics-cards/30-series/rtx-3090-3090ti/}}, \textit{NVIDIA TITAN RTX}\footnote{\href{https://www.nvidia.com/en-eu/deep-learning-ai/products/titan-rtx/}{nvidia.com/en-eu/deep-learning-ai/products/titan-rtx/}} or \textit{NVIDIA A10 Tensor Core}\footnote{\href{https://www.nvidia.com/en-us/data-center/products/a10-gpu/}{nvidia.com/en-us/data-center/products/a10-gpu/}}. This used servers on AWS, specifically the G5 instances (g5.4xlarge) equipped with \textit{NVIDIA A10 Tensor Core} GPUs \footnote{\href{https://aws.amazon.com/ec2/instance-types/g5/}{aws.amazon.com/ec2/instance-types/g5/}}. The open source embedding models such as \textit{SFR-Embedding-Mistral} can be run on CPUs, which only require the same amount of RAM available to run the models.
 
 
 \section{Assessing reliability and validity of the data collected}
