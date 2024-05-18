@@ -1,0 +1,66 @@
+\begin{listing}[H]
+\centering
+\renewcommand{\theFancyVerbLine}{\scriptsize\arabic{FancyVerbLine}}
+\scriptsize
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\scriptsize,
+linenos
+]{python}
+def load_hf_model(
+    model_path: str,
+    device: str
+) -> (transformers.AutoModelForCausalLM, transformers.AutoTokenizer):
+    """
+    Loads a Hugging Face causal language model and its tokenizer for a given
+    model path and device.
+    """
+
+def generate_text(
+    model: transformers.AutoModelForCausalLM,
+    tokenizer: transformers.AutoTokenizer,
+    device: str,
+    params: Params,
+    prompt: str
+) -> str:
+    """
+    Generates text from a prompt using the specified model, tokenizer, and
+    generation parameters.
+    """
+
+async def generate_text_streaming(
+    model: transformers.AutoModelForCausalLM,
+    tokenizer: transformers.AutoTokenizer,
+    device: str,
+    params: Params,
+    prompt: str
+) -> AsyncGenerator[str, None]:
+    """
+    Asynchronously generates text from a prompt, yielding tokens incrementally.
+    Useful for streaming responses.
+    """
+
+def _tokenise_inputs(
+    tokeniser: transformers.AutoTokenizer,
+    input_texts: list[str],
+    max_length: int = 8192
+) -> dict:
+    """
+    Tokenizes the input texts with padding and truncation.
+    """
+
+def should_stop_generating(
+    output_token_ids: list,
+    tokenizer: transformers.AutoTokenizer,
+    params: Params,
+    token_id: int
+) -> bool:
+    """
+    Determines whether to stop generating text based on stop conditions.
+    """
+\end{minted}
+\caption{High level API on-top of Huggingface's tranformers library that can be used for generating text using models available on Huggingface.}
+\label{fig:python-apis-for-llm}
+\end{listing}

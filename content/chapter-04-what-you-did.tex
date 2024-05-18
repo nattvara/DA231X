@@ -32,7 +32,28 @@ Langchain is a company \footnote{\href{https://langchain.com}{langchain.com}} an
 \subsubsection{GPT-4 and text-embedding-3-large}
 
 
+To build a chat application with an AI-assistant that has access to an external knowledge base, one of the most popular approaches is to use langchain to connect the following four parts.
+
+
+\begin{enumerate}
+        \item A \gls{LLM}, such as GPT-4 to run the chat.
+        \item A \gls{LLM}, such as GPT-4 to run the query construction.
+        \item An embedding function, such as OpenAI’s text-embedding-3-large used to index and query documents.
+        \item A vector store, such as ChromaDB, that stores the vector embeddings and associated documents \footnote{\href{https://www.trychroma.com/}{trychroma.com/}}
+\end{enumerate}.
+
+
+In this configuration, Lanchain acts as the glue connecting these components and handling tasks like chunking larger documents. The goal of this \gls{POC} was to test a common approach for building AI assistants and evaluate its potential for use in the full study. \href{https://www.youtube.com/watch?v=bKjxi-NKRHo}{A video can be seen here} that showcases this \gls{POC}.
+
+
 \subsubsection{Simple Python API for models on Huggingface}
+
+
+Langchain and similar tools support running language models locally. However, working with the prompt templates in less advanced models than GPT-4 and achieving good retrieval and chat performance was challenging. Therefore, a simple \gls{POC} was developed to create higher-level Python abstraction APIs on top of the Hugging Face Transformers library that could be integrated into completely custom solutions. These APIs include examples like those shown in listings ~\ref{fig:python-apis-for-llm} and ~\ref{fig:python-apis-for-embeddings}.
+
+
+\input{content/figures/08-python-apis-for-llm}
+\input{content/figures/09-python-apis-for-embeddings}
 
 
 \subsubsection{Mistral 7B v0.1 and intfloat/e5-large-v2}

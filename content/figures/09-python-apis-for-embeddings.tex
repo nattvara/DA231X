@@ -1,0 +1,41 @@
+\begin{listing}[H]
+\centering
+\renewcommand{\theFancyVerbLine}{\scriptsize\arabic{FancyVerbLine}}
+\scriptsize
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\scriptsize,
+linenos
+]{python}
+def load_hf_embedding_model(
+    model_path: str,
+    device: str
+) -> (torch.nn.Module, transformers.AutoTokenizer):
+    """
+    Loads a Hugging Face embedding model and its tokenizer for a given model
+    path and device.
+    """
+
+async def compute_embedding(
+    model: torch.nn.Module,
+    tokeniser: transformers.AutoTokenizer,
+    text: str
+) -> List[float]:
+    """
+    Computes and returns the normalized embedding for a given text using the
+    specified model and tokenizer.
+    """
+
+def _compute_model_embeddings(
+    model: torch.nn.Module,
+    tokenised_inputs: dict
+) -> torch.Tensor:
+    """
+    Computes the model embeddings from the tokenized inputs.
+    """
+\end{minted}
+\caption{High level API on-top of Huggingface's tranformers library that can be used for generating vector embeddings using models available on Huggingface.}
+\label{fig:python-apis-for-embeddings}
+\end{listing}
