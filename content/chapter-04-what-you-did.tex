@@ -30,6 +30,7 @@ Langchain is a company \footnote{\href{https://langchain.com}{langchain.com}} an
 
 
 \subsubsection{GPT-4 and text-embedding-3-large}
+\label{sec:poc_gpt_langchain}
 
 
 To build a chat application with an AI-assistant that has access to an external knowledge base, one of the most popular approaches is to use langchain to connect the following four parts.
@@ -46,6 +47,15 @@ To build a chat application with an AI-assistant that has access to an external 
 In this configuration, Lanchain acts as the glue connecting these components and handling tasks like chunking larger documents. The goal of this \gls{POC} was to test a common approach for building AI assistants and evaluate its potential for use in the full study. \href{https://www.youtube.com/watch?v=bKjxi-NKRHo}{A video can be seen here} that showcases this \gls{POC}.
 
 
+\subsubsection{Mistral 7B v0.2 and e5-large-v2}
+
+
+There was a \gls{POC} constructed that had the same approach as the one outlined in \ref{sec:poc_gpt_langchain} with the notable requirement that all tools had to be under an open source licence. This meant the GPT-4 model and text-embedding-3-large models couldn’t be used. A similar version of the same \gls{POC} was made that used the Mistral 7B v0.2 model and the embedding function e5-large-v2 \cite{wang_text_2024}. These are both under an open source licence and are freely available on Huggingface \footnote{\href{https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2}{huggingface.co/mistralai/Mistral-7B-Instruct-v0.2} \href{https://huggingface.co/intfloat/e5-large-v2}{huggingface.co/intfloat/e5-large-v2}}. This \gls{POC} did however suffer from poor performance in initial tests for retrieval and performance. It was difficult to tune the prompts to get decent performance. This \gls{POC} showed it was difficult for the researcher to get good performance out of certain models using the langchain framework.
+
+
+\subsection{Custom applications}
+
+
 \subsubsection{Simple Python API for models on Huggingface}
 
 
@@ -56,19 +66,13 @@ Langchain and similar tools support running language models locally. However, wo
 \input{content/figures/09-python-apis-for-embeddings}
 
 
-\subsubsection{Mistral 7B v0.1 and intfloat/e5-large-v2}
+\subsubsection{Mistral 7B v0.2 and Opensearch}
 
 
-\subsection{Custom applications}
+\subsubsection{Mistral 7B v0.2 with Opensearch and Postprocessing}
 
 
-\subsubsection{Mistral 7B v0.1 and Opensearch}
-
-
-\subsubsection{Mistral 7B v0.1 with Opensearch and Postprocessing}
-
-
-\subsubsection{Mistral 7B v0.1 with Opensearch and Heavy Postprocessing}
+\subsubsection{Mistral 7B v0.2 with Opensearch and Heavy Postprocessing}
 
 
 \section{The architecture of the software}
