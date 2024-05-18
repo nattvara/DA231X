@@ -56,6 +56,9 @@ There was a \gls{POC} constructed that had the same approach as the one outlined
 \subsection{Custom applications}
 
 
+This section outlines some major and minor \gls{POC}s that were made without any frameworks that are popular \gls{LLM} applications, aside from very common python libraries such as pytorch and hugginface’s transformers library.
+
+
 \subsubsection{Simple Python API for models on Huggingface}
 
 
@@ -67,6 +70,9 @@ Langchain and similar tools support running language models locally. However, wo
 
 
 \subsubsection{Mistral 7B v0.2 and Opensearch}
+
+
+The goal with this \gls{POC} was to build a version of the \gls{RAG} application that didn’t use a vector embedding function. Instead, this \gls{POC} would utilise a traditional search service such as Elasticsearch or Opensearch. These implement "traditional" search algorithms such as \gls{TF-IDF}, as outlined in section \ref{sec:background_tfidf}. This \gls{POC} was very easy to implement and showed great promise.
 
 
 \subsubsection{Mistral 7B v0.2 with Opensearch and Postprocessing}
