@@ -151,13 +151,13 @@ The software is primarily written in python, with a service-based architecture. 
 These services are written in such a way that they can be incorporated into any executable within the project. There are numerous executables within the application, these are;
 
 
-\begin{enumerate}
+\begin{itemize}
         \item A graphical user interface, which is a web-based application
         \item A HTTP rest API
         \item A websocket server
         \item A job-runner that execute background tasks from a queue
         \item A worker node for the \gls{LLM} service that keep a \gls{LLM} in-memory ready to generate a response to a prompt for the given model
-\end{enumerate}
+\end{itemize}
 
 
 \autoref{fig:system_architecture_diagram} shows an overview of the architecture of the software written to conduct the research and which components are called by other components.
@@ -172,11 +172,11 @@ These services are written in such a way that they can be incorporated into any 
 The software is written on-top of numerous python and javascript libraries, these are documented in their entirety in the systems source code repository. In addition, the software needs the following major dependencies to operate.
 
 
-\begin{enumerate}
+\begin{itemize}
         \item A postgres database
         \item A opensearch index
         \item A redis in-memory storage
-\end{enumerate}
+\end{itemize}
 
 
 \subsection{Courseroom Crawler}
