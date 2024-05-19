@@ -118,7 +118,16 @@ There are different strategies for the prompt that reduce the size of the docume
 \input{content/figures/11-with-processing}
 
 
-\subsubsection{Too much post processing}
+\subsubsection{Too much processing}
+
+
+Processing the documents to be smaller in size such that smaller models could accurately recall facts from retrieved documents was investigated until the point where additional processing would no longer improve the quality of the answers,
+
+
+There were additional efforts put towards investigating the processing of documents to be smaller in size. The goal was to enable smaller models to accurately recall facts from the retrieved documents. This process continued until additional processing no longer improved the quality of the answers. There were \gls{POC}s produced that for instance processed the documents during the indexing phase in addition to the retrieval phase. During the indexing the documents were compiled into smaller "facts" that were indexed on their own. However, reducing the documents in size decreased the retrieval algorithms, both \gls{TF-IDF} algorithms and embedding functions.
+
+
+Some processing however could improve the performance. Such as including a summary of the entire document with each chunk of that document. In summary, pre-processing the documents, and chunks of each document, during the indexing process, did increase the system’s ability to produce accurate answers to user queries. However, processing the documents too much was found to eventually lead to a reduction in accuracy.
 
 
 \section{The architecture of the software}
