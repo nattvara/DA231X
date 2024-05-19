@@ -142,7 +142,41 @@ This section will outline the final software that was constructed to investigate
 The purpose of the software is to crawl canvas course rooms and index their data into a knowledge base. The software should expose this knowledge base in a chat based application integrated into the same course room it has crawled. The tool should be able to randomly sample a configuration of models and tools for indexing, retrieval and chat between users of the tool. Finally, the tool should inject questions into the chat and track the necessary data points to investigate the research question of this thesis outlined in section~\ref{sec:researchQuestion}.
 
 
+\subsection{Overall architecture}
+
+
+The software is primarily written in python, with a service-based architecture. This means it is divided into distinct domain specific services, each handling specific domains and functionalities. These services handle one of four things, \gls{LLM}-, Download-, Index- or Chat-functionality.
+
+
+These services are written in such a way that they can be incorporated into any executable within the project. There are numerous executables within the application, these are;
+
+
+\begin{enumerate}
+        \item A graphical user interface, which is a web-based application
+        \item A HTTP rest API
+        \item A websocket server
+        \item A job-runner that execute background tasks from a queue
+        \item A worker node for the \gls{LLM} service that keep a \gls{LLM} in-memory ready to generate a response to a prompt for the given model
+\end{enumerate}
+
+
+\autoref{fig:system_architecture_diagram} shows an overview of the architecture of the software written to conduct the research and which components are called by other components.
+
+
 \input{content/figures/06-system-architecture-diagram}
+
+
+\subsection{Dependencies}
+
+
+The software is written on-top of numerous python and javascript libraries, these are documented in their entirety in the systems source code repository. In addition, the software needs the following major dependencies to operate.
+
+
+\begin{enumerate}
+        \item A postgres database
+        \item A opensearch index
+        \item A redis in-memory storage
+\end{enumerate}
 
 
 \subsection{Courseroom Crawler}
