@@ -75,10 +75,50 @@ Langchain and similar tools support running language models locally. However, wo
 The goal with this \gls{POC} was to build a version of the \gls{RAG} application that didn’t use a vector embedding function. Instead, this \gls{POC} would utilise a traditional search service such as Elasticsearch or Opensearch. These implement "traditional" search algorithms such as \gls{TF-IDF}, as outlined in section \ref{sec:background_tfidf}. This \gls{POC} was very easy to implement and showed great promise.
 
 
-\subsubsection{Mistral 7B v0.2 with Opensearch and Postprocessing}
+\subsubsection{Post processing for smaller models}
 
 
-\subsubsection{Mistral 7B v0.2 with Opensearch and Heavy Postprocessing}
+When working with models that don’t produce the best scores on public benchmarks, such as \gls{MMLU}, there are a number of techniques that can be employed that could improve the performance of a \gls{RAG} system. These generally smaller models suffer from worse scores on precision and recall benchmarks. This means they are worse at recalling facts injected into the conversation by a \gls{RAG} pipeline. One of the techniques that can be used is post-processing retrieved documents before they are inserted into the chat. There are a number of ways of achieving this. One of the techniques that was tried, and eventually implemented in the final study, was to use a post-processing mechanism, where each of the retrieved documents are passed through a post-processing function, which reduce the size of the document, as shown in \autoref{eq:without_post_processing} and \autoref{eq:with_post_processing}.
+
+
+\begin{equation}
+R = \text{LLM}\left(Q, \{D_i\}_{i=1}^N\right)
+\label{eq:without_post_processing}
+\end{equation}
+
+
+Where:
+\begin{itemize}
+        \item \( R \) is the generated response.
+        \item \( \text{LLM} \) is the language model function.
+        \item \( Q \) is the user query.
+        \item \( \{D_i\}_{i=1}^N \) are the matching documents retrieved from the index.
+\end{itemize}
+
+
+\begin{equation}
+R = \text{LLM}\left(Q, \{\text{PP}(D_i, P)\}_{i=1}^N\right)
+\label{eq:with_post_processing}
+\end{equation}
+
+
+Where:
+\begin{itemize}
+        \item \( \text{PP} \) is the post-processing function.
+        \item \( P \) is the post-processing prompt.
+\end{itemize}
+
+
+There are different strategies for the prompt that reduce the size of the document. This prompt can instruct the language model to extract quotes from the document related to the query, summarise key facts related to the query, or a number of other methods. The one that was chosen for the final study was extracting quotes as this showed the most potential. \autoref{fig:without_post_processing} and \autoref{fig:with_post_processing} illustrate this process.
+
+
+\input{content/figures/10-without-post-processing}
+
+
+\input{content/figures/11-with-processing}
+
+
+\subsubsection{Too much post processing}
 
 
 \section{The architecture of the software}
