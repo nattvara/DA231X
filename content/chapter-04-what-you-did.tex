@@ -213,6 +213,19 @@ Opensearch, which started as a fork of the popular search engine Elasticsearch, 
 \subsection{Running large language models at scale}
 
 
+One of the principal requirements for the study software was the ability to investigate the impact of different \gls{LLM} on the experience of the user. This could impact the recall abilities of the system due to the models involvement in both understanding what the user is searching for and for summarising that information. Additionally, large embedding models would also be investigated within the scope of the study.
+
+
+Proprietary models, such as those provided by OpenAI and are studied in this thesis, are always executed on the model vendors infrastructure and are accessible only via an HTTP API. These APIs are not compute-intensive for the consuming application, such as the one developed for this thesis. However, open-source models, like the Mistral family of models, are available for anyone to run. One of the goals of this thesis was to investigate the feasibility of running such applications with all necessary dependencies on-premise. This involved executing these models within the application. This presents an engineering challenge, as these models are not very mature yet, and the infrastructure for running them is not well developed.
+
+
+For the software in this study an \textit{LLM-service} was developed. This service presented a high-level API that could be used by any part of the application, such as the chat-service, for producing messages, or the indexing service, for producing summaries or embeddings. The API had a high-level function that took a model name, model parameters and prompt to execute, and returned a prompt handle as a response. The data model for a prompt handle can be seen in its entirety in figure~\ref{fig:database_schema}, but in addition to the provided arguments, this kept the necessary queuing information for the system to function, some performance metrics and the output of the model.
+
+
+In the background the service provides the infrastructure for organising a virtually unbounded number of worker-nodes for each model. Any worker node keeps the model running in memory, which could be either in CPU or GPU memory. Loading the model into memory is a time-consuming operation, which was one of the driving reasons for this approach. This architecture allows for scaling the service to keep up-with-higher demand for prompt-completions. Heavy load could be caused by for instance, many users using the system simultaneously, or indexing one or more course rooms simultaneously.
+
+
+Organising systems like this have many difficulties, particularly regarding the distributed nature of this architecture and the compute intensiveness of model inference. For instance, since the execution time of a prompt can be upwards of a minute, the worker nodes need the ability to stream the response back to an end user in real-time token-by-token, to provide a good user experience. For this reason a websocket service was implemented, that allows the end-user application to listen for tokens being produced over a websocket that the producing node is directly connected to. More advanced queue techniques, such as a Kafka queue, could have been implemented instead of using a database table with distributed mutex locks in Redis. However, for rapid implementation and prototyping, the chosen approach was adequate for the software in this thesis.
 \subsection{Maintaining user sessions and chats}
 
 
