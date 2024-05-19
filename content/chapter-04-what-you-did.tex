@@ -192,7 +192,16 @@ The crawler was built upon the playwright framework developed by Microsoft \foot
 Ideally, the public canvas HTTP API \footnote{Documentation for the API can be found here \href{https://canvas.instructure.com/doc/api/}{canvas.instructure.com/doc/api/}} should be used to ensure the highest level of data quality and a more reliable connection. However, this API had been disabled by KTH IT and would’ve taken time and resources to get access to.
 
 
-\subsection{Datastore and Index}
+\subsection{Database design}
+
+
+All database interactions has been built on-top of the python \gls{ORM} peewee \footnote{\href{http://docs.peewee-orm.com/en/latest/}{docs.peewee-orm.com}}. An \gls{ORM} is a technique for converting data between a relational database and objects native to the program. A full entity diagram can be seen in figure~\ref{fig:database_schema}.
+
+
+\input{content/figures/12-database-diagram}
+
+
+\subsection{Document index}
 
 
 \subsection{Running large language models at scale}
