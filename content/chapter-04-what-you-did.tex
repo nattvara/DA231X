@@ -195,13 +195,19 @@ Ideally, the public canvas HTTP API \footnote{Documentation for the API can be f
 \subsection{Database design}
 
 
-All database interactions has been built on-top of the python \gls{ORM} peewee \footnote{\href{http://docs.peewee-orm.com/en/latest/}{docs.peewee-orm.com}}. An \gls{ORM} is a technique for converting data between a relational database and objects native to the program. A full entity diagram can be seen in figure~\ref{fig:database_schema}.
+All database interactions has been built on-top of the python \gls{ORM} peewee \footnote{\href{http://docs.peewee-orm.com/en/latest/}{docs.peewee-orm.com}}. An \gls{ORM} is a technique for converting data between a relational database and objects native to the program. A full entity relation diagram can be seen in figure~\ref{fig:database_schema}.
 
 
 \input{content/figures/12-database-diagram}
 
 
 \subsection{Document index}
+
+
+Opensearch, which started as a fork of the popular search engine Elasticsearch, serves as a full text search backend and document store for the software. The opensearch server also stores each vector embedding for all supported vector embedding functions used in the study. Opensearch is also used in the software to compute similarity scores for the computed vector embeddings of all documents, utilising the k-NN algorithm for efficient nearest neighbour search. This enables rapid retrieval and ranking of relevant documents based on their vector similarities which is one of the key research goals of this thesis. Listing~\ref{fig:indexed_document} shows an example of a document indexed in a snapshot of a course room that participated in the study.
+
+
+\input{content/figures/13-indexed-document}
 
 
 \subsection{Running large language models at scale}
