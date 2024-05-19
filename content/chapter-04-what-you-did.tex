@@ -182,10 +182,26 @@ The software is written on-top of numerous python and javascript libraries, thes
 \subsection{Courseroom Crawler}
 
 
-\subsection{Running large language models at scale}
+The software contains a job that is run every minute, which checks if a new snapshot should be taken of a course room. A snapshot contains all urls and their content that was crawled from a course room. A piece of content may be a canvas webpage, a file hosted on canvas, an external url or file etc.
+
+
+If a new snapshot is created of a course room the crawler will immediately crawl the course room. The crawler has global rules it follows for all course rooms, certain pages are ignored and how some content should be indexed. For instance, some common tools, such as the programming assignment tester kattis \footnote{More information about how kattis is used at universities can be found here \href{https://www.kattis.com/universities}{kattis.com/universities}} have a known format. The crawler employs specific crawlers for these common sites and tools to ensure a high-level of data quality.
+The crawler was built upon the playwright framework developed by Microsoft \footnote{\href{https://playwright.dev/}{playwright.dev/}}. This is a browser automation framework, mostly used for end-to-end testing of web applications. Using a browser to crawl websites is more compute-intensive than simply requesting the html files without rendering them. The benefit of using a browser, and actually rendering the content of the pages, is that content that’s requested by scripts on the page gets loaded and can be extracted.
+
+
+Ideally, the public canvas HTTP API \footnote{Documentation for the API can be found here \href{https://canvas.instructure.com/doc/api/}{canvas.instructure.com/doc/api/}} should be used to ensure the highest level of data quality and a more reliable connection. However, this API had been disabled by KTH IT and would’ve taken time and resources to get access to.
 
 
 \subsection{Datastore and Index}
+
+
+\subsection{Running large language models at scale}
+
+
+\subsection{Maintaining user sessions and chats}
+
+
+\subsection{Tracking metrics and gathering user feedback}
 
 
 \subsection{User interface}
