@@ -76,6 +76,7 @@ The goal with this \gls{POC} was to build a version of the \gls{RAG} application
 
 
 \subsubsection{Post processing for smaller models}
+\label{sec:post_processing}
 
 
 When working with models that don’t produce the best scores on public benchmarks, such as \gls{MMLU}, there are a number of techniques that can be employed that could improve the performance of a \gls{RAG} system. These generally smaller models suffer from worse scores on precision and recall benchmarks. This means they are worse at recalling facts injected into the conversation by a \gls{RAG} pipeline. One of the techniques that can be used is post-processing retrieved documents before they are inserted into the chat. There are a number of ways of achieving this. One of the techniques that was tried, and eventually implemented in the final study, was to use a post-processing mechanism, where each of the retrieved documents are passed through a post-processing function, which reduce the size of the document, as shown in \autoref{eq:without_post_processing} and \autoref{eq:with_post_processing}.
@@ -226,7 +227,25 @@ In the background the service provides the infrastructure for organising a virtu
 
 
 Organising systems like this have many difficulties, particularly regarding the distributed nature of this architecture and the compute intensiveness of model inference. For instance, since the execution time of a prompt can be upwards of a minute, the worker nodes need the ability to stream the response back to an end user in real-time token-by-token, to provide a good user experience. For this reason a websocket service was implemented, that allows the end-user application to listen for tokens being produced over a websocket that the producing node is directly connected to. More advanced queue techniques, such as a Kafka queue, could have been implemented instead of using a database table with distributed mutex locks in Redis. However, for rapid implementation and prototyping, the chosen approach was adequate for the software in this thesis.
-\subsection{Maintaining user sessions and chats}
+
+
+\subsection{Assigning a chat configuration to a user}
+
+
+The system supports defining multiple chat configurations, each consisting of a specific set of tools and models for the user’s chat experience. A chat configuration consists of;
+
+
+\begin{itemize}
+        \item \textbf{A Language Model}: This is the \gls{LLM} used for generating assistant responses and computing internal agent functionality such as the post processing of documents, if that’s enabled for the config.
+        \item \textbf{Retrieval Technique}: The method used for information retrieval, either an embedding model or full-text search.
+        \item \textbf{Embedding Model}: Specifies the embedding model if used.
+        \item \textbf{Document Processing}: Indicates whether documents should be post-processed before being inserted into the chat context (see section~\ref{sec:post_processing}).
+\end{itemize}
+
+
+Any configuration can be selectively enabled or disabled based on the experimental requirements.
+
+When a user accesses the system for the first time, a configuration is randomly assigned to ensure an unbiased distribution among users. Once assigned, the configuration remains consistent for the lifetime of that user’s account. This is however only true if the user uses the same browser, a new browser would result in a separate account.
 
 
 \subsection{Tracking metrics and gathering user feedback}
