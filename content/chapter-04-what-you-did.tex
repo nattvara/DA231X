@@ -261,7 +261,7 @@ The software was designed to facilitate user feedback collection. This feedback 
 These triggers were chosen to capture the user experience over a certain period, enabling control over the duration of system usage when analysing the users response to each feedback question.
 
 
-The feedback question format was designed to be extensive. There were two formats implemented for the research in this thesis. These formats were multiple choice questions, and binary textit\{thumbs up} / textit\{thumbs down} questions. Figure~\ref{fig:multiple_choice}~and~\ref{fig:feedback_thumbs} showcase these two formats respectively.
+The feedback question format was designed to be extensive. There were two formats implemented for the research in this thesis. These formats were multiple choice questions, and binary \textit{thumbs up} / \textit{thumbs down} questions. Figure~\ref{fig:multiple_choice}~and~\ref{fig:feedback_thumbs} showcase these two formats respectively.
 
 
 \input{content/figures/15-feedback-choices}
@@ -271,6 +271,36 @@ The feedback question format was designed to be extensive. There were two format
 
 
 \subsection{User interface}
+
+
+The assistant built for the system was designed to live within the \gls{LMS} used at KTH, known as canvas. Each couse in canvas is assigned a course room. This course room contains all the information a participant in the course might need, such as course announcement, assignments and modules. \autoref{fig:canvas_course_room} shows the course room of one of the courses that participated in the study. The \gls{GUI} for the assistant designed for this thesis, was designed to live within the courseroom as an iframe.
+
+
+The software constructed for this study was designed to integrate with KTH's \gls{LMS}, Canvas. Each course in Canvas has a designated course room that contains all information for students in the course. This includes announcements, assignments, modules and more. \autoref{fig:canvas_course_room} shows the course room of one of the participating courses in the study. The \gls{GUI} for the assistant, developed for this thesis, was embedded within the course room as an iframe, accessible through the course sidebar in the web, and navigation menu in the Canvas mobile app.
+
+
+\input{content/figures/16-canvas-course-room}
+
+
+% \input{content/figures/17-consent-form}
+
+
+The system utilise a script that compiles the most common questions. These are displayed each time a user starts the application, as can be seen in figure~\ref{fig:faq_questions}. This allows the user to quickly understand what other students have asked the tool, and quickly start a conversation.
+
+
+\input{content/figures/18-faq-questions}
+
+
+Overall, the \gls{GUI} of the tool is very simple as can be seen in figure~\ref{fig:conversation_with_assistant}. It allows users to send and receive messages from the tool. The responses from the assistant support some rich formatting, such as bold fonts. Links to cited documents are highlighted and forwards the user to the corresponding page or file in canvas when clicked. A video demonstration of the software being used by a student \href{https://www.youtube.com/watch?v=spdZ4jwI8mo}{can be seen here}.
+
+
+Any teacher or TA can be granted administrative privileges which yields them access to a list of all chats that have been had between students and the assistant in their course, as can be seen in figure~\ref{fig:list_of_conversations}. This allows them insights into what the chatbot is responding to the students questions.
+
+
+\input{content/figures/19-a-conversation-with-the-assistant}
+
+
+\input{content/figures/20-list-of-conversations}
 
 
 \section{How the software is deployed}
