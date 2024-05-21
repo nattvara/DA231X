@@ -227,8 +227,6 @@ In the background the service provides the infrastructure for organising a virtu
 
 
 Organising systems like this have many difficulties, particularly regarding the distributed nature of this architecture and the compute intensiveness of model inference. For instance, since the execution time of a prompt can be upwards of a minute, the worker nodes need the ability to stream the response back to an end user in real-time token-by-token, to provide a good user experience. For this reason a websocket service was implemented, that allows the end-user application to listen for tokens being produced over a websocket that the producing node is directly connected to. More advanced queue techniques, such as a Kafka queue, could have been implemented instead of using a database table with distributed mutex locks in Redis. However, for rapid implementation and prototyping, the chosen approach was adequate for the software in this thesis.
-
-
 \subsection{Assigning a chat configuration to a user}
 
 
@@ -248,7 +246,28 @@ Any configuration can be selectively enabled or disabled based on the experiment
 When a user accesses the system for the first time, a configuration is randomly assigned to ensure an unbiased distribution among users. Once assigned, the configuration remains consistent for the lifetime of that user’s account. This is however only true if the user uses the same browser, a new browser would result in a separate account.
 
 
-\subsection{Tracking metrics and gathering user feedback}
+\subsection{Gathering user feedback}
+
+
+The software was designed to facilitate user feedback collection. This feedback is gathered through a fairly flexible feedback entity, which integrates questions in the configured language of the course. A feedback questions are triggered by specific conditions, such as:
+
+
+\begin{itemize}
+\item After the response for the $n$-th message is sent in the $m$-th chat a user has had, where $n$ represent the number of messages in the current chat and $m$ the number of chat a user have had in total.
+\item After generating a response to a frequently asked question.
+\end{itemize}
+
+
+These triggers were chosen to capture the user experience over a certain period, enabling control over the duration of system usage when analysing the users response to each feedback question.
+
+
+The feedback question format was designed to be extensive. There were two formats implemented for the research in this thesis. These formats were multiple choice questions, and binary textit\{thumbs up} / textit\{thumbs down} questions. Figure~\ref{fig:multiple_choice}~and~\ref{fig:feedback_thumbs} showcase these two formats respectively.
+
+
+\input{content/figures/15-feedback-choices}
+
+
+\input{content/figures/14-feedback-thumbs}
 
 
 \subsection{User interface}
