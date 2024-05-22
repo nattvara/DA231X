@@ -306,10 +306,38 @@ Any teacher or TA can be granted administrative privileges which yields them acc
 \section{How the software is deployed}
 
 
-TODO
+Considering the nature of running \gls{LLM}s at scale the software had quite compute-intensive requirements. Due to sponsorship from KTH Innovation there were credits accessible on Amazon AWS that were available to use for the study. This meant AWS was a suitable cloud infrastructure provider to deploy the software that was built for the study.
+
+
+AWS has hundreds of services of varying levels of abstraction. The requirements on the infrastructure for this study was primarily that it had to support GPU heavy compute-workloads. Since the software was built to be packed into Docker images, the infrastructure had to support connecting GPU devices to the running Docker containers. AWS \gls{ECS} supports creating \textit{"Task Definitions"} and executing them in services that are hosted on their fully managed \textit{Fargate} platform, or hosting them on regular \gls{EC2}-instances. The latter has a wide array of instance definitions to choose from, of which multiple has one or more GPU devices connected. The \gls{ECS} platform was therefore chosen as the main deployment platform for the software. The entire system architecture can be seen in figure~\ref{fig:aws_diagram}.
 
 
 \input{content/figures/07-aws-diagram}
+
+
+In the repository for the source code there are a few github workflows, one of which builds the executables for the project. The executables are four docker images, these are:
+
+
+\begin{itemize}
+        \item \textbf{HTTP API:} This docker image runs the HTTP and Websocket servers for the software.
+        \item \textbf{GUI:} This runs a small node server that servers the user interface for the software.
+        \item \textbf{LLM Worker:} This runs a worker node for a given \gls{LLM} in the system
+        \item \textbf{Queue Worker:} This executes a pool of worker nodes for the jobs that can be dispatched in the system
+\end{itemize}
+
+
+Each of these images are published to their respective \gls{ECR}-registry. The \gls{ECR} are themselves used as source for the task definitions in \gls{ECS}. Together with configuration stored in \gls{S3} the image and task definition are deployed into services in \gls{ECS}. These services can be scaled independently of each other, and use different hosting environments depending on their workload.
+
+
+Each service can be scaled manually or put in auto scaling groups. The only service that would see any considerable load is the \textit{LLM-worker} containers. However, since they need to keep the \gls{LLM} in-memory in order to provide real time answers to users, it can’t be scaled using traditional metrics such as CPU or memory usage. No sophisticated auto-scaling was configured, since it was deemed unnecessary for this study. Instead, the study relied upon a schedule maintained by a simple script that during certain peak hours scaled up the infrastructure necessary to run more nodes for each enabled \gls{LLM} or embedding function.
+
+
+Traditional services in AWS were used for running the respective component of the application. One postgres server was deployed in \gls{RDS}, an in-memory Redis cache was created in \textit{Amazon ElastiCache} and an OpenSearch cluster was created in \textit{Amazon OpenSearch Service}. Logs from all services and software components were collected in \textit{Amazon CloudWatch}.
+
+
+Whilst the service was operational keeping track of whether the system was operational became a priority. During the initial development and deployment it became necessary to track if the service was up and running and be notified of any outages. Therefore a simple playwright script was built that simulated a student entering a question in each course room on a rotating schedule. This would publish a message on a \gls{SNS} topic that would trigger an email if a response couldn’t be produced by the system.
+
+
 
 
 % \sweExpl{Hårdvara / Mjukvarudesign ... / modell / Simuleringsmodell och parametrar / …}
