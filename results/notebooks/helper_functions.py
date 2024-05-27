@@ -12,6 +12,17 @@ def save_table(filename: str, latex_code: str):
     print(f"Saved latex code to {filename}")
 
 
+def save_variable(filename: str, variable_value: str):
+    current_file_path = os.path.abspath(__file__)
+    current_dir = os.path.dirname(current_file_path)
+    fullpath = f"{current_dir}/../latex_variables/{filename}.tex"
+    fullpath = os.path.realpath(fullpath)
+    with open(fullpath, 'w') as f:
+        f.write(variable_value)
+
+    print(f"Saved latex variable to {filename}")
+
+
 def save_plot(plt, filename: str, caption: str, label: str):
     current_file_path = os.path.abspath(__file__)
     current_dir = os.path.dirname(current_file_path)
