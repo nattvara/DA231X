@@ -100,13 +100,35 @@ Looking at the operational performance of both models included in \autoref{tab:s
 \subsection{Open source v. Proprietary Embedding functions}
 
 
-The intention of the research in this thesis was to compare open source embedding functions with proprietary alternatives commonly used in \gls{RAG}-based applications. In addition to this, the experiment was also designed to be able to measure vector search as a retrieval technique, with traditional full text search. However, due to the number of students that participated in the study, no configuration was used that didn’t use the vector search strategy with the embedding function \textit{text-embedding-3-large} by OpenAI \cite{openai_new_2024}. So no metrics were captured in the retrieval phase for any other strategy or model. Metrics were, however, captured during the indexing phase on other models.
+The intention of the research in this thesis was to compare open source embedding functions with proprietary alternatives commonly used in \gls{RAG}-based applications. In addition to this, the experiment was also designed to be able to measure vector search as a retrieval technique, with traditional full text search. However, due to the number of students that participated in the study, no configuration was used that didn’t use the vector search strategy with the embedding function \textit{text-embedding-3-large} by OpenAI \cite{openai_new_2024}. So no metrics were captured in the retrieval phase for any other strategy or model. The retrieval time taken for the model that was used is shown in \autoref{fig:performance_07_embedding_function_query_performance}. Metrics were, however, captured during the indexing phase on other models.
+
+
+\input{results/plots/performance-07-embedding-function-query-performance}
 
 
 \subsubsection{Understanding the indexing}
 
 
+The indexing of course rooms was done regularly. It wasn’t done on a schedule, it was instead done on an ad-hoc basis whenever a course was updated with new content. \autoref{fig:performance_01_timeline_of_snapshots_taken} shows a timeline for each course which includes the date for when each snapshot of the course room was taken.
+
+
+\input{results/plots/performance-01-timeline-of-snapshots-taken}
+
+
+Each course room is different and includes pages and content of varying length. No exact metric for how much content was included in each course room is presented in this section, however \autoref{fig:performance_02_urls_per_course} shows how many urls the crawler found in each course, and how many of them were indexed. This is an imperfect, yet decent proxy for how "large" a course room was.
+
+
+\input{results/plots/performance-02-urls-per-course}
+
+
+To understand why the size of the course room is relevant we need to look at \autoref{fig:performance_03_index_time}, that shows how long each course room took to index. We can see that indexing time for the same course room vary a lot. The reason for this is not that the size of the course room varies over time. Looking at \autoref{fig:performance_03_index_time} we can see that the higher values occur when snapshots are taken simultaneously. The way indexing time is measured is by taking the time between the first url in a course room being crawled, and the last time a url was indexed in that snapshot. \autoref{fig:performance_03_index_time} suggests that there is an operation that takes a lot of time, and the indexer gets overloaded when a lot of courses are being indexed at the same time. Section~\ref{sec:measuring_indexing_performance} will show that this is due to the performance of the open source embedding function used in the experiments.
+
+
+\input{results/plots/performance-03-index-time}
+
+
 \subsubsection{Measuring indexing performance}
+\label{sec:measuring_indexing_performance}
 
 
 
