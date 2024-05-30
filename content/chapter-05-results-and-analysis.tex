@@ -76,16 +76,24 @@ Looking at the distribution of how many chats and messages is sent per session, 
 \subsection{Open source v. Proprietary LLMs}
 
 
+With regards to the feasibility of building AI assistants on open source technologies there are a number of metrics to look at for comparing open source \gls{LLM}s to proprietary language models. \autoref{tab:sessions_chats_and_messages_by_model} shows metrics for both models that were included in the experiment. The experiment was designed to sample between the included models randomly, and as we can see the number of sessions started between the two models are virtually the same. However, there are notable differences in the number of chats started and messages sent between the two. The proprietary model, \textit{GPT-4} by OpenAI, leads the open source model, \textit{Mistral-7B-Instruct-v0.2} by MistralAI. Section~\ref{sec:qualitative_analysis_of_user_responses} and \ref{sec:impact_of_llm_on_user_preferences} will showcase the user preferences with respect to these models, which could explain the discrepancy between two models with regards to simple usage metrics, which is what is shown in \autoref{tab:sessions_chats_and_messages_by_model}.
+
+
+\input{results/latex_tables/usage-01-sessions-chats-messages-by-model}
+
+
 \subsection{Open source v. Proprietary Embedding functions}
 
 
 \section{The impact of different LLM models on the speed, accuracy and reliability of responses}
+\label{sec:impact_of_llm_on_user_preferences}
 
 
 This section will present and analyse the gathered data on user preference and technological efficacy of different tools and technologies such as different \gls{RAG} toolchains and \gls{LLM}, as outlined in section~\ref{sec:goals}.
 
 
 \section{Qualitative analysis of user responses}
+\label{sec:qualitative_analysis_of_user_responses}
 
 
 This section will present an analysis of the free text answers users have provided in the forms that have been presented in the participating courses.
