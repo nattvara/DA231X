@@ -5,25 +5,60 @@
 This chapter will discuss the key findings from the research carried out in this thesis. It will evaluate the implications of the findings and compare it to existing literature. The discussion is structured to provide analysis of the results. It will also explore why some questions laid out in the introduction section have been left unanswered. Finally the chapter will include a brief discussion about the role of AI assistants in the broader context of AI in the educational setting.
 
 
-\section{Summary of key findings}
 
 
-% Briefly restate the main results and findings of your research.
+\section{Feasibility of Open Source Technologies}
 
 
-\section{Explanation of key results}
+The study, and the software constructed to execute its experiments, show that it is feasible to build and deploy an AI assistant using open source technologies. The most popular models to implement AI assistants are commonly provided under proprietary licences and hidden behind pay-per-use APIs. Examples of this are the models built and sold by OpenAI.
 
 
-% Provide interpretations of your findings and explain why certain results were obtained. Discuss the implications of your results for theory, practice, or policy.
+The results laid out in \autoref{ch:whatYouDid} and \autoref{ch:resultsAndAnalysis} shows that an open source alternative is feasible from an implementation standpoint. The open source \gls{LLM} and embedding functions used in the study proved functional and provided comparable performance to proprietary solutions with respect to operational metrics such as response time and query generation time. One learning from operating the software constructed for the study is that the embedding function should probably be operated with a dedicated GPU to improve performance when computing embeddings of larger docs, such as during indexing.
+
+
+\section{User Engagement and Satisfaction}
+
+
+The study showed steady engagement from students across multiple different courses. The courses were all fairly different from each other. Some courses were self-study courses, without any lectures, some had regular lectures. Some courses had many participating students, some courses had as little as 30 students in the course.
+
+
+There was a clear indication that the proprietary models such as OpenAI’s GPT-4 received more favourable feedback compared to its open source counterparts. Unfortunately, due to the volume of participating courses and the number of chats that were held, the decision was made to not test other variables, such as different \gls{RAG} techniques, or embedding functions.
+
+
+\section{How the method could have been improved}
+
+
+\section{The tools, models and technologies that were selected for the experiments}
+
+
+It's worth noting that the comparison between the open and closed-source models used in this experiment is not entirely fair. \textit{Mistral-7B-Instruct-v0.2} has 7 billion parameters. OpenAI discloses less about their models; however, \textit{GPT-3} has a confirmed 175 billion parameters. Less is known about \textit{GPT-4}, which is rumoured to have a \gls{SMoE} architecture, likely with at least as many, if not more, parameters than \textit{GPT-3}. Even though the number of parameters isn’t the best metric for determining intelligence in a model, it is one useful metric for comparing models. Had it been operationally and financially feasible to run a larger, more similar model, such as \textit{Mixtral-8x7B-Instruct-v0.1}, that would’ve made for a better comparison.
+
+
+It could also be argued that the \textit{GPT-3} model could have been chosen, since that would’ve made for a fairer comparison. Since \textit{GPT-4} is the current best model, and one that likely would have been used implementing tools like this in real world applications, that model made sense to test with respect to measuring the general acceptance of AI assistants among students. Had there been more time, or more money to fund more expensive servers to run the larger open source models, the experiment would have been executed with different models. The same cannot be said for the embedding functions though.
+
+
+Even though the embedding functions incorporated in the study were never tested for retrieval purposes, due to the number of participating courses, the models selected should be easier to compare. \textit{Mistral-7B-Instruct-v0.2} and \textit{GPT-4} score very differently on the available benchmarks. The embedding functions chosen, Salesforce’s \textit{SFR-Embedding-Mistral} and OpenAI’s \textit{text-embedding-3-large}, rank very similarly to each other on the \gls{MTEB}.
+
+
+\section{Prompts and instructions aren't portable across models}
 
 
 
 
-% Lessons learned:
-% Prompts aren't portable across models
+\section{Why AI assistants are helpful to students}
 
 
-\section{Comparison to existing literature}
+% Why students haven’t tried the assitant
+
+
+\section{Ethical and privacy concerns}
+
+
+
+
+
+
+% \section{Comparison to existing literature}
 
 
 % Compare your findings with previous studies and discuss any similarities or differences.
