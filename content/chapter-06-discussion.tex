@@ -55,9 +55,16 @@ It could also be argued that the \textit{GPT-3} model could have been chosen, si
 Even though the embedding functions incorporated in the study were never tested for retrieval purposes, due to the number of participating courses, the models selected should be easier to compare. \textit{Mistral-7B-Instruct-v0.2} and \textit{GPT-4} score very differently on the available benchmarks. The embedding functions chosen, Salesforce’s \textit{SFR-Embedding-Mistral} and OpenAI’s \textit{text-embedding-3-large}, rank very similarly to each other on the \gls{MTEB}.
 
 
-\section{Prompts and instructions aren't portable across models}
+\section{Prompts and Instructions Aren't Portable Across Models}
 
 
+Just as the study was launched, Meta released the third iteration of their LLaMA family of models, LLaMA 3. This included \textit{LLaMA 3 8B}, an eight billion parameter model. A model of this size was feasible to operate and scored significantly higher than \textit{Mistral-7B-Instruct-v0.2} on most benchmarks. Since both are open source, \textit{LLaMA 3 8B} obviously made for a better candidate for testing open source \gls{LLM}.
+
+
+The infrastructure to download and run the new model is very flexible and stable. The software was quickly adapted to switch the study from Mistral’s model to Meta’s latest model. However, it quickly became evident that the prompts used in the application were incompatible. As explained in section~\ref{sec:prompt_engineering}, prompts are a key component of getting the \gls{LLM} to perform as desired. In this study's software, this primarily involved hosting a chat with the user and some internal logic for constructing queries and indexing/retrieving documents. These prompts weren’t trivially ported to work well with LLaMA 3.
+
+
+The prompts were designed and tested with \textit{Mistral-7B-Instruct-v0.2} and \textit{GPT-4} during the initial development of the study's software. Quickly adapting these prompts to also work with \textit{LLaMA 3 8B} wasn’t possible. One key takeaway for when constructing similar studies is that model selection must be done early and continuously monitored to ensure accurate test results. In this study, \textit{GPT-4} and \textit{Mistral-7B-Instruct-v0.2} used the same prompts. One could even argue that this should be a variable controlled for to ensure both models have the best available and most adapted instructions for them to use.
 
 
 \section{Why AI assistants are helpful to students}
