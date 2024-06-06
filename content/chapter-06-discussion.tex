@@ -25,6 +25,27 @@ The study showed steady engagement from students across multiple different cours
 There was a clear indication that the proprietary models such as OpenAI’s GPT-4 received more favourable feedback compared to its open source counterparts. Unfortunately, due to the volume of participating courses and the number of chats that were held, the decision was made to not test other variables, such as different \gls{RAG} techniques, or embedding functions.
 
 
+\section{Why AI assistants are helpful to students}
+
+
+\autoref{ch:resultsAndAnalysis} included section~\ref{sec:qualitative_analysis_of_user_responses} which analysed the answers collected from students in three courses who had tried the chatbot. The responses to questions distributed in these courses provided valuable insights into why students responded like they did to the questions in section~\ref{sec:survey_questions_injected_into_the_chat}.
+
+
+The first conclusion that can be drawn from the responses to the form is the benefit students feel of being able to quickly access information at any time. Instead of having to navigate extensive course materials, students can quickly get answers to their questions by simply asking the AI assistant in the course room. It is easy to forget that students are enrolled in multiple courses at the same time, each with a different course room utilising a different course room layout. Even if an individual course room is well-designed, the simple fact that another course room is poorly designed, can make navigation challenging.
+
+
+Being able to ask an assistant anything, at any time, was particularly useful for logistical details such as deadlines, lecture schedules, and the links to course material. This was especially mentioned by the students in the \textit{MG2040 Assembly Technology} course, however, these themes were present in the answers from students in all three courses which distributed forms.
+
+
+Another thing students appreciated was being able to use the chatbot to understand course content. For instance, in the \textit{LD1000} course, users noted that the AI assistant provided very extensive answers and good explanations.
+
+
+One core component was the integration of citations. Citations aren’t necessarily required when constructing chatbot-applications. However, many students, across all courses, often mentioned the importance of understanding the source of the assistants responses for being able to trust the answer. The assistant’s ability to both provide comprehensive answers, and links to follow-up information, was cited as a key reason by some students, as why they had felt the bot was useful.
+
+
+Some students even reported that they preferred asking the assistant some questions over asking the teachers and TAs. This was primarily due to the fact that the assistant was available all hours of the day, and could provide quicker responses. Also, some students reported that they felt their questions could be too simple or trivial for asking a teacher. This is an interesting insight because this suggests there are questions that students aren’t asking teachers today. Ensuring that students are comfortable asking questions about the course and its contents is key for ensuring that students learn efficiently.
+
+
 \section{Methodological Improvements}
 
 
@@ -67,10 +88,6 @@ The infrastructure to download and run the new model is very flexible and stable
 The prompts were designed and tested with \textit{Mistral-7B-Instruct-v0.2} and \textit{GPT-4} during the initial development of the study's software. Quickly adapting these prompts to also work with \textit{LLaMA 3 8B} wasn’t possible. One key takeaway for when constructing similar studies is that model selection must be done early and continuously monitored to ensure accurate test results. In this study, \textit{GPT-4} and \textit{Mistral-7B-Instruct-v0.2} used the same prompts. One could even argue that this should be a variable controlled for to ensure both models have the best available and most adapted instructions for them to use.
 
 
-\section{Why AI assistants are helpful to students}
-
-
-% Why students haven’t tried the assitant
 
 
 \section{Ethical and privacy concerns}
