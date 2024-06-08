@@ -108,7 +108,7 @@ There is some obvious future work that was left undone within this thesis. For i
 In addition to this, exploring how chatbots can be granted access to student specific content. Such as their personalised schedule, past assignments and other courses. There are a myriad of other logistical courses students might want to get help with. These include what courses they are eligible for, what they are required to take etc. In all of these cases a chatbot might be a useful tool to deploy. Therefore, future research should be done to investigate how assistants can be given access to this data safely, whilst maintaining user trust as discussed in section~\ref{sec:discussion_privacy}.
 
 
-\section{Reflections}
+\section{Reflections on sustainability}
 \label{sec:reflections}
 
 
@@ -119,15 +119,25 @@ In addition to this, exploring how chatbots can be granted access to student spe
 % }
 
 
+AI is not a new field of research, and it has been integrated into products and services for years. However, in the last few years their immediate usefulness has become more apparent, especially with the release of tools such as ChatGPT. It is clear the new \gls{LLM}s are very capable and useful. The technology is still very nascent. In the coming years and decades integrating these models into real world applications and business processes will be a long process.
 
 
-One of the most important results is the reduction in the amount of
-energy required to process each packet while at the same time reducing the
-time required to process each packet.
+Training machine learning models has traditionally been very compute-intensive, often requiring accelerated compute devices such as GPUs. Computation requires electricity, which depending on the electricity source, means an increased environmental footprint. By extension this means compute intensive applications, such as training models, have an impact on the environment. What’s new with the development of \gls{LLM}s, is that inference, the activity of merely running the models, is also very compute intensive.
 
 
-% The thesis contributes to the \gls{UN}\enspace\glspl{SDG} numbers 1 and 9 by
-% xxxx.
+The software constructed in this study supported adding server nodes that could run a \gls{LLM} on an attached GPU. During most of the study however, only one server node was used, since the number of students rarely peaked above more than one or two at a time. If the chatbot were to be enabled in more course rooms however, the demands on the available amount of compute-capacity would increase.
+
+
+The fact that operating applications built on-top of \gls{LLM}s require large amounts of compute capacity, leads to interesting discussions around the \gls{SDG} goals laid out by the United Nations. In the case of the research in this thesis, \gls{SDG} numbers four and thirteen are the most relevant. Goal number four tries to ensure high quality education, while goal thirteen tries to combat climate change and its effects. The research in this thesis has shown that AI-assistants can increase the quality of education and improve the student learning experience. However, since this requires running \gls{LLM}, which has an environmental impact, this results in a trade-off between education and environmental impact.
+
+
+It’s not clear that \gls{LLM} inference will always have a high environmental impact. New inference technologies such as Groq \cite{abts_software-defined_2022} might result in faster inference with lower energy usage. Achieving energy efficiency in inference would essentially eliminate the tradeoff between the two \gls{SDG} goals, although this remains to be proven.
+
+
+Operating a \gls{LLM} on-premise isn't always necessary though. However, running the language model yourself offers major privacy benefits. In the case of the application built in this thesis, KTH may need to keep all student-data on their own servers, which could also be the case in other applications in completely different domains, either due to legal or contractual obligations. Besides privacy, performance can also justify on-premise deployments. Having dedicated models available ensures that the performance of applications relying on the \gls{LLM} isn't impacted by the load on third party vendors, such as OpenAI.
+
+
+By running the model on-premise, this has a higher likelihood of underutilised hardware. Using energy whilst not executing prompts, keeping a model in memory whilst being idle. Using a third party vendor, such as OpenAI or Groq, leads to the pooling of resources between AI applications. This could lead to a higher utilisation of the existing hardware, and reduce the environmental impact. What becomes the de facto standard when building \gls{LLM} application in the future, remains to be seen.
 
 
 \noindent\rule{\textwidth}{0.4mm}
