@@ -27,7 +27,7 @@ The following section will outline the various \gls{POC} applications that were 
 \subsection{Langchain based applications}
 
 
-Langchain is a company \footnote{\href{https://langchain.com}{langchain.com}} and framework \footnote{\href{https://python.langchain.com}{python.langchain.com}} for building context aware reasoning applications. The framework allows for easy composition of language models and \gls{RAG} techniques and tools that makes it easy to build chatbots with a connected knowledge base. This section outlines some \gls{POC}s that were made with the langchain framework.
+Langchain is a company \footnote{\href{https://langchain.com}{langchain.com} (accessed on \today)} and framework \footnote{\href{https://python.langchain.com}{python.langchain.com} (accessed on \today)} for building context aware reasoning applications. The framework allows for easy composition of language models and \gls{RAG} techniques and tools that makes it easy to build chatbots with a connected knowledge base. This section outlines some \gls{POC}s that were made with the langchain framework.
 
 
 \subsubsection{GPT-4 and text-embedding-3-large}
@@ -41,7 +41,7 @@ To build a chat application with an AI-assistant that has access to an external 
         \item A \gls{LLM}, such as GPT-4 to run the chat.
         \item A \gls{LLM}, such as GPT-4 to run the query construction.
         \item An embedding function, such as OpenAI’s text-embedding-3-large used to index and query documents.
-        \item A vector store, such as ChromaDB, that stores the vector embeddings and associated documents \footnote{\href{https://www.trychroma.com/}{trychroma.com/}}
+        \item A vector store, such as ChromaDB, that stores the vector embeddings and associated documents \footnote{\href{https://www.trychroma.com/}{trychroma.com/} (accessed on \today)}
 \end{enumerate}.
 
 
@@ -51,7 +51,7 @@ In this configuration, Lanchain acts as the glue connecting these components and
 \subsubsection{Mistral 7B v0.2 and e5-large-v2}
 
 
-There was a \gls{POC} constructed that had the same approach as the one outlined in \ref{sec:poc_gpt_langchain} with the notable requirement that all tools had to be under an open source licence. This meant the GPT-4 model and text-embedding-3-large models couldn’t be used. A similar version of the same \gls{POC} was made that used the Mistral 7B v0.2 model and the embedding function e5-large-v2 \cite{wang_text_2024}. These are both under an open source licence and are freely available on Huggingface \footnote{\href{https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2}{huggingface.co/mistralai/Mistral-7B-Instruct-v0.2} \href{https://huggingface.co/intfloat/e5-large-v2}{huggingface.co/intfloat/e5-large-v2}}. This \gls{POC} did however suffer from poor performance in initial tests for retrieval and performance. It was difficult to tune the prompts to get decent performance. This \gls{POC} showed it was difficult for the researcher to get good performance out of certain models using the langchain framework.
+There was a \gls{POC} constructed that had the same approach as the one outlined in \ref{sec:poc_gpt_langchain} with the notable requirement that all tools had to be under an open source licence. This meant the GPT-4 model and text-embedding-3-large models couldn’t be used. A similar version of the same \gls{POC} was made that used the Mistral 7B v0.2 model and the embedding function e5-large-v2 \cite{wang_text_2024}. These are both under an open source licence and are freely available on Huggingface \footnote{\href{https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2}{huggingface.co/mistralai/Mistral-7B-Instruct-v0.2} (accessed on \today)} \footnote{\href{https://huggingface.co/intfloat/e5-large-v2}{huggingface.co/intfloat/e5-large-v2} (accessed on \today)}. This \gls{POC} did however suffer from poor performance in initial tests for retrieval and performance. It was difficult to tune the prompts to get decent performance. This \gls{POC} showed it was difficult for the researcher to get good performance out of certain models using the langchain framework.
 
 
 \subsection{Custom applications}
@@ -187,17 +187,17 @@ The software is written on-top of numerous python and javascript libraries, thes
 The software contains a job that is run every minute, which checks if a new snapshot should be taken of a course room. A snapshot contains all urls and their content that was crawled from a course room. A piece of content may be a canvas webpage, a file hosted on canvas, an external url or file etc.
 
 
-If a new snapshot is created of a course room the crawler will immediately crawl the course room. The crawler has global rules it follows for all course rooms, certain pages are ignored and how some content should be indexed. For instance, some common tools, such as the programming assignment tester kattis \footnote{More information about how kattis is used at universities can be found here \href{https://www.kattis.com/universities}{kattis.com/universities}} have a known format. The crawler employs specific crawlers for these common sites and tools to ensure a high-level of data quality.
-The crawler was built upon the playwright framework developed by Microsoft \footnote{\href{https://playwright.dev/}{playwright.dev/}}. This is a browser automation framework, mostly used for end-to-end testing of web applications. Using a browser to crawl websites is more compute-intensive than simply requesting the html files without rendering them. The benefit of using a browser, and actually rendering the content of the pages, is that content that’s requested by scripts on the page gets loaded and can be extracted.
+If a new snapshot is created of a course room the crawler will immediately crawl the course room. The crawler has global rules it follows for all course rooms, certain pages are ignored and how some content should be indexed. For instance, some common tools, such as the programming assignment tester kattis \footnote{More information about how kattis is used at universities can be found here \href{https://www.kattis.com/universities}{kattis.com/universities} (accessed on \today)} have a known format. The crawler employs specific crawlers for these common sites and tools to ensure a high-level of data quality.
+The crawler was built upon the playwright framework developed by Microsoft \footnote{\href{https://playwright.dev/}{playwright.dev/} (accessed on \today)}. This is a browser automation framework, mostly used for end-to-end testing of web applications. Using a browser to crawl websites is more compute-intensive than simply requesting the html files without rendering them. The benefit of using a browser, and actually rendering the content of the pages, is that content that’s requested by scripts on the page gets loaded and can be extracted.
 
 
-Ideally, the public canvas HTTP API \footnote{Documentation for the API can be found here \href{https://canvas.instructure.com/doc/api/}{canvas.instructure.com/doc/api/}} should be used to ensure the highest level of data quality and a more reliable connection. However, this API had been disabled by KTH IT and would’ve taken time and resources to get access to.
+Ideally, the public canvas HTTP API \footnote{Documentation for the API can be found here \href{https://canvas.instructure.com/doc/api/}{canvas.instructure.com/doc/api/} (accessed on \today)} should be used to ensure the highest level of data quality and a more reliable connection. However, this API had been disabled by KTH IT and would’ve taken time and resources to get access to.
 
 
 \subsection{Database design}
 
 
-All database interactions has been built on-top of the python \gls{ORM} peewee \footnote{\href{http://docs.peewee-orm.com/en/latest/}{docs.peewee-orm.com}}. An \gls{ORM} is a technique for converting data between a relational database and objects native to the program. A full entity relation diagram can be seen in figure~\ref{fig:database_schema}.
+All database interactions has been built on-top of the python \gls{ORM} peewee \footnote{\href{http://docs.peewee-orm.com/en/latest/}{docs.peewee-orm.com} (accessed on \today)}. An \gls{ORM} is a technique for converting data between a relational database and objects native to the program. A full entity relation diagram can be seen in figure~\ref{fig:database_schema}.
 
 
 \input{content/figures/12-database-diagram}
