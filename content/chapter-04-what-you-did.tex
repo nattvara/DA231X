@@ -144,6 +144,15 @@ This section will outline the final software that was constructed to investigate
 The purpose of the software is to crawl canvas course rooms and index their data into a knowledge base. The software should expose this knowledge base in a chat based application integrated into the same course room it has crawled. The tool should be able to randomly sample a configuration of models and tools for indexing, retrieval and chat between users of the tool. Finally, the tool should inject questions into the chat and track the necessary data points to investigate the research question of this thesis outlined in section~\ref{sec:researchQuestion}.
 
 
+\subsection{What the software can test}
+
+
+The software was constructed to measure how certain variables would impact the user feedback to certain configured questions. Section~\ref{sec:survey_questions_injected_into_the_chat} shows all questions that were used, and what possible answers existed. The variables that were supported can be seen in \autoref{tab:models_supported}, \autoref{tab:indicies_supported} and \autoref{tab:indicies_supported_with_postprocessing}. The table also includes a column if this variable was actually used in the experiment, or if it was just implemented but never enabled in the experiments.
+
+
+\input{content/tables/09-supported-and-enabled-configs}
+
+
 \subsection{Overall architecture}
 
 
