@@ -69,7 +69,7 @@ There would be two main proof of concepts, one using proprietary models and \gls
 \subsection{Implementation of study software}
 
 
-The second phase consists of constructing the software that will be used during the study. This software is the actual AI assistant and all it’s components, such as the course room crawler and indexer, the infrastructure to run \gls{LLM}s at scale and a \gls{GUI} to interact with the assistant. This software also needs to be able to exchange various different components that are the subject for the study, such as the \gls{LLM} being used in a chat. Furthermore, the software needs to be able to record user interactions and responses to questions.
+The second phase consists of constructing the software that will be used during the study. This software is the actual AI assistant and all its components, such as the course room crawler and indexer, the infrastructure to run \gls{LLM}s at scale and a \gls{GUI} to interact with the assistant. This software also needs to be able to exchange various different components that are the subject for the study, such as the \gls{LLM} being used in a chat. Furthermore, the software needs to be able to record user interactions and responses to questions.
 
 
 \subsection{Conduct the study at KTH}
@@ -81,7 +81,12 @@ This phase consists of deploying and monitoring the assistant in the course room
 \subsection{Analyse results}
 
 
-TODO.
+Once the study has concluded the data analysis will be conducted, the final results and analysis can be found in \autoref{ch:resultsAndAnalysis}. The various different data points collected in the experiments were all stored in a database. Once the study concluded, the analysis was done using different python jupyter notebooks. The notebooks can be found in the github repository for this thesis \footnote{\href{https://github.com/nattvara/DA231X/tree/main/results/notebooks}{github.com/nattvara/DA231X/results/notebooks}}. There are three notebooks, one for each theme.
+
+
+The first is the \textit{"usage"} notebook. This contains the charts and tables constructed to analyse the general usage of the assistant in all courses. These cover metrics like, how many messages were sent, how many chats were held, users registered in each course, etc. The second notebook is the \textit{"feedback"} notebook. This notebook contains an analysis of all user submitted responses to the feedback questions. The third and last notebook is the \textit{"performance"} notebook. This notebook contains charts and tables that analyse all performance metrics collected by the system, such as how quickly models produced response to prompts, how long indexing took, etc.
+
+
 
 
 % \sweExpl{Undersökningsrocess och utvecklingsprocess}
