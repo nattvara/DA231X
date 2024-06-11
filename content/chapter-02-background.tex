@@ -79,7 +79,7 @@ The introduction of the transformer model was foundational in the field, and tod
 \label{sec:bert_and_encoder_decoder}
 
 
-\gls{BERT} was introduced by Devlin et al. \cite{devlin_bert_2019} in 2018 and was a major improvement within natural language processing. The \gls{BERT} model optimised token representations bidirectionally which means that it was refining the understanding of each token by looking at the tokens before and after each token. \gls{BERT} was built on the transformer model’s encoder which allowed for pre-training on large text corpora, followed by fine-tuning for various tasks such as sentiment analysis and question answering.
+\gls{BERT} was introduced by Devlin et al. \cite{devlin_bert_2019-2} in 2018 and was a major improvement within natural language processing. The \gls{BERT} model optimised token representations bidirectionally which means that it was refining the understanding of each token by looking at the tokens before and after each token. \gls{BERT} was built on the transformer model’s encoder which allowed for pre-training on large text corpora, followed by fine-tuning for various tasks such as sentiment analysis and question answering.
 
 
 Encoder-decoder models are important in machine learning for tasks that involve converting one sequence into another, such as machine translation or speech-to-text. In this type of model the encoder processes the input sequence and compresses information into what’s known as a context vector, this is a condensed representation of the input data. The decoder takes this context vector and generates an output sequence token by token. Each of these two components may be built using recurrent networks, convolutional networks, or more commonly nowadays, transformer architectures.
@@ -373,16 +373,47 @@ Interactions with AI agents through conversation is very affected by the agent's
 \label{sec:related_work}
 
 
-\subsection{The Open Source Models by Mistral and Meta}
+\subsection{Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering}
 
 
-Mistral and Meta have both released a series of open-source models within their respective LLaMA and Mistral families. They’ve both made substantial contributions to the field of \gls{NLP}. The LLaMA models offered very capable models that could fit within different computing envelopes, with various levels of compute capacity \cite{touvron_llama_2023-1, touvron_llama_2023-2}. Similarly, Mistral's models, including \textit{Mistral-7B} and its Mixtral variants, have been made widely available and demonstrated robust capabilities. While the performance of these models is noteworthy, their most significant impact lies in their open-source licensing. This approach has democratised access to cutting-edge research and models, significantly accelerating the pace of innovation in the field compared to proprietary models from vendors such as OpenAI.
+In this paper Siriwardhana et al. \cite{siriwardhana_improving_2023} primarily writes about \gls{RAG}-end2end. This is an enhancement to \gls{RAG} models that enables joint training of the retriever and generator. This improves adapting the base model for open domain question answering. Their paper evaluates their new approach against \textit{COVID-19} datasets. Their suggested model shows significant improvements against traditional \gls{RAG}.
 
 
-\subsection{The Proprietary Models by OpenAI}
+The paper by Siriwardhana et al. is very similar to the research in this thesis. They both try to evaluate \gls{RAG} techniques. The key difference is that Siriwardhana et al. try to construct a new paradigm, whereas this thesis only evaluates existing paradigms against each other. This thesis presents no new \gls{RAG} paradigms.
 
 
-The models released by OpenAI, which includes all the models from GPT-1 through GPT-4 have led the field across most benchmarks and text capabilities. Each new model has incorporated architectural improvements, larger datasets and new training methodologies. All of which have increased the models’ ability to understand complex text structures and generate coherent text. OpenAI’s contributions primarily lie in their scaled transformer architectures and fine-tuning techniques \cite{brown_language_2020}. OpenAI have also done major advancements in \gls{LLM} alignment research, for instance with their development of \textit{instructGPT} \cite{ouyang_training_2022}. InstructGPT was an effort to get models to follow human instructions. This was done through a combination of techniques such as \gls{RLHF} and supervised learning. These techniques have also shown to be able to increase truthfulness and reduce toxicity in the model’s output, which may have been inherent in the models’ training dataset.
+This thesis also creates a new dataset for the evaluation by integrating the question into custom built software that is deployed into a real domain. In their paper, Siriwardhana et al. use existing QA-pairs to evaluate their model. Their paper uses significantly larger datasets than constructed in this thesis. Albeit the domain for the research in this thesis is much more novel, and much less common in the training data for the \gls{LLM}s evaluated.
+
+
+\subsection{CoGenesis: A Framework Collaborating Large and Small Language
+Models for Secure Context-Aware Instruction Following}
+
+
+This paper, written by Zhang et al. \cite{zhang_cogenesis_2024}, introduces a framework for making small and large language models collaborate. This framework works by deploying smaller models on devices and larger models on compute clouds. The goal with developing a framework like this is to produce a system that can balance privacy and performance.
+
+
+Their evaluation involves using a synthetic dataset with an enriched personal context on-top of two open-source datasets. Their framework is benchmarked against standalone \gls{LLM}s using various metrics. In contrast to the research in this thesis, the aim with their research is purely to find a way to address the privacy shortcomings of current approaches for building \gls{LLM} applications. They have similar metrics like relevance in their benchmarking, but also measure privacy protection by measuring how much user-specific context information is kept on local models while only sharing generalised instructions with the cloud based \gls{LLM}s.
+
+
+\subsection{Evaluation in artificial intelligence: from task-oriented to ability-oriented measurement}
+
+
+José Hernández-Orallo \cite{hernandez-orallo_evaluation_2017} writes in this paper about different ways of assessing various methods that evaluate AI models. The methods he evaluates range from traditional task-oriented approaches to ability-oriented approaches. Task-oriented puts emphasis on solving specific problems. Within \gls{NLP} and \gls{LLM}s, this can be stuff like Stanford Question Answering Dataset \cite{rajpurkar_squad_2016} or parts of \gls{MMLU} \cite{hendrycks_measuring_2021}.
+
+
+Ability-oriented tests on the other hand, measure cognitive abilities of AI systems and models using similar methodologies to those done on humans. Human intelligence has for a long time been measured using various different intelligence and algorithmic tests. Examples of such tests are traditional IQ-tests or calculating Kolmogorov complexity.
+
+
+The research in this thesis is narrower than what is proposed by Hernández-Orallo. His paper takes a broader approach on AI and AI evaluation. Even though the motivation for this thesis is similar, evaluation methods and benchmarks for \gls{LLM}s, \gls{RAG} and AI generally are too task-oriented. As described earlier in this chapter, considering the size of the training data for \gls{LLM}s, one argument is that the models \textit{learn} solve problems simply by memorising the solution. The solution explored by Hernández-Orallo, and this thesis, is a more abstract evaluation method. In the case of this thesis, it’s by measuring user preferences, as opposed to constructing a new test-method, as proposed by Hernández-Orallo.
+
+
+\subsection{SciBERT: A Pre-trained Language Model for Scientific Text}
+
+
+\textit{SciBERT} was introduced by Beltagy et al.\cite{beltagy_scibert_2019-1}. \textit{SciBERT} is a version of \textit{BERT} \cite{devlin_bert_2019-2} which is specifically trained on scientific texts. This corpus of scientific texts contains scientific publications which is meant to enhance the models performance on \gls{NLP} tasks such as sentence classification, and entity recognition within the scientific domain.
+
+
+There are numerous similar models developed for other domains. Even though it may appear that \textit{SciBERT} was developed for similar reasons to the system in this thesis. \textit{SciBERT} was adapting a language model, albeit a smaller one, to a new domain. However, adapting a \gls{LLM} using \gls{RAG} is a different approach since there is no training on any new data. The model in that case is simply adapted by constructing prompts, and attaching an external knowledge-base, see section~\ref{sec:background_rag} for more information.
 
 
 \subsection{Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks}
@@ -392,31 +423,7 @@ The models released by OpenAI, which includes all the models from GPT-1 through 
 The introduction of \gls{RAG} by Lewis et al. has been crucial for the development of \gls{NLP} systems. The model they proposed has been shown to combine the generative power of a \gls{LLM} with the factual accuracy of verified knowledge bases. From a research perspective, \gls{RAG} is a method of addressing "hallucinations" in generative models \cite{lewis_retrieval-augmented_2021}. "Hallucinations" refers to instances where a \gls{LLM} asserts a fact that is provably untrue as though it were accurate, see figure ~\ref{fig:hallucination_example}. With the techniques proposed by Lewis et al. a system can be constructed around the model that ensures only verified facts are used to answer input prompts.
 
 
-\subsection{Gemini 1.5: Unlocking Multimodal Understanding Across Millions of Tokens of Context}
-
-
-There are two dominant theories for how AI systems will be constructed. The first theory advocates for a \gls{RAG}-based approach. As discussed in sections ~\ref{sec:background_rag} and ~\ref{sec:related_works_rag}, \gls{RAG} effectively integrates an external knowledge base into an AI system. However, there is the alternative theory of longer context windows. The context window refers to the maximum amount of tokens the model can consider at one time when generating responses. The context window typically consists of the input prompt, whatever extra content has been added to the model (could be multi-modal content such as images) and the models’ output. With a large enough context window, theoretically, an entire knowledge-base could be incorporated into a prompt. This would remove the need from intercepting the models generation process, which is the core component of \gls{RAG}, since the entire knowledge base is part of the prompt.
-
-
-Previously, Liu et al. has shown that models with larger prompts have a bias towards the beginning and the end of the prompt \cite{liu_lost_2023}. This effectively meant that a knowledge base with similar facts injected into the beginning or end of the prompt would have a higher likelihood of being included in the response, regardless of their correctness.
-
-
-When Google announced their Gemini 1.5 model they released results that suggest that it could process and integrate information across vast context windows using an extended transformer architecture \cite{gemini_team_gemini_2024}. The model could do this without a bias in precision or recall depending on where the data existed in the prompt. Even though this model isn’t widely available yet, Google’s results suggest that it is possible to construct a model that can fit a large knowledge base within the context window of a \gls{LLM}.
-
-
-Larger context windows generally require larger models which are more expensive to run. Larger prompts also take longer compute responses for. It remains an open research question whether the necessity of \gls{RAG}-systems will remain in the future.
-
-
-\subsection{Measuring Massive Multitask Language Understanding}
-The \gls{MMLU} benchmark was introduced by Hendrycks et al. in 2020 to provide a framework for evaluating \gls{LLM} across a broad range of tasks \cite{hendrycks_measuring_2021}. The test covers tasks in fields such as elementary mathematics, US history, computer science and law. It is designed to test a model's world knowledge and problem solving abilities. The benchmark is significant as it is the current most widely used general intelligence test on \gls{LLM}s.
-
-
-As highlighted by many, not the least Google in their Gemini 1.5 paper \cite{gemini_team_gemini_2024}, there is a pressing need for new benchmarking approaches. Traditional benchmarks do not sufficiently challenge new models, especially in the multimodal domain where text, images, video, and audio are combined \cite{gemini_team_gemini_2024}. Current evaluation methods rely heavily on human labelling and annotation, they are  increasingly seen as inadequate for more complex prompts and responses.
-
-
-In addition most benchmarks are biassed towards the training dataset of the models. The model's general intelligence is measured by data that is available to the model during training. This includes historical events, facts and problems. For instance, included in the training set are programming problems very similar to the programming problems included in benchmarks such as \textit{PIQA} \cite{bisk_piqa_2019-1}. To test the models true intelligence there is a need for benchmarks that measure the models abilities on data it hasn’t seen before.
-
-
+The research in this paper focuses on applying different \gls{LLM}s and \gls{RAG} techniques to a real domain. The paper by Lewis et al. is also more abstract and proposes general terminology and concepts. This thesis implements those concepts in real software deployed in a real domain. Additionally, this thesis experiments with various practical \gls{RAG} techniques. Furthermore, it proposes a method for measuring the effectiveness of these techniques by introducing feedback questions into the system. This approach is also deployed in the experiments conducted within this thesis.
 
 
 % \section{Summary}
