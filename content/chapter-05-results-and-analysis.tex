@@ -55,13 +55,24 @@ Looking at other courses in figure~\ref{fig:usage_02_cumulative_number_of_chats_
 
 
 
-Looking at the number of sessions created in \autoref{fig:usage_06_number_of_sessions_per_day} and \autoref{fig:usage_07_number_of_sessions_per_day_and_course}, we can see a similar pattern linear pattern. A session is started whenever a user loads the application without already having loaded it before. A session is not tracked between devices, therefore a user would have two sessions if the same user accessed the chat on two different devices, such as a desktop and a mobile phone. However, the same session is used across courses.
+Looking at the number of sessions created in \autoref{fig:usage_06_number_of_sessions_per_day}, we can see a similar linear pattern. A session is started whenever a user loads the application without already having loaded it before. A session is not tracked between devices, therefore a user would have two sessions if the same user accessed the chat on two different devices, such as a desktop and a mobile phone. However, the same session is used across courses. Looking at the breakdown per course in \autoref{fig:usage_07_number_of_sessions_per_day_and_course}, we can see that this is likely the case for the course \textit{MG2040 Assembly Technology}.
 
 
 \input{results/plots/usage-06-number-of-sessions-per-day}
 
 
 \input{results/plots/usage-07-number-of-sessions-per-day-and-course}
+
+
+Looking at \textit{MG2040}, it looks like nearly 200\% of its 32 students have started a session. This discrepancy is likely due to the following two reasons,
+
+
+\begin{enumerate}
+        \item The inclusion of teachers and TAs who also use the service. In a small course, this significantly skews the percentages that can be seen in \autoref{fig:usage_07_number_of_sessions_per_day_and_course}.
+        \item Sessions are counted uniquely across different devices. This factor likely affects other courses as well, although it is most evident in \textit{MG2040}.
+\end{enumerate}
+
+
 
 
 Looking at the distribution of how many chats and messages is sent per session, as seen in figure \autoref{fig:usage_12_number_of_sessions_with_number_of_chats} and \autoref{fig:usage_13_number_of_sessions_with_number_of_messages} we can see that it was very common for users to only start one or two chats. Most users sent quite a few messages though. The average user held \input{results/latex_variables/usage-02-average-chats-per-session}chats and sent \input{results/latex_variables/usage-03-average-messages-per-session}messages.
