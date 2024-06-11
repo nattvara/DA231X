@@ -159,9 +159,6 @@ After each response to a question that was selected from the frequently asked qu
 Looking at the breakdown per model, the open-source alternative \textit{Mistral-7B-Instruct-v0.2}, had almost the same amount of positive and negative responses, which can be seen in \autoref{fig:feedback_02_frequency_of_answer_for_question_per_model_2e09fd}. The proprietary model \textit{GPT-4} had a significantly higher proportion of positive responses, which indicates a generally more favourable reception from the participants in the study.
 
 
-\input{results/plots/feedback-01-frequency-of-answer-for-question-2e09fd}
-
-
 \input{results/plots/feedback-02-frequency-of-answer-for-question-per-model-2e09fd}
 
 
@@ -172,10 +169,7 @@ Looking at the breakdown per model, the open-source alternative \textit{Mistral-
 The software written for this thesis was, as discussed in sections \ref{sec:method_feedback_data} and \ref{sec:what_you_did_gathering_feedback_data}, and shown in \autoref{fig:multiple_choice}, designed to gather user feedback by injecting questions in the chat at certain triggers. The questions inserted after receiving the first response in chat number 2, 4 and 6 of each session can be seen in \autoref{tab:inserted_questions_2_4_6}. The questions inserted after receiving the first response in chat number 8 can be seen in \autoref{tab:inserted_questions_2_4_6}.
 
 
-Unfortunately, very few of the users who used the system answered these questions. \autoref{tab:number_of_answers_received} shows how many answers the first set of questions got, and how many answers the second set of questions got.
-
-
-However, for the users that did answer the first set of questions, their answers can be seen in figures \ref{fig:feedback_01_frequency_of_answer_for_question_cbfea1}, \ref{fig:feedback_01_frequency_of_answer_for_question_ead094} and \ref{fig:feedback_01_frequency_of_answer_for_question_d474ac}.
+Unfortunately, few of the users who actually used the system answered these questions. \autoref{tab:number_of_answers_received} shows how many answers the first set of questions got, and how many answers the second set of questions got.
 
 
 \input{content/tables/03-feedback-questions-first-three-times}
@@ -185,15 +179,6 @@ However, for the users that did answer the first set of questions, their answers
 
 
 \input{content/tables/05-feedback-questions-number-of-answers}
-
-
-\input{results/plots/feedback-01-frequency-of-answer-for-question-cbfea1}
-
-
-\input{results/plots/feedback-01-frequency-of-answer-for-question-ead094}
-
-
-\input{results/plots/feedback-01-frequency-of-answer-for-question-d474ac}
 
 
 Since the number of answers weren't many, the study couldn’t sample between more than two different configurations. These two configurations used different \gls{LLM}s, but shared the same retrieval strategy (vector search) and embedding function (\textit{openai/text-embedding-3-large}). In figures \ref{fig:feedback_02_frequency_of_answer_for_question_per_model_cbfea1}, \ref{fig:feedback_02_frequency_of_answer_for_question_per_model_ead094} and \ref{fig:feedback_02_frequency_of_answer_for_question_per_model_d474ac} how users that were assigned the different \gls{LLM}s answered can be seen.
