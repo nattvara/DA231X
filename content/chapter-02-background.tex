@@ -373,41 +373,16 @@ Interactions with AI agents through conversation is very affected by the agent's
 \label{sec:related_work}
 
 
-\subsection{Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering}
+% Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
 
 
-In this paper Siriwardhana et al. \cite{siriwardhana_improving_2023} primarily writes about \gls{RAG}-end2end. This is an enhancement to \gls{RAG} models that enables joint training of the retriever and generator. This improves adapting the base model for open domain question answering. Their paper evaluates their new approach against \textit{COVID-19} datasets. Their suggested model shows significant improvements against traditional \gls{RAG}.
+The introduction of \gls{RAG} by Lewis et al. has been crucial for the development of \gls{NLP} systems. The model they proposed has been shown to combine the generative power of a \gls{LLM} with the factual accuracy of verified knowledge bases. From a research perspective, \gls{RAG} is a method of addressing "hallucinations" in generative models \cite{lewis_retrieval-augmented_2020}. "Hallucinations" refers to instances where a \gls{LLM} asserts a fact that is provably untrue as though it were accurate, see figure ~\ref{fig:hallucination_example}. With the techniques proposed by Lewis et al. a system can be constructed around the model that ensures only verified facts are used to answer input prompts.
 
 
-The paper by Siriwardhana et al. is very similar to the research in this thesis. They both try to evaluate \gls{RAG} techniques. The key difference is that Siriwardhana et al. try to construct a new paradigm, whereas this thesis only evaluates existing paradigms against each other. This thesis presents no new \gls{RAG} paradigms.
+The research in this paper focuses on applying different \gls{LLM}s and \gls{RAG} techniques to a real domain. The paper by Lewis et al. is also more abstract and proposes general terminology and concepts. This thesis implements those concepts in real software deployed in a real domain. Additionally, this thesis experiments with various practical \gls{RAG} techniques. Furthermore, it proposes a method for measuring the effectiveness of these techniques by introducing feedback questions into the system. This approach is also deployed in the experiments conducted within this thesis.
 
 
-This thesis also creates a new dataset for the evaluation by integrating the question into custom built software that is deployed into a real domain. In their paper, Siriwardhana et al. use existing QA-pairs to evaluate their model. Their paper uses significantly larger datasets than constructed in this thesis. Albeit the domain for the research in this thesis is much more novel, and much less common in the training data for the \gls{LLM}s evaluated.
-
-
-\subsection{CoGenesis: A Framework Collaborating Large and Small Language
-Models for Secure Context-Aware Instruction Following}
-
-
-This paper, written by Zhang et al. \cite{zhang_cogenesis_2024}, introduces a framework for making small and large language models collaborate. This framework works by deploying smaller models on devices and larger models on compute clouds. The goal with developing a framework like this is to produce a system that can balance privacy and performance.
-
-
-Their evaluation involves using a synthetic dataset with an enriched personal context on-top of two open-source datasets. Their framework is benchmarked against standalone \gls{LLM}s using various metrics. In contrast to the research in this thesis, the aim with their research is purely to find a way to address the privacy shortcomings of current approaches for building \gls{LLM} applications. They have similar metrics like relevance in their benchmarking, but also measure privacy protection by measuring how much user-specific context information is kept on local models while only sharing generalised instructions with the cloud based \gls{LLM}s.
-
-
-\subsection{Evaluation in artificial intelligence: from task-oriented to ability-oriented measurement}
-
-
-José Hernández-Orallo \cite{hernandez-orallo_evaluation_2017} writes in this paper about different ways of assessing various methods that evaluate AI models. The methods he evaluates range from traditional task-oriented approaches to ability-oriented approaches. Task-oriented puts emphasis on solving specific problems. Within \gls{NLP} and \gls{LLM}s, this can be stuff like Stanford Question Answering Dataset \cite{rajpurkar_squad_2016} or parts of \gls{MMLU} \cite{hendrycks_measuring_2020}.
-
-
-Ability-oriented tests on the other hand, measure cognitive abilities of AI systems and models using similar methodologies to those done on humans. Human intelligence has for a long time been measured using various different intelligence and algorithmic tests. Examples of such tests are traditional IQ-tests or calculating Kolmogorov complexity.
-
-
-The research in this thesis is narrower than what is proposed by Hernández-Orallo. His paper takes a broader approach on AI and AI evaluation. Even though the motivation for this thesis is similar, evaluation methods and benchmarks for \gls{LLM}s, \gls{RAG} and AI generally are too task-oriented. As described earlier in this chapter, considering the size of the training data for \gls{LLM}s, one argument is that the models \textit{learn} solve problems simply by memorising the solution. The solution explored by Hernández-Orallo, and this thesis, is a more abstract evaluation method. In the case of this thesis, it’s by measuring user preferences, as opposed to constructing a new test-method, as proposed by Hernández-Orallo.
-
-
-\subsection{SciBERT: A Pre-trained Language Model for Scientific Text}
+% SciBERT: A Pre-trained Language Model for Scientific Text
 
 
 \textit{SciBERT} was introduced by Beltagy et al.\cite{beltagy_scibert_2019-1}. \textit{SciBERT} is a version of \textit{BERT} \cite{devlin_bert_2019-2} which is specifically trained on scientific texts. This corpus of scientific texts contains scientific publications which is meant to enhance the models performance on \gls{NLP} tasks such as sentence classification, and entity recognition within the scientific domain.
@@ -416,14 +391,45 @@ The research in this thesis is narrower than what is proposed by Hernández-Oral
 There are numerous similar models developed for other domains. Even though it may appear that \textit{SciBERT} was developed for similar reasons to the system in this thesis. \textit{SciBERT} was adapting a language model, albeit a smaller one, to a new domain. However, adapting a \gls{LLM} using \gls{RAG} is a different approach since there is no training on any new data. The model in that case is simply adapted by constructing prompts, and attaching an external knowledge-base, see section~\ref{sec:background_rag} for more information.
 
 
-\subsection{Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks}
-\label{sec:related_works_rag}
+% Evaluation in artificial intelligence: from task-oriented to ability-oriented measurement
 
 
-The introduction of \gls{RAG} by Lewis et al. has been crucial for the development of \gls{NLP} systems. The model they proposed has been shown to combine the generative power of a \gls{LLM} with the factual accuracy of verified knowledge bases. From a research perspective, \gls{RAG} is a method of addressing "hallucinations" in generative models \cite{lewis_retrieval-augmented_2020}. "Hallucinations" refers to instances where a \gls{LLM} asserts a fact that is provably untrue as though it were accurate, see figure ~\ref{fig:hallucination_example}. With the techniques proposed by Lewis et al. a system can be constructed around the model that ensures only verified facts are used to answer input prompts.
+José Hernández-Orallo wrote\cite{hernandez-orallo_evaluation_2017} about different ways of assessing various methods that evaluate AI models. The methods he evaluates range from traditional task-oriented approaches to ability-oriented approaches. Task-oriented puts emphasis on solving specific problems. Within \gls{NLP} and \gls{LLM}s, this can be stuff like Stanford Question Answering Dataset \cite{rajpurkar_squad_2016} or parts of \gls{MMLU} \cite{hendrycks_measuring_2020}.
 
 
-The research in this paper focuses on applying different \gls{LLM}s and \gls{RAG} techniques to a real domain. The paper by Lewis et al. is also more abstract and proposes general terminology and concepts. This thesis implements those concepts in real software deployed in a real domain. Additionally, this thesis experiments with various practical \gls{RAG} techniques. Furthermore, it proposes a method for measuring the effectiveness of these techniques by introducing feedback questions into the system. This approach is also deployed in the experiments conducted within this thesis.
+Ability-oriented tests on the other hand, measure cognitive abilities of AI systems and models using similar methodologies to those done on humans. Human intelligence has for a long time been measured using various different intelligence and algorithmic tests. Examples of such tests are traditional IQ-tests or calculating Kolmogorov complexity.
+
+
+The research in this thesis is narrower than what is proposed by Hernández-Orallo. His paper takes a broader approach on AI and AI evaluation. Even though the motivation for this thesis is similar, evaluation methods and benchmarks for \gls{LLM}s, \gls{RAG} and AI generally are too task-oriented. As described earlier in this chapter, considering the size of the training data for \gls{LLM}s, one argument is that the models \textit{learn} solve problems simply by memorising the solution. The solution explored by Hernández-Orallo, and this thesis, is a more abstract evaluation method. In the case of this thesis, it’s by measuring user preferences, as opposed to constructing a new test-method, as proposed by Hernández-Orallo.
+
+
+% CoGenesis: A Framework Collaborating Large and Small Language Models for Secure Context-Aware Instruction Following
+
+
+Zhang et al. \cite{zhang_cogenesis_2024}, introduced a framework, called \textit{CoGenesis}, for making small and large language models collaborate. This framework works by deploying smaller models on devices and larger models on compute clouds. The goal with developing a framework like this is to produce a system that can balance privacy and performance.
+
+
+Their evaluation involves using a synthetic dataset with an enriched personal context on-top of two open-source datasets. Their framework is benchmarked against standalone \gls{LLM}s using various metrics. In contrast to the research in this thesis, the aim with their research is purely to find a way to address the privacy shortcomings of current approaches for building \gls{LLM} applications. They have similar metrics like relevance in their benchmarking, but also measure privacy protection by measuring how much user-specific context information is kept on local models while only sharing generalised instructions with the cloud based \gls{LLM}s.
+
+
+% Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering
+
+
+Siriwardhana et al. \cite{siriwardhana_improving_2023} write about \gls{RAG}-end2end. This is an enhancement to \gls{RAG} models that enables joint training of the retriever and generator. This improves adapting the base model for open domain question answering. Their paper evaluates their new approach against \textit{COVID-19} datasets. Their suggested model shows significant improvements against traditional \gls{RAG}.
+
+
+The paper by Siriwardhana et al. is very similar to the research in this thesis. They both try to evaluate \gls{RAG} techniques. The key difference is that Siriwardhana et al. try to construct a new paradigm, whereas this thesis only evaluates existing paradigms against each other. This thesis presents no new \gls{RAG} paradigms.
+
+
+This thesis also creates a new dataset for the evaluation by integrating the question into custom built software that is deployed into a real domain. In their paper, Siriwardhana et al. use existing QA-pairs to evaluate their model. Their paper uses significantly larger datasets than constructed in this thesis. Albeit the domain for the research in this thesis is much more novel, and much less common in the training data for the \gls{LLM}s evaluated.
+
+
+% Summary
+
+
+To summarise, while there is existing research that explores and evaluates various enhancements and frameworks for connecting \gls{LLM}s with different \gls{RAG} approaches, this thesis evaluates some of these techniques in a practical, real world domain. This thesis also introduces a method for measuring the effectiveness of different \gls{RAG} techniques that are common when building AI assistants. The method relies upon integrated feedback questions that measure more nuanced properties of AI assistant’s usefulness for users in the selected domain.
+
+
 
 
 % \section{Summary}
