@@ -42,4 +42,4 @@ plt.tight_layout()
 
 file_path = os.path.realpath(f"{os.path.dirname(__file__)}/../content/figures/assets/04-background-word-plot.png")
 os.makedirs(os.path.dirname(file_path), exist_ok=True)
-plt.savefig(file_path, bbox_inches='tight', pad_inches=0)
+plt.savefig(file_path, bbox_inches='tight', pad_inches=.2)
