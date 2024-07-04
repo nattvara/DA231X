@@ -41,7 +41,7 @@ To build a chat application with an AI-assistant that has access to an external 
         \item A \gls{LLM}, such as GPT-4 to run the chat.
         \item A \gls{LLM}, such as GPT-4 to run the query construction.
         \item An embedding function, such as OpenAI’s text-embedding-3-large used to index and query documents.
-        \item A vector store, such as ChromaDB, that stores the vector embeddings and associated documents \footnote{\href{https://www.trychroma.com/}{trychroma.com/} (accessed on \today)}
+        \item A vector store, such as ChromaDB, that stores the vector embeddings and associated documents \footnote{\href{https://www.trychroma.com/}{trychroma.com} (accessed on \today)}
 \end{enumerate}.
 
 
@@ -57,7 +57,7 @@ There was a \gls{POC} constructed that had the same approach as the one outlined
 \subsection{Custom applications}
 
 
-This section outlines some major and minor \gls{POC}s that were made without any frameworks that are popular \gls{LLM} applications, aside from very common python libraries such as pytorch and hugginface’s transformers library.
+This section outlines some major and minor \gls{POC}s that were made without any frameworks that are popular \gls{LLM} applications, aside from very common python libraries such as PyTorch and Hugginface’s transformers library.
 
 
 \subsubsection{Simple Python API for models on Huggingface}
@@ -141,7 +141,7 @@ This section will outline the final software that was constructed to investigate
 \subsection{What the purpose of the software is}
 
 
-The purpose of the software is to crawl canvas course rooms and index their data into a knowledge base. The software should expose this knowledge base in a chat based application integrated into the same course room it has crawled. The tool should be able to randomly sample a configuration of models and tools for indexing, retrieval and chat between users of the tool. Finally, the tool should inject questions into the chat and track the necessary data points to investigate the research question of this thesis outlined in section~\ref{sec:researchQuestion}.
+The purpose of the software is to crawl Canvas course rooms and index their data into a knowledge base. The software should expose this knowledge base in a chat based application integrated into the same course room it has crawled. The tool should be able to randomly sample a configuration of models and tools for indexing, retrieval and chat between users of the tool. Finally, the tool should inject questions into the chat and track the necessary data points to investigate the research question of this thesis outlined in section~\ref{sec:researchQuestion}.
 
 
 \subsection{What the software can test}
@@ -156,18 +156,18 @@ The software was constructed to measure how certain variables would impact the u
 \subsection{Overall architecture}
 
 
-The software is primarily written in python, with a service-based architecture. This means it is divided into distinct domain specific services, each handling specific domains and functionalities. These services handle one of four things, \gls{LLM}-, Download-, Index- or Chat-functionality.
+The software is primarily written in Python, with a service-based architecture. This means it is divided into distinct domain specific services, each handling specific domains and functionalities. These services handle one of four things, \gls{LLM}-, Download-, Index- or Chat-functionality.
 
 
 These services are written in such a way that they can be incorporated into any executable within the project. There are numerous executables within the application, these are;
 
 
 \begin{itemize}
-        \item A graphical user interface, which is a web-based application
-        \item A HTTP rest API
-        \item A websocket server
-        \item A job-runner that execute background tasks from a queue
-        \item A worker node for the \gls{LLM} service that keep a \gls{LLM} in-memory ready to generate a response to a prompt for the given model
+        \item A graphical user interface, which is a web-based application.
+        \item A \gls{REST}ful HTTP API.
+        \item A websocket server.
+        \item A job-runner that execute background tasks from a queue.
+        \item A worker node for the \gls{LLM} service that keep a \gls{LLM} in-memory ready to generate a response to a prompt for the given model.
 \end{itemize}
 
 
@@ -180,24 +180,24 @@ These services are written in such a way that they can be incorporated into any 
 \subsection{Dependencies}
 
 
-The software is written on-top of numerous python and javascript libraries, these are documented in their entirety in the systems source code repository. In addition, the software needs the following major dependencies to operate.
+The software is written on-top of numerous Python and Javascript libraries, these are documented in their entirety in the systems source code repository. In addition, the software needs the following major dependencies to operate.
 
 
 \begin{itemize}
-        \item A postgres database
-        \item A opensearch index
-        \item A redis in-memory storage
+        \item A Postgres database.
+        \item An Opensearch index.
+        \item A Redis in-memory storage.
 \end{itemize}
 
 
 \subsection{Courseroom Crawler}
 
 
-The software contains a job that is run every minute, which checks if a new snapshot should be taken of a course room. A snapshot contains all urls and their content that was crawled from a course room. A piece of content may be a canvas webpage, a file hosted on canvas, an external url or file etc.
+The software contains a job that is run every minute, which checks if a new snapshot should be taken of a course room. A snapshot contains all \gls{URL}s and their content that was crawled from a course room. A piece of content may be a Canvas webpage, a file hosted on Canvas, an external url or file etc.
 
 
-If a new snapshot is created of a course room the crawler will immediately crawl the course room. The crawler has global rules it follows for all course rooms, certain pages are ignored and how some content should be indexed. For instance, some common tools, such as the programming assignment tester kattis \footnote{More information about how kattis is used at universities can be found here \href{https://www.kattis.com/universities}{kattis.com/universities} (accessed on \today)} have a known format. The crawler employs specific crawlers for these common sites and tools to ensure a high-level of data quality.
-The crawler was built upon the playwright framework developed by Microsoft \footnote{\href{https://playwright.dev/}{playwright.dev/} (accessed on \today)}. This is a browser automation framework, mostly used for end-to-end testing of web applications. Using a browser to crawl websites is more compute-intensive than simply requesting the html files without rendering them. The benefit of using a browser, and actually rendering the content of the pages, is that content that’s requested by scripts on the page gets loaded and can be extracted.
+If a new snapshot is created of a course room the crawler will immediately crawl the course room. The crawler has global rules it follows for all course rooms, certain pages are ignored and how some content should be indexed. For instance, some common tools, such as the programming assignment tester Kattis \footnote{More information about how kattis is used at universities can be found here \href{https://www.kattis.com/universities}{kattis.com/universities} (accessed on \today)} have a known format. The crawler employs specific crawlers for these common sites and tools to ensure a high-level of data quality.
+The crawler was built upon the Playwright framework developed by Microsoft \footnote{\href{https://playwright.dev/}{playwright.dev} (accessed on \today)}. This is a browser automation framework, mostly used for end-to-end testing of web applications. Using a browser to crawl websites is more compute-intensive than simply requesting the html files without rendering them. The benefit of using a browser, and actually rendering the content of the pages, is that content that’s requested by scripts on the page gets loaded and can be extracted.
 
 
 Ideally, the public canvas HTTP API \footnote{Documentation for the API can be found here \href{https://canvas.instructure.com/doc/api/}{canvas.instructure.com/doc/api/} (accessed on \today)} should be used to ensure the highest level of data quality and a more reliable connection. However, this API had been disabled by KTH IT and would’ve taken time and resources to get access to.
@@ -230,7 +230,7 @@ One of the principal requirements for the study software was the ability to inve
 Proprietary models, such as those provided by OpenAI and are studied in this thesis, are always executed on the model vendors infrastructure and are accessible only via an HTTP API. These APIs are not compute-intensive for the consuming application, such as the one developed for this thesis. However, open-source models, like the Mistral family of models, are available for anyone to run. One of the goals of this thesis was to investigate the feasibility of running such applications with all necessary dependencies on-premise. This involved executing these models within the application. This presents an engineering challenge, as these models are not very mature yet, and the infrastructure for running them is not well developed.
 
 
-For the software in this study an \textit{LLM-service} was developed. This service presented a high-level API that could be used by any part of the application, such as the chat-service, for producing messages, or the indexing service, for producing summaries or embeddings. The API had a high-level function that took a model name, model parameters and prompt to execute, and returned a prompt handle as a response. The data model for a prompt handle can be seen in its entirety in figure~\ref{fig:database_schema}, but in addition to the provided arguments, this kept the necessary queuing information for the system to function, some performance metrics and the output of the model.
+For the software in this study an \textit{LLM-service} was developed. This service presented a high-level API that could be used by any part of the application, such as the chat-service, for producing messages, or the indexing service, for producing summaries or embeddings. The API had a high-level function that took a model name, model parameters and prompt to execute, and returned a prompt handle as a response. A prompt handle, in addition to the provided arguments, kept the necessary queuing information for the system to function, some performance metrics and the eventual output of the model.
 
 
 In the background the service provides the infrastructure for organising a virtually unbounded number of worker-nodes for each model. Any worker node keeps the model running in memory, which could be either in CPU or GPU memory. Loading the model into memory is a time-consuming operation, which was one of the driving reasons for this approach. This architecture allows for scaling the service to keep up-with-higher demand for prompt-completions. Heavy load could be caused by for instance, many users using the system simultaneously, or indexing one or more course rooms simultaneously.
@@ -260,7 +260,7 @@ When a user accesses the system for the first time, a configuration is randomly 
 \label{sec:what_you_did_gathering_feedback_data}
 
 
-The software was designed to facilitate user feedback collection. This feedback is gathered through a fairly flexible feedback entity, which integrates questions in the configured language of the course. A feedback questions are triggered by specific conditions, such as:
+The software was designed to facilitate user feedback collection. This feedback is gathered through a fairly flexible feedback entity, which integrates questions in the configured language of the course. A feedback questions was triggered by specific conditions, such as:
 
 
 \begin{itemize}
@@ -284,7 +284,7 @@ The feedback question format was designed to be extensive. There were two format
 \subsection{User interface}
 
 
-The assistant built for the system was designed to live within the \gls{LMS} used at KTH, known as canvas. Each couse in canvas is assigned a course room. This course room contains all the information a participant in the course might need, such as course announcement, assignments and modules. \autoref{fig:canvas_course_room} shows the course room of one of the courses that participated in the study. The \gls{GUI} for the assistant designed for this thesis, was designed to live within the courseroom as an iframe.
+The assistant built for the system was designed to live within the \gls{LMS} used at KTH, known as Canvas. Each course in canvas is assigned a course room. This course room contains all the information a participant in the course might need, such as course announcement, assignments and modules. \autoref{fig:canvas_course_room} shows the course room of one of the courses that participated in the study. The \gls{GUI} for the assistant designed for this thesis, was designed to live within the courseroom as an iframe.
 
 
 The software constructed for this study was designed to integrate with KTH's \gls{LMS}, Canvas. Each course in Canvas has a designated course room that contains all information for students in the course. This includes announcements, assignments, modules and more. \autoref{fig:canvas_course_room} shows the course room of one of the participating courses in the study. The \gls{GUI} for the assistant, developed for this thesis, was embedded within the course room as an iframe, accessible through the course sidebar in the web, and navigation menu in the Canvas mobile app.
