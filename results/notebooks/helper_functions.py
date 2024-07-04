@@ -32,7 +32,7 @@ def save_plot(plt, filename: str, caption: str, label: str):
     plot_fullpath = os.path.realpath(os.path.join(plot_dir, f"{filename}.png"))
     latex_fullpath = os.path.realpath(os.path.join(latex_dir, f"{filename}.tex"))
 
-    plt.savefig(plot_fullpath, dpi=300)
+    plt.savefig(plot_fullpath, dpi=450)
 
     latex_code = f"""
 \\begin{{figure}}[H]
