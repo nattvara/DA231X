@@ -168,7 +168,7 @@ The operational data refers to data collected by the system to function. This in
 \subsubsection{Usage data}
 
 
-Usage data in system refers to data that is generated when users use the system. This includes session information and its metadata, chat information such as which course room a chat is associated with and which messages were sent by the user and the ai-assistant in each chat.
+Usage data in system refers to data that is generated when users use the system. This includes session information and its metadata, chat information such as which course room a chat is associated with and which messages were sent by the user and the AI-assistant in each chat.
 
 
 \subsubsection{Performance data}
@@ -267,9 +267,6 @@ There is quite a bit of configuration needed to get the software operational. Th
 To run the AI assistant with data from an actual course room the bot needs to have access to a canvas through a KTH registered user. Due to time constraints the option to use the official Canvas API was abandoned early in the planning of this study. The softwares’ crawler therefore needs the cookies of an authenticated user with access to the course rooms included in the study.
 
 
-\textbf{note: maybe explore publishing the course content of some course rooms? As like a downloadable from the github repo or something?}
-
-
 \subsection{Models}
 
 
@@ -294,7 +291,7 @@ In addition to the open source models the software also supports experiments usi
 The study software should be able to execute on most common hardware and most parts of the application are not particularly compute intensive. The notable exception to this is the worker processes in the \text{LLM Service} part of the software that, depending on the model, run quite intensive compute loads. That is unless the agent runs either of the proprietary cloud hosted models provided by OpenAI.
 
 
-If the agent is running one of the \gls{LLM}s it can run, such as the \textit{Mistral 7B instruct} model, the agent needs access to a quite capable GPU. For the supported models this needs to be a GPU with at least 24 GB of video memory. Example of such graphics cards are \textit{NVIDIA GeForce RTX 3090}\footnote{\href{https://www.nvidia.com/sv-se/geforce/graphics-cards/30-series/rtx-3090-3090ti/}{nvidia.com/sv-se/geforce/graphics-cards/30-series/rtx-3090-3090ti/} (accessed on \today)}, \textit{NVIDIA TITAN RTX}\footnote{\href{https://www.nvidia.com/en-eu/deep-learning-ai/products/titan-rtx/}{nvidia.com/en-eu/deep-learning-ai/products/titan-rtx/} (accessed on \today)} or \textit{NVIDIA A10 Tensor Core}\footnote{\href{https://www.nvidia.com/en-us/data-center/products/a10-gpu/}{nvidia.com/en-us/data-center/products/a10-gpu/} (accessed on \today)}. This used servers on AWS, specifically the G5 instances (g5.4xlarge) equipped with \textit{NVIDIA A10 Tensor Core} GPUs \footnote{\href{https://aws.amazon.com/ec2/instance-types/g5/}{aws.amazon.com/ec2/instance-types/g5/} (accessed on \today)}. The open source embedding models such as \textit{SFR-Embedding-Mistral} can be run on CPUs, which only require the same amount of RAM available to run the models.
+If the agent is running one of the \gls{LLM}s it can run, such as the \textit{Mistral 7B instruct} model, the agent needs access to a quite capable GPU. For the supported models this needs to be a GPU with at least 24 GB of memory. Example of such graphics cards are \textit{NVIDIA GeForce RTX 3090}\footnote{\href{https://www.nvidia.com/sv-se/geforce/graphics-cards/30-series/rtx-3090-3090ti/}{nvidia.com/sv-se/geforce/graphics-cards/30-series/rtx-3090-3090ti/} (accessed on \today)}, \textit{NVIDIA TITAN RTX}\footnote{\href{https://www.nvidia.com/en-eu/deep-learning-ai/products/titan-rtx/}{nvidia.com/en-eu/deep-learning-ai/products/titan-rtx/} (accessed on \today)} or \textit{NVIDIA A10 Tensor Core}\footnote{\href{https://www.nvidia.com/en-us/data-center/products/a10-gpu/}{nvidia.com/en-us/data-center/products/a10-gpu/} (accessed on \today)}. This used servers on AWS, specifically the G5 instances (g5.4xlarge) equipped with \textit{NVIDIA A10 Tensor Core} GPUs \footnote{\href{https://aws.amazon.com/ec2/instance-types/g5/}{aws.amazon.com/ec2/instance-types/g5/} (accessed on \today)}. The open source embedding models such as \textit{SFR-Embedding-Mistral} can be run on CPUs, which only require the same amount of RAM available to run the models.
 
 
 \section{Assessing reliability and validity of the data collected}
