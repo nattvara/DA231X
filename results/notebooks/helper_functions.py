@@ -23,7 +23,7 @@ def save_variable(filename: str, variable_value: str):
     print(f"Saved latex variable to {filename}")
 
 
-def save_plot(plt, filename: str, caption: str, label: str):
+def save_plot(plt, filename: str, caption: str, label: str, width_scale_factor: float = 1):
     current_file_path = os.path.abspath(__file__)
     current_dir = os.path.dirname(current_file_path)
     plot_dir = os.path.join(current_dir, "../plots/assets")
@@ -37,7 +37,7 @@ def save_plot(plt, filename: str, caption: str, label: str):
     latex_code = f"""
 \\begin{{figure}}[H]
     \\centering
-    \\includegraphics[width=\\textwidth]{{results/plots/assets/{filename}.png}}
+    \\includegraphics[width={width_scale_factor}\\textwidth]{{results/plots/assets/{filename}.png}}
     \\caption{{{caption}}}
     \\label{{{label}}}
 \\end{{figure}}
